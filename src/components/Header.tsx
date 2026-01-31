@@ -28,7 +28,7 @@ const Header = () => {
             <a href="#community" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               Community
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <a href="https://github.com/CErixsson/open-lingual" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               GitHub
             </a>
           </nav>
@@ -61,7 +61,7 @@ const Header = () => {
               <a href="#community" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
                 Community
               </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
+              <a href="https://github.com/CErixsson/open-lingual" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
                 GitHub
               </a>
               <div className="flex flex-col gap-2 pt-4 border-t border-border/50">
