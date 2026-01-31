@@ -14,7 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      language_progress: {
+        Row: {
+          created_at: string
+          id: string
+          language_code: string
+          lessons_completed: number
+          level: number
+          total_xp: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          language_code: string
+          lessons_completed?: number
+          level?: number
+          total_xp?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          language_code?: string
+          lessons_completed?: number
+          level?: number
+          total_xp?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          current_language: string | null
+          display_name: string | null
+          id: string
+          last_activity_date: string | null
+          streak_days: number
+          updated_at: string
+          user_id: string
+          xp_points: number
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          current_language?: string | null
+          display_name?: string | null
+          id?: string
+          last_activity_date?: string | null
+          streak_days?: number
+          updated_at?: string
+          user_id: string
+          xp_points?: number
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          current_language?: string | null
+          display_name?: string | null
+          id?: string
+          last_activity_date?: string | null
+          streak_days?: number
+          updated_at?: string
+          user_id?: string
+          xp_points?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
