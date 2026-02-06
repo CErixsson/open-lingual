@@ -14,6 +14,192 @@ export type Database = {
   }
   public: {
     Tables: {
+      cefr_band_config: {
+        Row: {
+          band_max: number
+          band_min: number
+          created_at: string
+          id: string
+          language_id: string
+          level: string
+        }
+        Insert: {
+          band_max: number
+          band_min: number
+          created_at?: string
+          id?: string
+          language_id: string
+          level: string
+        }
+        Update: {
+          band_max?: number
+          band_min?: number
+          created_at?: string
+          id?: string
+          language_id?: string
+          level?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cefr_band_config_language_id_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "languages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exercise_attempts: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          difficulty_elo_after: number
+          difficulty_elo_before: number
+          elo_after: number
+          elo_before: number
+          exercise_id: string
+          expected_score: number
+          id: string
+          k_factor_used: number
+          passed: boolean
+          rd_after: number
+          rd_before: number
+          score_raw: number
+          skill_id: string
+          started_at: string
+          time_spent_sec: number | null
+          user_id: string
+          user_language_profile_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          difficulty_elo_after: number
+          difficulty_elo_before: number
+          elo_after: number
+          elo_before: number
+          exercise_id: string
+          expected_score: number
+          id?: string
+          k_factor_used: number
+          passed?: boolean
+          rd_after: number
+          rd_before: number
+          score_raw?: number
+          skill_id: string
+          started_at?: string
+          time_spent_sec?: number | null
+          user_id: string
+          user_language_profile_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          difficulty_elo_after?: number
+          difficulty_elo_before?: number
+          elo_after?: number
+          elo_before?: number
+          exercise_id?: string
+          expected_score?: number
+          id?: string
+          k_factor_used?: number
+          passed?: boolean
+          rd_after?: number
+          rd_before?: number
+          score_raw?: number
+          skill_id?: string
+          started_at?: string
+          time_spent_sec?: number | null
+          user_id?: string
+          user_language_profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exercise_attempts_exercise_id_fkey"
+            columns: ["exercise_id"]
+            isOneToOne: false
+            referencedRelation: "exercises"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exercise_attempts_skill_id_fkey"
+            columns: ["skill_id"]
+            isOneToOne: false
+            referencedRelation: "skills"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exercise_attempts_user_language_profile_id_fkey"
+            columns: ["user_language_profile_id"]
+            isOneToOne: false
+            referencedRelation: "user_language_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exercises: {
+        Row: {
+          content: Json | null
+          created_at: string
+          description: string | null
+          difficulty_elo: number
+          id: string
+          is_adaptive: boolean
+          language_id: string
+          skill_id: string
+          status: string
+          tags: string[] | null
+          time_limit_sec: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: Json | null
+          created_at?: string
+          description?: string | null
+          difficulty_elo?: number
+          id?: string
+          is_adaptive?: boolean
+          language_id: string
+          skill_id: string
+          status?: string
+          tags?: string[] | null
+          time_limit_sec?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: Json | null
+          created_at?: string
+          description?: string | null
+          difficulty_elo?: number
+          id?: string
+          is_adaptive?: boolean
+          language_id?: string
+          skill_id?: string
+          status?: string
+          tags?: string[] | null
+          time_limit_sec?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exercises_language_id_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "languages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exercises_skill_id_fkey"
+            columns: ["skill_id"]
+            isOneToOne: false
+            referencedRelation: "skills"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       language_progress: {
         Row: {
           created_at: string
@@ -46,6 +232,81 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      languages: {
+        Row: {
+          code: string
+          created_at: string
+          flag_emoji: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          flag_emoji?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          flag_emoji?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      leaderboard_entries: {
+        Row: {
+          display_name: string | null
+          id: string
+          language_id: string
+          period: string
+          rank: number
+          rating_snapshot: number
+          skill_id: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          display_name?: string | null
+          id?: string
+          language_id: string
+          period: string
+          rank: number
+          rating_snapshot: number
+          skill_id?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          display_name?: string | null
+          id?: string
+          language_id?: string
+          period?: string
+          rank?: number
+          rating_snapshot?: number
+          skill_id?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leaderboard_entries_language_id_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "languages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leaderboard_entries_skill_id_fkey"
+            columns: ["skill_id"]
+            isOneToOne: false
+            referencedRelation: "skills"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -86,12 +347,138 @@ export type Database = {
         }
         Relationships: []
       }
+      skills: {
+        Row: {
+          display_name: string
+          icon_name: string | null
+          id: string
+          key: string
+        }
+        Insert: {
+          display_name: string
+          icon_name?: string | null
+          id?: string
+          key: string
+        }
+        Update: {
+          display_name?: string
+          icon_name?: string | null
+          id?: string
+          key?: string
+        }
+        Relationships: []
+      }
+      user_language_profiles: {
+        Row: {
+          created_at: string
+          id: string
+          language_id: string
+          last_active_at: string | null
+          overall_cefr: string
+          overall_elo: number
+          overall_rd: number
+          streak_count: number
+          total_attempts: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          language_id: string
+          last_active_at?: string | null
+          overall_cefr?: string
+          overall_elo?: number
+          overall_rd?: number
+          streak_count?: number
+          total_attempts?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          language_id?: string
+          last_active_at?: string | null
+          overall_cefr?: string
+          overall_elo?: number
+          overall_rd?: number
+          streak_count?: number
+          total_attempts?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_language_profiles_language_id_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "languages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_skill_ratings: {
+        Row: {
+          attempts_count: number
+          created_at: string
+          elo: number
+          id: string
+          last_update_at: string | null
+          rd: number
+          skill_id: string
+          user_language_profile_id: string
+        }
+        Insert: {
+          attempts_count?: number
+          created_at?: string
+          elo?: number
+          id?: string
+          last_update_at?: string | null
+          rd?: number
+          skill_id: string
+          user_language_profile_id: string
+        }
+        Update: {
+          attempts_count?: number
+          created_at?: string
+          elo?: number
+          id?: string
+          last_update_at?: string | null
+          rd?: number
+          skill_id?: string
+          user_language_profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_skill_ratings_skill_id_fkey"
+            columns: ["skill_id"]
+            isOneToOne: false
+            referencedRelation: "skills"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_skill_ratings_user_language_profile_id_fkey"
+            columns: ["user_language_profile_id"]
+            isOneToOne: false
+            referencedRelation: "user_language_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      calculate_k_factor: {
+        Args: { p_attempts: number; p_elo: number; p_rd: number }
+        Returns: number
+      }
+      map_elo_to_cefr: {
+        Args: { p_elo: number; p_language_id: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

@@ -26,15 +26,25 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              Features
-            </a>
-            <a href="#languages" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              Languages
-            </a>
-            <a href="#community" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              Community
-            </a>
+            {user ? (
+              <>
+                <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  Dashboard
+                </Link>
+                <Link to="/leaderboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  Leaderboard
+                </Link>
+              </>
+            ) : (
+              <>
+                <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  Features
+                </a>
+                <a href="#languages" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  Languages
+                </a>
+              </>
+            )}
             <a href="https://github.com/CErixsson/open-lingual" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               GitHub
             </a>
