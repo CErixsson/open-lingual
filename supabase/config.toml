@@ -1,1 +1,7 @@
 project_id = "xnvqmukgsjluwpoosohf"
+
+[functions.submit-attempt]
+verify_jwt = false
+
+[functions.get-leaderboard]
+verify_jwt = false

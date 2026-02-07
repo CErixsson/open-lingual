@@ -88,15 +88,25 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border/50">
             <nav className="flex flex-col gap-4">
-              <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
-                Features
-              </a>
-              <a href="#languages" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
-                Languages
-              </a>
-              <a href="#community" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
-                Community
-              </a>
+              {user ? (
+                <>
+                  <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
+                    Dashboard
+                  </Link>
+                  <Link to="/leaderboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
+                    Leaderboard
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
+                    Features
+                  </a>
+                  <a href="#languages" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
+                    Languages
+                  </a>
+                </>
+              )}
               <a href="https://github.com/CErixsson/open-lingual" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
                 GitHub
               </a>
