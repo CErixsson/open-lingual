@@ -34,6 +34,9 @@ const Header = () => {
                 <Link to="/leaderboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                   Leaderboard
                 </Link>
+                <Link to="/courses" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  Kurser
+                </Link>
               </>
             ) : (
               <>
@@ -95,6 +98,9 @@ const Header = () => {
                   </Link>
                   <Link to="/leaderboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
                     Leaderboard
+                  </Link>
+                  <Link to="/courses" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
+                    Kurser
                   </Link>
                 </>
               ) : (
