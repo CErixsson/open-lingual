@@ -11,14 +11,37 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { languageId, languageCode, languageName } = await req.json();
+    const body = await req.json();
 
-    if (!languageId || !languageCode || !languageName) {
-      return new Response(JSON.stringify({ error: 'languageId, languageCode, languageName required' }), {
+    // Validate languageId (UUID format)
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!body.languageId || typeof body.languageId !== 'string' || !uuidRegex.test(body.languageId)) {
+      return new Response(JSON.stringify({ error: 'Invalid or missing languageId' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
+
+    // Validate languageCode (ISO 639 format: 2-3 lowercase letters)
+    if (!body.languageCode || typeof body.languageCode !== 'string' || !/^[a-z]{2,3}$/i.test(body.languageCode)) {
+      return new Response(JSON.stringify({ error: 'Invalid or missing languageCode' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Validate languageName (letters, spaces, hyphens, apostrophes only, max 50 chars)
+    if (!body.languageName || typeof body.languageName !== 'string' ||
+        body.languageName.length > 50 || !/^[\p{L}\s\-']+$/u.test(body.languageName)) {
+      return new Response(JSON.stringify({ error: 'Invalid or missing languageName' }), {
+        status: 400,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    const languageId = body.languageId;
+    const languageCode = body.languageCode.toLowerCase();
+    const languageName = body.languageName.trim();
 
     console.log(`[seed-courses] Generating exercises for ${languageName} (${languageCode})`);
 
