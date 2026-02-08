@@ -3,15 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useLanguages } from '@/hooks/useLanguages';
 import { useLanguageProfile, useCreateLanguageProfile } from '@/hooks/useLanguageProfile';
-import { useSkillRatings } from '@/hooks/useSkillRatings';
-import { useRecommendedExercises } from '@/hooks/useExercises';
 import { useCefrBands } from '@/hooks/useLanguages';
+import { useDashboardStats, useSkillTrends } from '@/hooks/useDashboardStats';
+import { useProgressHistory, usePeriodComparison } from '@/hooks/useProgressHistory';
+import { useCoachingInsights } from '@/hooks/useCoachingInsights';
+import { useDailyFocus } from '@/hooks/useDailyFocus';
+import { useRecommendedExercises } from '@/hooks/useExercises';
+
 import Header from '@/components/Header';
-import RatingChip from '@/components/elo/RatingChip';
-import SkillsGrid from '@/components/elo/SkillsGrid';
-import ExerciseCard from '@/components/elo/ExerciseCard';
 import LanguageSelector from '@/components/elo/LanguageSelector';
-import { Flame, Target, BarChart3, Loader2 } from 'lucide-react';
+import RatingChip from '@/components/elo/RatingChip';
+import ExerciseCard from '@/components/elo/ExerciseCard';
+import AtAGlanceSummary from '@/components/dashboard/AtAGlanceSummary';
+import EnhancedSkillsGrid from '@/components/dashboard/EnhancedSkillsGrid';
+import ProgressChart from '@/components/dashboard/ProgressChart';
+import CoachingPanel from '@/components/dashboard/CoachingPanel';
+import DailyFocusCard from '@/components/dashboard/DailyFocusCard';
+
+import { Flame, Target, BarChart3, Loader2, Brain, Crosshair, LineChart } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Dashboard() {
@@ -27,7 +36,18 @@ export default function Dashboard() {
   const { data: languages, isLoading: langsLoading } = useLanguages();
   const { data: profile, isLoading: profileLoading } = useLanguageProfile(selectedLanguageId);
   const { data: bands } = useCefrBands(selectedLanguageId);
-  const { data: skillRatings, isLoading: skillsLoading } = useSkillRatings(profile?.id ?? null);
+
+  // Enhanced data hooks
+  const { data: stats, isLoading: statsLoading } = useDashboardStats(profile?.id ?? null);
+  const { data: skillTrends, isLoading: trendsLoading } = useSkillTrends(profile?.id ?? null);
+  const { data: history, isLoading: historyLoading } = useProgressHistory(profile?.id ?? null, 30);
+  const { data: comparison } = usePeriodComparison(profile?.id ?? null, 7);
+  const { data: insights, isLoading: insightsLoading } = useCoachingInsights(
+    profile?.id ?? null,
+    skillTrends,
+    profile?.overall_elo
+  );
+  const dailyFocus = useDailyFocus(skillTrends);
   const { data: exercises, isLoading: exercisesLoading } = useRecommendedExercises(
     selectedLanguageId,
     profile?.overall_elo
@@ -35,7 +55,7 @@ export default function Dashboard() {
 
   const createProfile = useCreateLanguageProfile();
 
-  // Auto-select first language or from profile
+  // Auto-select first language
   useEffect(() => {
     if (languages?.length && !selectedLanguageId) {
       setSelectedLanguageId(languages[0].id);
@@ -73,9 +93,9 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto px-4 pt-24 pb-12 max-w-5xl">
-        {/* Top HUD */}
-        <div className="rounded-2xl border border-border/50 bg-card p-5 shadow-card mb-6">
+      <main className="container mx-auto px-4 pt-24 pb-12 max-w-5xl space-y-6">
+        {/* Top bar: Language selector + rating */}
+        <div className="rounded-2xl border border-border/50 bg-card p-5 shadow-card">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <LanguageSelector
@@ -111,7 +131,7 @@ export default function Dashboard() {
 
         {/* No profile yet – onboarding */}
         {!profileLoading && !profile && selectedLanguageId && (
-          <div className="rounded-2xl border border-border/50 bg-card p-8 shadow-card text-center mb-6">
+          <div className="rounded-2xl border border-border/50 bg-card p-8 shadow-card text-center">
             <h2 className="text-xl font-bold mb-2">
               Börja lära dig{' '}
               {languages?.find(l => l.id === selectedLanguageId)?.name || 'detta språk'}!
@@ -130,49 +150,94 @@ export default function Dashboard() {
           </div>
         )}
 
-        {/* Skills grid */}
+        {/* === DASHBOARD SECTIONS (only when profile exists) === */}
         {profile && (
-          <section className="mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <BarChart3 className="w-5 h-5 text-primary" />
-              <h2 className="text-lg font-bold">Färdigheter</h2>
-            </div>
-            {skillsLoading ? (
-              <div className="flex justify-center py-8">
-                <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
-              </div>
-            ) : (
-              <SkillsGrid
-                ratings={(skillRatings as any[]) || []}
-                bands={cefrBands}
-              />
-            )}
-          </section>
-        )}
+          <>
+            {/* 1. At-a-Glance Summary */}
+            <AtAGlanceSummary
+              overallElo={profile.overall_elo}
+              overallCefr={profile.overall_cefr}
+              streak={profile.streak_count}
+              stats={stats}
+              isLoading={statsLoading}
+            />
 
-        {/* Recommended exercises */}
-        {profile && (
-          <section>
-            <div className="flex items-center gap-2 mb-4">
-              <Target className="w-5 h-5 text-accent" />
-              <h2 className="text-lg font-bold">Rekommenderade övningar</h2>
+            {/* 2. Skill Ratings with trends */}
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <BarChart3 className="w-5 h-5 text-primary" />
+                <h2 className="text-lg font-bold">Färdigheter</h2>
+              </div>
+              {trendsLoading ? (
+                <div className="flex justify-center py-8">
+                  <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+                </div>
+              ) : (
+                <EnhancedSkillsGrid
+                  trends={skillTrends || []}
+                  bands={cefrBands}
+                />
+              )}
+            </section>
+
+            {/* 3. Progress Visualization */}
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <LineChart className="w-5 h-5 text-primary" />
+                <h2 className="text-lg font-bold">Progression</h2>
+              </div>
+              <ProgressChart
+                history={history || []}
+                comparison={comparison}
+                bands={cefrBands}
+                isLoading={historyLoading}
+              />
+            </section>
+
+            {/* 4. Two-column: Coaching + Daily Focus */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Coaching insights */}
+              <section>
+                <div className="flex items-center gap-2 mb-4">
+                  <Brain className="w-5 h-5 text-accent" />
+                  <h2 className="text-lg font-bold">Coaching</h2>
+                </div>
+                <CoachingPanel insights={insights} isLoading={insightsLoading} />
+              </section>
+
+              {/* Daily focus */}
+              <section>
+                <div className="flex items-center gap-2 mb-4">
+                  <Crosshair className="w-5 h-5 text-secondary" />
+                  <h2 className="text-lg font-bold">Dagens fokus</h2>
+                </div>
+                <DailyFocusCard focus={dailyFocus} languageId={selectedLanguageId} />
+              </section>
             </div>
-            {exercisesLoading ? (
-              <div className="flex justify-center py-8">
-                <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+
+            {/* 5. Recommended exercises */}
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <Target className="w-5 h-5 text-accent" />
+                <h2 className="text-lg font-bold">Rekommenderade övningar</h2>
               </div>
-            ) : exercises?.length ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {exercises.map((ex: any) => (
-                  <ExerciseCard key={ex.id} exercise={ex} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-8 text-muted-foreground rounded-xl border border-border/50 bg-card">
-                Inga övningar tillgängliga just nu för din nivå. Kom tillbaka snart!
-              </div>
-            )}
-          </section>
+              {exercisesLoading ? (
+                <div className="flex justify-center py-8">
+                  <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+                </div>
+              ) : exercises?.length ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {exercises.map((ex: any) => (
+                    <ExerciseCard key={ex.id} exercise={ex} />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-muted-foreground rounded-xl border border-border/50 bg-card">
+                  Inga övningar tillgängliga just nu för din nivå.
+                </div>
+              )}
+            </section>
+          </>
         )}
       </main>
     </div>
