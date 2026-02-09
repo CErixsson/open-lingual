@@ -308,6 +308,172 @@ export type Database = {
           },
         ]
       }
+      learner_progress: {
+        Row: {
+          completion_percent: number
+          created_at: string
+          id: string
+          last_activity_at: string | null
+          lesson_id: string
+          streak_days: number
+          updated_at: string
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          completion_percent?: number
+          created_at?: string
+          id?: string
+          last_activity_at?: string | null
+          lesson_id: string
+          streak_days?: number
+          updated_at?: string
+          user_id: string
+          xp?: number
+        }
+        Update: {
+          completion_percent?: number
+          created_at?: string
+          id?: string
+          last_activity_at?: string | null
+          lesson_id?: string
+          streak_days?: number
+          updated_at?: string
+          user_id?: string
+          xp?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "learner_progress_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lesson_attempts: {
+        Row: {
+          correct: boolean
+          created_at: string
+          exercise_id: string
+          id: string
+          lesson_id: string
+          time_ms: number | null
+          user_id: string
+        }
+        Insert: {
+          correct: boolean
+          created_at?: string
+          exercise_id: string
+          id?: string
+          lesson_id: string
+          time_ms?: number | null
+          user_id: string
+        }
+        Update: {
+          correct?: boolean
+          created_at?: string
+          exercise_id?: string
+          id?: string
+          lesson_id?: string
+          time_ms?: number | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_attempts_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lessons: {
+        Row: {
+          author_id: string
+          created_at: string
+          description: string | null
+          exercises: Json | null
+          id: string
+          language: string
+          level: string
+          license: string
+          objectives: string[] | null
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          version: string
+        }
+        Insert: {
+          author_id: string
+          created_at?: string
+          description?: string | null
+          exercises?: Json | null
+          id?: string
+          language: string
+          level: string
+          license?: string
+          objectives?: string[] | null
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          version?: string
+        }
+        Update: {
+          author_id?: string
+          created_at?: string
+          description?: string | null
+          exercises?: Json | null
+          id?: string
+          language?: string
+          level?: string
+          license?: string
+          objectives?: string[] | null
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          version?: string
+        }
+        Relationships: []
+      }
+      media_assets: {
+        Row: {
+          bytes: number | null
+          created_at: string
+          height: number | null
+          id: string
+          path: string
+          type: string
+          uploaded_by: string | null
+          width: number | null
+        }
+        Insert: {
+          bytes?: number | null
+          created_at?: string
+          height?: number | null
+          id?: string
+          path: string
+          type: string
+          uploaded_by?: string | null
+          width?: number | null
+        }
+        Update: {
+          bytes?: number | null
+          created_at?: string
+          height?: number | null
+          id?: string
+          path?: string
+          type?: string
+          uploaded_by?: string | null
+          width?: number | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -347,6 +513,41 @@ export type Database = {
         }
         Relationships: []
       }
+      reviews: {
+        Row: {
+          comments: string
+          created_at: string
+          decision: string
+          id: string
+          reviewer_id: string
+          submission_id: string
+        }
+        Insert: {
+          comments: string
+          created_at?: string
+          decision: string
+          id?: string
+          reviewer_id: string
+          submission_id: string
+        }
+        Update: {
+          comments?: string
+          created_at?: string
+          decision?: string
+          id?: string
+          reviewer_id?: string
+          submission_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_submission_id_fkey"
+            columns: ["submission_id"]
+            isOneToOne: false
+            referencedRelation: "submissions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       skills: {
         Row: {
           display_name: string
@@ -367,6 +568,47 @@ export type Database = {
           key?: string
         }
         Relationships: []
+      }
+      submissions: {
+        Row: {
+          author_id: string
+          created_at: string
+          id: string
+          lesson_id: string
+          notes: string | null
+          reviewer_id: string | null
+          state: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          created_at?: string
+          id?: string
+          lesson_id: string
+          notes?: string | null
+          reviewer_id?: string | null
+          state?: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          created_at?: string
+          id?: string
+          lesson_id?: string
+          notes?: string | null
+          reviewer_id?: string | null
+          state?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "submissions_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_language_profiles: {
         Row: {
@@ -417,6 +659,27 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
       }
       user_skill_ratings: {
         Row: {
@@ -475,13 +738,24 @@ export type Database = {
         Args: { p_attempts: number; p_elo: number; p_rd: number }
         Returns: number
       }
+      get_user_roles: {
+        Args: { _user_id: string }
+        Returns: Database["public"]["Enums"]["app_role"][]
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       map_elo_to_cefr: {
         Args: { p_elo: number; p_language_id: string }
         Returns: string
       }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "learner" | "author" | "reviewer" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -608,6 +882,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["learner", "author", "reviewer", "admin"],
+    },
   },
 } as const

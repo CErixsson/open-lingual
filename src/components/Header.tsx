@@ -1,12 +1,26 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Globe, Menu, X, LogOut, User } from "lucide-react";
+import { Globe, Menu, X, LogOut, User, Languages } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useI18n, type Locale } from "@/i18n";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const localeLabels: Record<Locale, string> = {
+  en: 'English',
+  es: 'Español',
+  sv: 'Svenska',
+};
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOut } = useAuth();
+  const { t, locale, setLocale } = useI18n();
 
   const handleSignOut = async () => {
     await signOut();
@@ -29,32 +43,53 @@ const Header = () => {
             {user ? (
               <>
                 <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                  Dashboard
+                  {t('nav.dashboard')}
                 </Link>
                 <Link to="/leaderboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                  Leaderboard
+                  {t('nav.leaderboard')}
                 </Link>
                 <Link to="/courses" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                  Kurser
+                  {t('nav.courses')}
                 </Link>
               </>
             ) : (
               <>
                 <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                  Features
+                  {t('nav.features')}
                 </a>
                 <a href="#languages" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                  Languages
+                  {t('nav.languages')}
                 </a>
               </>
             )}
             <a href="https://github.com/CErixsson/open-lingual" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              GitHub
+              {t('nav.github')}
             </a>
           </nav>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
+            {/* Language switcher */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" aria-label="Change language">
+                  <Languages className="w-4 h-4 mr-1" />
+                  {locale.toUpperCase()}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {(Object.keys(localeLabels) as Locale[]).map((l) => (
+                  <DropdownMenuItem
+                    key={l}
+                    onClick={() => setLocale(l)}
+                    className={locale === l ? 'font-semibold' : ''}
+                  >
+                    {localeLabels[l]}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             {user ? (
               <>
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted text-sm">
@@ -63,16 +98,16 @@ const Header = () => {
                 </div>
                 <Button variant="ghost" onClick={handleSignOut}>
                   <LogOut className="w-4 h-4 mr-2" />
-                  Log Out
+                  {t('nav.logOut')}
                 </Button>
               </>
             ) : (
               <>
                 <Link to="/auth">
-                  <Button variant="ghost">Log In</Button>
+                  <Button variant="ghost">{t('nav.logIn')}</Button>
                 </Link>
                 <Link to="/auth">
-                  <Button variant="default">Register</Button>
+                  <Button variant="default">{t('nav.register')}</Button>
                 </Link>
               </>
             )}
@@ -82,6 +117,7 @@ const Header = () => {
           <button
             className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -94,28 +130,39 @@ const Header = () => {
               {user ? (
                 <>
                   <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
-                    Dashboard
+                    {t('nav.dashboard')}
                   </Link>
                   <Link to="/leaderboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
-                    Leaderboard
+                    {t('nav.leaderboard')}
                   </Link>
                   <Link to="/courses" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
-                    Kurser
+                    {t('nav.courses')}
                   </Link>
                 </>
               ) : (
                 <>
                   <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
-                    Features
+                    {t('nav.features')}
                   </a>
                   <a href="#languages" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
-                    Languages
+                    {t('nav.languages')}
                   </a>
                 </>
               )}
-              <a href="https://github.com/CErixsson/open-lingual" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors px-2 py-2">
-                GitHub
-              </a>
+
+              {/* Mobile language switcher */}
+              <div className="flex gap-2 px-2 py-2">
+                {(Object.keys(localeLabels) as Locale[]).map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setLocale(l)}
+                    className={`text-xs px-2 py-1 rounded ${locale === l ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`}
+                  >
+                    {localeLabels[l]}
+                  </button>
+                ))}
+              </div>
+
               <div className="flex flex-col gap-2 pt-4 border-t border-border/50">
                 {user ? (
                   <>
@@ -125,16 +172,16 @@ const Header = () => {
                     </div>
                     <Button variant="ghost" className="justify-start" onClick={handleSignOut}>
                       <LogOut className="w-4 h-4 mr-2" />
-                      Log Out
+                      {t('nav.logOut')}
                     </Button>
                   </>
                 ) : (
                   <>
                     <Link to="/auth">
-                      <Button variant="ghost" className="justify-start w-full">Log In</Button>
+                      <Button variant="ghost" className="justify-start w-full">{t('nav.logIn')}</Button>
                     </Link>
                     <Link to="/auth">
-                      <Button variant="default" className="w-full">Register</Button>
+                      <Button variant="default" className="w-full">{t('nav.register')}</Button>
                     </Link>
                   </>
                 )}
