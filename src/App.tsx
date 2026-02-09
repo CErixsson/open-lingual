@@ -4,12 +4,15 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
+import { I18nProvider } from "@/i18n";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import DashboardRouter from "./pages/DashboardRouter";
 import ExercisePage from "./pages/Exercise";
 import LeaderboardPage from "./pages/Leaderboard";
 import CoursesPage from "./pages/Courses";
+import LessonEditor from "./pages/LessonEditor";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -17,21 +20,26 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/exercise/:id" element={<ExercisePage />} />
-            <Route path="/leaderboard" element={<LeaderboardPage />} />
-            <Route path="/courses" element={<CoursesPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <I18nProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/dashboard" element={<DashboardRouter />} />
+              <Route path="/dashboard/skills" element={<Dashboard />} />
+              <Route path="/exercise/:id" element={<ExercisePage />} />
+              <Route path="/leaderboard" element={<LeaderboardPage />} />
+              <Route path="/courses" element={<CoursesPage />} />
+              <Route path="/lessons/new" element={<LessonEditor />} />
+              <Route path="/lessons/:id/edit" element={<LessonEditor />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </I18nProvider>
     </AuthProvider>
   </QueryClientProvider>
 );
