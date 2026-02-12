@@ -10,7 +10,7 @@ import { useCoachingInsights } from '@/hooks/useCoachingInsights';
 import { useDailyFocus } from '@/hooks/useDailyFocus';
 import { useRecommendedExercises } from '@/hooks/useExercises';
 
-import Header from '@/components/Header';
+import Header from '../components/Header';
 import LanguageSelector from '@/components/elo/LanguageSelector';
 import RatingChip from '@/components/elo/RatingChip';
 import ExerciseCard from '@/components/elo/ExerciseCard';
