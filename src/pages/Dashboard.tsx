@@ -10,6 +10,22 @@ import { useCoachingInsights } from '@/hooks/useCoachingInsights';
 import { useDailyFocus } from '@/hooks/useDailyFocus';
 import { useRecommendedExercises } from '@/hooks/useExercises';
 
+
+return (
+  <div className="min-h-screen bg-background">
+    {/* DEBUG-banderoll – syns alltid */}
+    <div className="px-4 py-2 text-xs bg-yellow-100 text-yellow-900 border-b border-yellow-300">
+      DEBUG: Dashboard render körs. authLoading={String(authLoading)}
+    </div>
+
+    <Header />
+    <main className="container mx-auto px-4 pt-24 pb-12 max-w-5xl space-y-6">
+      {/* ...resten av din kod... */}
+    </main>
+  </div>
+);
+
+
 import Header from '../components/Header';
 import LanguageSelector from '@/components/elo/LanguageSelector';
 import RatingChip from '@/components/elo/RatingChip';
