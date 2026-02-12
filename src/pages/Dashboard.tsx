@@ -1,38 +1,314 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
+import { useLanguages } from '@/hooks/useLanguages';
+import { useLanguageProfile, useCreateLanguageProfile } from '@/hooks/useLanguageProfile';
+import { useCefrBands } from '@/hooks/useLanguages';
+import { useDashboardStats, useSkillTrends } from '@/hooks/useDashboardStats';
+import { useProgressHistory, usePeriodComparison } from '@/hooks/useProgressHistory';
+import { useCoachingInsights } from '@/hooks/useCoachingInsights';
+import { useDailyFocus } from '@/hooks/useDailyFocus';
+import { useRecommendedExercises } from '@/hooks/useExercises';
 
-const useDashboardData = () => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+import Header from '@/components/Header';
+import LanguageSelector from '@/components/elo/LanguageSelector';
+import RatingChip from '@/components/elo/RatingChip';
+import ExerciseCard from '@/components/elo/ExerciseCard';
+import AtAGlanceSummary from '@/components/dashboard/AtAGlanceSummary';
+import EnhancedSkillsGrid from '@/components/dashboard/EnhancedSkillsGrid';
+import ProgressChart from '@/components/dashboard/ProgressChart';
+import CoachingPanel from '@/components/dashboard/CoachingPanel';
+import DailyFocusCard from '@/components/dashboard/DailyFocusCard';
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const response = await fetch('/api/dashboard');
-                if (!response.ok) throw new Error('Network response was not ok');
-                const result = await response.json();
-                setData(result);
-            } catch (err) {
-                setError(err);
-            } finally {
-                setLoading(false);
-            }
-        };
+import { Flame, Target, BarChart3, Loader2, Brain, Crosshair, LineChart } from 'lucide-react';
+import { toast } from 'sonner';
 
-        fetchData();
-    }, []); // Dependency array should be empty to avoid additional fetches
+export default function Dashboard() {
+  const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
+  const [selectedLanguageId, setSelectedLanguageId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-    return { data, loading, error };
-};
+  // Redirect if not logged in
+  useEffect(() => {
+    if (!authLoading && !user) {
+      navigate('/auth');
+    }
+  }, [authLoading, user, navigate]);
 
-const Dashboard = () => {
-    const { data, loading, error } = useDashboardData();
+  const { data: languages, isLoading: langsLoading } = useLanguages();
+  
+  // Auto-select first language
+  useEffect(() => {
+    if (languages && languages.length > 0 && !selectedLanguageId) {
+      setSelectedLanguageId(languages[0].id);
+    }
+  }, [languages, selectedLanguageId]);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+  // Only load profile-related hooks when selectedLanguageId is set
+  const { data: profile, isLoading: profileLoading } = useLanguageProfile(
+    selectedLanguageId || undefined
+  );
+  const { data: bands, isLoading: bandsLoading } = useCefrBands(
+    selectedLanguageId || undefined
+  );
 
-    return <div>{JSON.stringify(data)}</div>;
-};
+  // Enhanced data hooks - improved dependency handling
+  // Only load stats when profile ID is available
+  const { data: stats, isLoading: statsLoading } = useDashboardStats(
+    profile?.id || undefined
+  );
+  
+  // Load skill trends when profile ID is available
+  const { data: skillTrends, isLoading: trendsLoading } = useSkillTrends(
+    profile?.id || undefined
+  );
+  
+  // Load progress history when profile ID is available
+  const { data: history, isLoading: historyLoading } = useProgressHistory(
+    profile?.id || undefined,
+    30
+  );
+  
+  // Load period comparison when profile ID is available
+  const { data: comparison, isLoading: comparisonLoading } = usePeriodComparison(
+    profile?.id || undefined,
+    7
+  );
+  
+  // Coaching insights - wait for skillTrends to be available
+  const { data: insights, isLoading: insightsLoading } = useCoachingInsights(
+    profile?.id || undefined,
+    skillTrends && skillTrends.length > 0 ? skillTrends : undefined,
+    profile?.overall_elo || undefined
+  );
+  
+  // Daily focus doesn't need async data
+  const dailyFocus = useDailyFocus(skillTrends ?? []);
+  
+  // Recommended exercises when language is selected
+  const { data: exercises, isLoading: exercisesLoading } = useRecommendedExercises(
+    selectedLanguageId || undefined,
+    profile?.overall_elo || undefined
+  );
 
-export default Dashboard;
+  const createProfile = useCreateLanguageProfile();
+
+  const handleSelectLanguage = (langId: string) => {
+    setSelectedLanguageId(langId);
+    setError(null);
+  };
+
+  const handleStartLanguage = async () => {
+    if (!selectedLanguageId) {
+      setError('Vänligen välj ett språk.');
+      return;
+    }
+    try {
+      setError(null);
+      await createProfile.mutateAsync(selectedLanguageId);
+      toast.success('Språkprofil skapad! Dags att börja träna.');
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Kunde inte skapa profil.';
+      setError(errorMessage);
+      toast.error(errorMessage);
+    }
+  };
+
+  if (authLoading || langsLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!languages || languages.length === 0) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-muted-foreground mb-4">Inga språk tillgängliga.</p>
+          <button
+            onClick={() => navigate('/')}
+            className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            Gå tillbaka
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const cefrBands = bands?.map(b => ({
+    level: b.level,
+    band_min: b.band_min,
+    band_max: b.band_max,
+  })) || [];
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main className="container mx-auto px-4 pt-24 pb-12 max-w-5xl space-y-6">
+        {/* Top bar: Language selector + rating */}
+        <div className="rounded-2xl border border-border/50 bg-card p-5 shadow-card">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <LanguageSelector
+                languages={languages}
+                selectedId={selectedLanguageId}
+                onSelect={handleSelectLanguage}
+              />
+              {profile && !profileLoading && (
+                <RatingChip
+                  elo={profile.overall_elo}
+                  rd={profile.overall_rd}
+                  bands={cefrBands}
+                  showProgress
+                  size="lg"
+                />
+              )}
+            </div>
+            {profile && (
+              <div className="flex items-center gap-5 text-sm">
+                <div className="flex items-center gap-1.5 text-secondary">
+                  <Flame className="w-5 h-5" />
+                  <span className="font-bold tabular-nums">{profile.streak_count ?? 0}</span>
+                  <span className="text-muted-foreground text-xs">streak</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-muted-foreground">
+                  <Target className="w-4 h-4" />
+                  <span className="tabular-nums">{profile.total_attempts ?? 0} försök</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Error state */}
+        {error && (
+          <div className="rounded-2xl border border-red-500/30 bg-red-500/10 p-4 text-red-600">
+            {error}
+          </div>
+        )}
+
+        {/* No profile yet – onboarding */}
+        {!profileLoading && !profile && selectedLanguageId && (
+          <div className="rounded-2xl border border-border/50 bg-card p-8 shadow-card text-center">
+            <h2 className="text-xl font-bold mb-2">
+              Börja lära dig{' '}
+              {languages.find(l => l.id === selectedLanguageId)?.name || 'detta språk'}!
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              Din Elo startar på 1000 (A2). Gör övningar för att klättra i CEFR-nivåerna.
+            </p>
+            <button
+              onClick={handleStartLanguage}
+              disabled={createProfile.isPending}
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-50"
+            >
+              {createProfile.isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+              Starta profil
+            </button>
+          </div>
+        )}
+
+        {/* === DASHBOARD SECTIONS (only when profile exists) === */}
+        {profile && (
+          <>
+            {/* 1. At-a-Glance Summary */}
+            <AtAGlanceSummary
+              overallElo={profile.overall_elo}
+              overallCefr={profile.overall_cefr}
+              streak={profile.streak_count ?? 0}
+              stats={stats}
+              isLoading={statsLoading}
+            />
+
+            {/* 2. Skill Ratings with trends */}
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <BarChart3 className="w-5 h-5 text-primary" />
+                <h2 className="text-lg font-bold">Färdigheter</h2>
+              </div>
+              {trendsLoading ? (
+                <div className="flex justify-center py-8">
+                  <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+                </div>
+              ) : skillTrends && skillTrends.length > 0 ? (
+                <EnhancedSkillsGrid
+                  trends={skillTrends}
+                  bands={cefrBands}
+                />
+              ) : (
+                <div className="text-center py-8 text-muted-foreground rounded-xl border border-border/50 bg-card">
+                  Inga färdigheter registrerade ännu.
+                </div>
+              )}
+            </section>
+
+            {/* 3. Progress Visualization */}
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <LineChart className="w-5 h-5 text-primary" />
+                <h2 className="text-lg font-bold">Progression</h2>
+              </div>
+              <ProgressChart
+                history={history || []}
+                comparison={comparison || undefined}
+                bands={cefrBands}
+                isLoading={historyLoading || comparisonLoading}
+              />
+            </section>
+
+            {/* 4. Two-column: Coaching + Daily Focus */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Coaching insights */}
+              <section>
+                <div className="flex items-center gap-2 mb-4">
+                  <Brain className="w-5 h-5 text-accent" />
+                  <h2 className="text-lg font-bold">Coaching</h2>
+                </div>
+                <CoachingPanel insights={insights} isLoading={insightsLoading} />
+              </section>
+
+              {/* Daily focus */}
+              <section>
+                <div className="flex items-center gap-2 mb-4">
+                  <Crosshair className="w-5 h-5 text-secondary" />
+                  <h2 className="text-lg font-bold">Dagens fokus</h2>
+                </div>
+                <DailyFocusCard 
+                  focus={dailyFocus} 
+                  languageId={selectedLanguageId || ''} 
+                />
+              </section>
+            </div>
+
+            {/* 5. Recommended exercises */}
+            <section>
+              <div className="flex items-center gap-2 mb-4">
+                <Target className="w-5 h-5 text-accent" />
+                <h2 className="text-lg font-bold">Rekommenderade övningar</h2>
+              </div>
+              {exercisesLoading ? (
+                <div className="flex justify-center py-8">
+                  <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+                </div>
+              ) : exercises && exercises.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {exercises.map((ex) => (
+                    <ExerciseCard key={ex.id} exercise={ex} />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-muted-foreground rounded-xl border border-border/50 bg-card">
+                  Inga övningar tillgängliga just nu för din nivå.
+                </div>
+              )}
+            </section>
+          </>
+        )}
+      </main>
+    </div>
+  );
+}
