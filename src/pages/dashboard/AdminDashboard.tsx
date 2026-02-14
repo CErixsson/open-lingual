@@ -56,14 +56,19 @@ export default function AdminDashboard() {
     published: allLessons?.filter(l => l.status === 'published').length ?? 0,
   };
 
+  const sanitizeIlikePattern = (input: string) =>
+    input.replace(/[%_\\]/g, '\\$&');
+
   const handleSearch = async () => {
-    if (!searchQuery.trim()) return;
+    const trimmed = searchQuery.trim().slice(0, 100);
+    if (!trimmed) return;
     setSearching(true);
     try {
+      const sanitized = sanitizeIlikePattern(trimmed);
       const { data, error } = await supabase
         .from('profiles')
         .select('user_id, display_name')
-        .ilike('display_name', `%${searchQuery.trim()}%`)
+        .ilike('display_name', `%${sanitized}%`)
         .limit(10);
       if (error) throw error;
 
