@@ -26,18 +26,17 @@ export default function DashboardRouter() {
     if (status === 'unauthenticated') navigate('/auth');
   }, [status, navigate]);
 
-  // Set initial active role based on user's roles
+  // Set initial active role based on user's roles (default to learner)
+  const effectiveRolesForInit = roles.length > 0 ? roles : (['learner'] as AppRole[]);
   useEffect(() => {
-    if (roles.length > 0) {
-      const sorted = roleOrder.filter(r => roles.includes(r));
-      if (sorted.length > 0 && !roles.includes(activeRole)) {
-        setActiveRole(sorted[0]);
-      }
+    const sorted = roleOrder.filter(r => effectiveRolesForInit.includes(r));
+    if (sorted.length > 0 && !effectiveRolesForInit.includes(activeRole)) {
+      setActiveRole(sorted[0]);
     }
-  }, [roles, activeRole]);
+  }, [effectiveRolesForInit, activeRole]);
 
-  // Loading state
-  if (status === 'loading' || (status === 'authenticated' && roles.length === 0)) {
+  // Loading state - only show while auth is resolving, not while waiting for roles
+  if (status === 'loading') {
     return (
       <div className="min-h-screen bg-background">
         <Header />
@@ -53,7 +52,9 @@ export default function DashboardRouter() {
     );
   }
 
-  const sortedRoles = roleOrder.filter(r => roles.includes(r));
+  // Default to learner if user has no assigned roles
+  const effectiveRoles = roles.length > 0 ? roles : (['learner'] as AppRole[]);
+  const sortedRoles = roleOrder.filter(r => effectiveRoles.includes(r));
 
   const renderDashboard = () => {
     switch (activeRole) {
