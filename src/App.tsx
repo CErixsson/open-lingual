@@ -42,7 +42,6 @@ const App = () => (
               <Route path="/scenarios/:id" element={<DialoguePlayer />} />
               <Route path="/lessons/:id" element={<LessonPlayer />} />
               <Route path="*" element={<NotFound />} />
-              <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
