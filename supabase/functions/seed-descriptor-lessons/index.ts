@@ -15,7 +15,8 @@ Deno.serve(async (req) => {
     const body = await req.json().catch(() => ({}));
     const targetLangCode = body.languageCode || null;
     const scaleOffset = body.scaleOffset || 0;
-    const scaleBatchSize = body.scaleBatchSize || 5;
+    const scaleBatchSize = body.scaleBatchSize || 3; // smaller default for safety
+    const autoChain = body.autoChain ?? false;
 
     const supabaseAdmin = createClient(
       Deno.env.get('SUPABASE_URL')!,
@@ -38,10 +39,7 @@ Deno.serve(async (req) => {
       ? languages.filter(l => l.code === targetLangCode)
       : languages;
 
-    // Use all CEFR levels including C2 and Pre-A1
     const cefrLevels = ['Pre-A1', 'A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
-    let totalCreated = 0;
-    let totalSkipped = 0;
 
     // Slice scales for batching
     const scaleBatch = DESCRIPTOR_SCALES.slice(scaleOffset, scaleOffset + scaleBatchSize);
@@ -55,17 +53,18 @@ Deno.serve(async (req) => {
       });
     }
 
+    let totalCreated = 0;
+    let totalSkipped = 0;
+
     for (const lang of langsToSeed) {
       console.log(`[seed] Processing ${lang.name} (${lang.code}), scales ${scaleOffset}-${scaleOffset + scaleBatch.length - 1}`);
-
-      const lessonsToInsert: any[] = [];
 
       for (const scale of scaleBatch) {
         for (const level of cefrLevels) {
           const descriptor = scale.descriptors[level];
           if (!descriptor || descriptor.includes('No descriptor')) continue;
 
-          // Check if lesson already exists
+          // Check duplicate
           const { data: existing } = await supabaseAdmin
             .from('lessons')
             .select('id')
@@ -79,7 +78,7 @@ Deno.serve(async (req) => {
             continue;
           }
 
-          // Generate exercises via AI
+          // Generate exercises
           const prompt = `Generate 4 exercises for learning ${lang.name} (code: ${lang.code}) at CEFR level ${level}.
 Topic: "${scale.title}" (Category: ${scale.category}, Skill: ${scale.skill})
 CEFR Descriptor: "${descriptor}"
@@ -98,16 +97,15 @@ For word_order:
   - "correctOrder": array of indices showing correct order
 
 Level ${level} guidelines:
-${level === 'Pre-A1' ? 'Absolute beginner: single words, gestures, visual recognition, numbers, greetings' : ''}
-${level === 'A1' ? 'Very basic: greetings, numbers, colors, simple nouns, present tense' : ''}
-${level === 'A2' ? 'Elementary: daily routines, shopping, past tense, common adjectives' : ''}
-${level === 'B1' ? 'Intermediate: opinions, plans, conditionals, connectors' : ''}
-${level === 'B2' ? 'Upper intermediate: abstract topics, passive voice, idioms, formal register' : ''}
-${level === 'C1' ? 'Advanced: complex grammar, nuanced expressions, academic vocabulary' : ''}
-${level === 'C2' ? 'Mastery: subtle distinctions, literary references, sophisticated rhetoric, rare vocabulary' : ''}
+${level === 'Pre-A1' ? 'Absolute beginner: single words, gestures, visual recognition' : ''}
+${level === 'A1' ? 'Very basic: greetings, numbers, colors, simple nouns' : ''}
+${level === 'A2' ? 'Elementary: daily routines, shopping, past tense' : ''}
+${level === 'B1' ? 'Intermediate: opinions, plans, conditionals' : ''}
+${level === 'B2' ? 'Upper intermediate: abstract topics, passive voice, idioms' : ''}
+${level === 'C1' ? 'Advanced: complex grammar, nuanced expressions' : ''}
+${level === 'C2' ? 'Mastery: subtle distinctions, literary references, rare vocabulary' : ''}
 
-All ${lang.name} text must be authentic to the language.
-Return ONLY the JSON array. No markdown, no explanation.`;
+All ${lang.name} text must be authentic. Return ONLY the JSON array.`;
 
           try {
             const aiResponse = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
@@ -144,21 +142,16 @@ Return ONLY the JSON array. No markdown, no explanation.`;
             if (!Array.isArray(exercises)) continue;
 
             const validExercises = exercises.filter((ex: any) => {
-              if (ex.type === 'multiple_choice') {
-                return ex.question && Array.isArray(ex.options) && ex.options.length === 4 && typeof ex.correctIndex === 'number';
-              }
-              if (ex.type === 'cloze') {
-                return ex.text && ex.correctAnswer;
-              }
-              if (ex.type === 'word_order') {
-                return Array.isArray(ex.words) && Array.isArray(ex.correctOrder);
-              }
+              if (ex.type === 'multiple_choice') return ex.question && Array.isArray(ex.options) && ex.options.length === 4 && typeof ex.correctIndex === 'number';
+              if (ex.type === 'cloze') return ex.text && ex.correctAnswer;
+              if (ex.type === 'word_order') return Array.isArray(ex.words) && Array.isArray(ex.correctOrder);
               return false;
             });
 
             if (validExercises.length === 0) continue;
 
-            lessonsToInsert.push({
+            // Save IMMEDIATELY after creation
+            const { error } = await supabaseAdmin.from('lessons').insert({
               title: `${scale.title} (${level})`,
               description: descriptor,
               language: lang.code,
@@ -171,27 +164,42 @@ Return ONLY the JSON array. No markdown, no explanation.`;
               tags: [scale.skill, scale.id, scale.category.toLowerCase()],
               exercises: validExercises,
             });
+
+            if (error) {
+              console.error(`[seed] Insert error:`, error);
+            } else {
+              totalCreated++;
+              console.log(`[seed] Saved: ${scale.title} (${level}) for ${lang.name}`);
+            }
           } catch (err) {
             console.warn(`[seed] Error for ${scale.id}/${level}:`, err);
             continue;
           }
         }
       }
+    }
 
-      // Batch insert
-      if (lessonsToInsert.length > 0) {
-        const { error, data } = await supabaseAdmin
-          .from('lessons')
-          .insert(lessonsToInsert)
-          .select('id');
-        
-        if (error) {
-          console.error(`[seed] Insert error for ${lang.name}:`, error);
-        } else {
-          totalCreated += data?.length ?? lessonsToInsert.length;
-          console.log(`[seed] Created ${data?.length ?? lessonsToInsert.length} lessons for ${lang.name}`);
-        }
-      }
+    const nextOffset = scaleOffset + scaleBatchSize;
+    const hasMore = nextOffset < DESCRIPTOR_SCALES.length;
+
+    // Self-chain: trigger next batch automatically
+    if (hasMore && autoChain) {
+      const selfUrl = `${Deno.env.get('SUPABASE_URL')}/functions/v1/seed-descriptor-lessons`;
+      EdgeRuntime.waitUntil(
+        fetch(selfUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${Deno.env.get('SUPABASE_ANON_KEY')}`,
+          },
+          body: JSON.stringify({
+            languageCode: targetLangCode,
+            scaleOffset: nextOffset,
+            scaleBatchSize,
+            autoChain: true,
+          }),
+        })
+      );
     }
 
     return new Response(JSON.stringify({
@@ -200,9 +208,10 @@ Return ONLY the JSON array. No markdown, no explanation.`;
       languages: langsToSeed.map(l => l.name),
       scalesProcessed: scaleBatch.map(s => s.id),
       totalScales: DESCRIPTOR_SCALES.length,
-      nextOffset: scaleOffset + scaleBatchSize,
-      hasMore: scaleOffset + scaleBatchSize < DESCRIPTOR_SCALES.length,
-      message: `Seeded ${totalCreated} lessons (skipped ${totalSkipped} existing), batch ${scaleOffset / scaleBatchSize + 1}`,
+      nextOffset,
+      hasMore,
+      autoChaining: hasMore && autoChain,
+      message: `Batch done: ${totalCreated} created, ${totalSkipped} skipped. Scales ${scaleOffset}-${scaleOffset + scaleBatch.length - 1} of ${DESCRIPTOR_SCALES.length}.`,
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
