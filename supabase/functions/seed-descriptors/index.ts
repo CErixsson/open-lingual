@@ -32,18 +32,32 @@ Deno.serve(async (req) => {
     // ── PHASE 1: Populate cefr_descriptors ──
     let rows: any[] = body.descriptors || [];
 
-    // If no descriptors in body, fetch and parse the Excel from preview URL
+    // If no descriptors in body, fetch and parse the Excel
     if (rows.length === 0) {
-      const excelUrl = body.excelUrl || 'https://id-preview--f7e76cdc-0fac-440d-8506-30f485f30b7a.lovable.app/data/CEFR_Descriptors_2020.xlsx';
+      const excelUrl = body.excelUrl || 'https://open-speak-buddy.lovable.app/data/CEFR_Descriptors_2020.xlsx';
       console.log(`[seed] Fetching Excel from ${excelUrl}`);
-      const resp = await fetch(excelUrl);
+      const resp = await fetch(excelUrl, {
+        headers: { 'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' },
+      });
       if (!resp.ok) {
         return new Response(JSON.stringify({ error: `Failed to fetch Excel: ${resp.status}` }), {
           status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
+      const contentType = resp.headers.get('content-type') || '';
+      console.log(`[seed] Response content-type: ${contentType}`);
       const buffer = await resp.arrayBuffer();
+      console.log(`[seed] Downloaded ${buffer.byteLength} bytes`);
+      
+      if (buffer.byteLength < 1000) {
+        const text = new TextDecoder().decode(buffer.slice(0, 500));
+        return new Response(JSON.stringify({ error: `Response too small (${buffer.byteLength} bytes), likely not Excel`, preview: text }), {
+          status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      
       const workbook = XLSX.read(new Uint8Array(buffer), { type: 'array' });
+      console.log(`[seed] Sheets: ${workbook.SheetNames.join(', ')}`);
       // First sheet = English descriptors
       const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
       const rawRows = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
