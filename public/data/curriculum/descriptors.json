@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "level": "C2",
+    "scale": "Overall oral comprehension",
+    "activity": "Oral comprehension",
+    "scheme": "Communicative language activities",
+    "mode": "Reception",
+    "descriptor_number": 1,
+    "descriptor_text": "Can understand with ease virtually any kind of language, whether live or broadcast, delivered at fast natural speed."
+  },
+  {
+    "id": 2,
+    "level": "C1",
+    "scale": "Overall oral comprehension",
+    "activity": "Oral comprehension",
+    "scheme": "Communicative language activities",
+    "mode": "Reception",
+    "descriptor_number": 2,
+    "descriptor_text": "Can understand enough to follow extended discourse on abstract and complex topics beyond their own field, though they may need to confirm occasional details, especially if the variety is unfamiliar."
+  },
+  {
+    "id": 3,
+    "level": "C1",
+    "scale": "Overall oral comprehension",
+    "activity": "Oral comprehension",
+    "scheme": "Communicative language activities",
+    "mode": "Reception",
+    "descriptor_number": 3,
+    "descriptor_text": "Can recognise a wide range of idiomatic expressions and colloquialisms, appreciating register shifts."
+  },
+  {
+    "id": 4,
+    "level": "C1",
+    "scale": "Overall oral comprehension",
+    "activity": "Oral comprehension",
+    "scheme": "Communicative language activities",
+    "mode": "Reception",
+    "descriptor_number": 4,
+    "descriptor_text": "Can follow extended discourse even when it is not clearly structured and when relationships are only implied and not signalled explicitly."
+  },
+  {
+    "id": 5,
+    "level": "B2+",
+    "scale": "Overall oral comprehension",
+    "activity": "Oral comprehension",
+    "scheme": "Communicative language activities",
+    "mode": "Reception",
+    "descriptor_number": 5,
+    "descriptor_text": "Can understand standard language or a familiar variety, live or broadcast, on both familiar and unfamiliar topics normally encountered in personal, social, academic or vocational life. Only extreme [auditory/visual] background noise, inadequate discourse structure and/or idiomatic usage influence the ability to understand."
+  }
+]

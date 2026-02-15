@@ -1,0 +1,41 @@
+[
+  {
+    "id": "3ac81b02-2a9d-4cc8-a79f-fc7e7d5d723c",
+    "title": "السؤال عن الحمام",
+    "description": "Practice asking for directions to the restroom in Arabic.",
+    "language_code": "ar",
+    "cefr_target": "A1",
+    "topic": "travel",
+    "difficulty_elo": 1000,
+    "grammar_targets": [],
+    "vocabulary_clusters": [],
+    "cultural_notes": null,
+    "nodes": []
+  },
+  {
+    "id": "e97641b6-4ee0-40f4-9ee9-3944113e225a",
+    "title": "شراء تذكرة قطار",
+    "description": "Practice buying a train ticket in Arabic.",
+    "language_code": "ar",
+    "cefr_target": "A1",
+    "topic": "travel",
+    "difficulty_elo": 1000,
+    "grammar_targets": [],
+    "vocabulary_clusters": [],
+    "cultural_notes": null,
+    "nodes": []
+  },
+  {
+    "id": "5dd91561-6d34-4a79-b479-c5b480990cbe",
+    "title": "وصف عائلتك",
+    "description": "Practice describing your family in Arabic.",
+    "language_code": "ar",
+    "cefr_target": "A1",
+    "topic": "social",
+    "difficulty_elo": 1000,
+    "grammar_targets": [],
+    "vocabulary_clusters": [],
+    "cultural_notes": null,
+    "nodes": []
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "id": "9482e874-cb49-4f25-ab86-e1fd76a317c7",
+  "title": "English: Past Tenses",
+  "description": "Master the use of simple past, past continuous, and past perfect.",
+  "language": "en",
+  "level": "B1",
+  "tags": ["grammar", "tenses", "past"],
+  "objectives": [
+    "Distinguish between past tenses",
+    "Use correct tense in context",
+    "Identify time markers"
+  ],
+  "exercises": [
+    {
+      "id": "ex-past-01",
+      "type": "multiple_choice",
+      "prompt": "Which sentence uses the past continuous correctly?",
+      "items": [
+        { "text": "I was reading when the phone rang.", "correct": true },
+        { "text": "I was read when the phone rang.", "correct": false },
+        { "text": "I reading was when the phone rang.", "correct": false }
+      ]
+    },
+    {
+      "id": "ex-past-02",
+      "type": "cloze",
+      "prompt": "She _____ (already/leave) when I arrived.",
+      "items": [
+        { "answer": "had already left", "alternatives": ["had left already"] }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "license": "CC-BY-SA-4.0"
+}
