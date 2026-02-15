@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useLesson } from '@/hooks/useLessons';
+import { useUpsertProgress } from '@/hooks/useLearnerProgress';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -12,6 +13,7 @@ import {
   ArrowLeft,
   Loader2,
   BookOpen,
+  Star,
 } from 'lucide-react';
 import { getCefrColor } from '@/lib/elo';
 
@@ -41,6 +43,10 @@ export default function LessonPlayer() {
   const [correct, setCorrect] = useState(false);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [xpEarned, setXpEarned] = useState(0);
+  const savedRef = useRef(false);
+
+  const upsertProgress = useUpsertProgress();
 
   useEffect(() => {
     if (!authLoading && !user) navigate('/auth');
@@ -67,6 +73,26 @@ export default function LessonPlayer() {
     if (isCorrect) setScore(s => s + 1);
     setAnswered(true);
   };
+
+  // Save progress & XP when finished
+  useEffect(() => {
+    if (finished && user && id && !savedRef.current) {
+      savedRef.current = true;
+      const pct = total > 0 ? Math.round((score / total) * 100) : 0;
+      // XP formula: base 10 per exercise + bonus for accuracy
+      const baseXp = total * 10;
+      const accuracyBonus = Math.round(baseXp * (score / Math.max(total, 1)) * 0.5);
+      const totalXp = baseXp + accuracyBonus;
+      setXpEarned(totalXp);
+
+      upsertProgress.mutate({
+        user_id: user.id,
+        lesson_id: id,
+        completion_percent: pct >= 80 ? 100 : pct,
+        xp: totalXp,
+      });
+    }
+  }, [finished]);
 
   const nextExercise = () => {
     if (currentIdx + 1 >= total) {
@@ -116,9 +142,15 @@ export default function LessonPlayer() {
             <h1 className="text-2xl font-bold mb-2">Lektion klar!</h1>
             <p className="text-muted-foreground mb-4">{lesson.title}</p>
             <p className="text-3xl font-bold text-primary mb-1">{pct}%</p>
-            <p className="text-sm text-muted-foreground mb-6">
+            <p className="text-sm text-muted-foreground mb-2">
               {score} av {total} rätt
             </p>
+            {xpEarned > 0 && (
+              <div className="flex items-center justify-center gap-2 mb-6 text-secondary">
+                <Star className="w-5 h-5 fill-secondary" />
+                <span className="font-bold text-lg">+{xpEarned} XP</span>
+              </div>
+            )}
             <div className="flex gap-3">
               <Link to="/courses" className="flex-1">
                 <Button variant="outline" className="w-full">
@@ -126,7 +158,8 @@ export default function LessonPlayer() {
                 </Button>
               </Link>
               <Button className="flex-1" onClick={() => {
-                setCurrentIdx(0); setScore(0); setFinished(false);
+                setCurrentIdx(0); setScore(0); setFinished(false); setXpEarned(0);
+                savedRef.current = false;
                 setAnswered(false); setSelectedAnswer(null); setTextAnswer(''); setWordOrder([]);
               }}>
                 Gör om
