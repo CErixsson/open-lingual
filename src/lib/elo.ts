@@ -5,12 +5,13 @@ export interface CefrBand {
 }
 
 const DEFAULT_BANDS: CefrBand[] = [
-  { level: 'A1', band_min: 800, band_max: 999 },
-  { level: 'A2', band_min: 1000, band_max: 1199 },
-  { level: 'B1', band_min: 1200, band_max: 1399 },
-  { level: 'B2', band_min: 1400, band_max: 1599 },
-  { level: 'C1', band_min: 1600, band_max: 1799 },
-  { level: 'C2', band_min: 1800, band_max: 2500 },
+  { level: 'Pre-A1', band_min: 600, band_max: 899 },
+  { level: 'A1', band_min: 900, band_max: 1099 },
+  { level: 'A2', band_min: 1100, band_max: 1299 },
+  { level: 'B1', band_min: 1300, band_max: 1499 },
+  { level: 'B2', band_min: 1500, band_max: 1699 },
+  { level: 'C1', band_min: 1700, band_max: 1899 },
+  { level: 'C2', band_min: 1900, band_max: 2500 },
 ];
 
 export function expectedScore(playerRating: number, oppRating: number): number {
@@ -46,7 +47,7 @@ export function mapEloToCefr(elo: number, bands?: CefrBand[]): string {
   const b = bands || DEFAULT_BANDS;
   const found = b.find(band => elo >= band.band_min && elo <= band.band_max);
   if (found) return found.level;
-  return elo < 800 ? 'A1' : 'C2';
+  return elo < 600 ? 'Pre-A1' : 'C2';
 }
 
 export function getCefrProgress(elo: number, bands?: CefrBand[]): {
@@ -71,6 +72,7 @@ export function getCefrProgress(elo: number, bands?: CefrBand[]): {
 }
 
 export const CEFR_COLORS: Record<string, string> = {
+  'Pre-A1': '220 15% 60%',
   'A1': '200 70% 50%',
   'A2': '158 64% 42%',
   'B1': '38 92% 60%',
