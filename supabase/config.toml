@@ -14,3 +14,6 @@ verify_jwt = false
 
 [functions.dialogue]
 verify_jwt = false
+
+[functions.seed-descriptor-lessons]
+verify_jwt = false
