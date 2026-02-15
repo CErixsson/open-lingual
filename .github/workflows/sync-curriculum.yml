@@ -1,0 +1,20 @@
+name: Sync Curriculum to Database
+
+on:
+  push:
+    paths:
+      - 'public/data/curriculum/**'
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger sync edge function
+        run: |
+          curl -s -X POST \
+            "${{ secrets.SUPABASE_URL }}/functions/v1/sync-curriculum" \
+            -H "Content-Type: application/json" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -d '{"types": ["descriptors", "lessons", "scenarios"]}'

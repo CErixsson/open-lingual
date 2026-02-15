@@ -1,0 +1,36 @@
+{
+  "id": "adc2e3ab-6ba6-41ae-87b4-e67135c2cea5",
+  "title": "French: At the Market",
+  "description": "Vocabulary and phrases for shopping at a French market.",
+  "language": "fr",
+  "level": "A2",
+  "tags": ["shopping", "vocabulary", "food"],
+  "objectives": [
+    "Name common fruits and vegetables in French",
+    "Ask for prices",
+    "Make purchases"
+  ],
+  "exercises": [
+    {
+      "id": "ex-market-01",
+      "type": "match",
+      "prompt": "Match the French words to their English translations.",
+      "items": [
+        { "left": "pomme", "right": "apple" },
+        { "left": "fromage", "right": "cheese" },
+        { "left": "pain", "right": "bread" },
+        { "left": "lait", "right": "milk" }
+      ]
+    },
+    {
+      "id": "ex-market-02",
+      "type": "translate",
+      "prompt": "Translate: 'How much does it cost?'",
+      "items": [
+        { "sourceText": "How much does it cost?", "expectedTranslation": "Combien ça coûte ?" }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "license": "CC-BY-SA-4.0"
+}

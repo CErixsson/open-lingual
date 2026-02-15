@@ -1,0 +1,47 @@
+{
+  "id": "f7f79455-fa4a-466e-9da0-3d9687625eee",
+  "title": "Spanish Basics: Greetings",
+  "description": "Learn essential Spanish greetings and introductions.",
+  "language": "es",
+  "level": "A1",
+  "tags": ["greetings", "basics", "conversation"],
+  "objectives": [
+    "Greet people in Spanish",
+    "Introduce yourself",
+    "Ask simple questions"
+  ],
+  "exercises": [
+    {
+      "id": "ex-greet-01",
+      "type": "multiple_choice",
+      "prompt": "How do you say 'Hello' in Spanish?",
+      "items": [
+        { "text": "Hola", "correct": true },
+        { "text": "Adiós", "correct": false },
+        { "text": "Gracias", "correct": false },
+        { "text": "Por favor", "correct": false }
+      ]
+    },
+    {
+      "id": "ex-greet-02",
+      "type": "multiple_choice",
+      "prompt": "What does '¿Cómo te llamas?' mean?",
+      "items": [
+        { "text": "What is your name?", "correct": true },
+        { "text": "How are you?", "correct": false },
+        { "text": "Where are you from?", "correct": false },
+        { "text": "How old are you?", "correct": false }
+      ]
+    },
+    {
+      "id": "ex-greet-03",
+      "type": "cloze",
+      "prompt": "Buenos _____, ¿cómo estás?",
+      "items": [
+        { "answer": "días", "alternatives": ["dias"] }
+      ]
+    }
+  ],
+  "version": "1.0.0",
+  "license": "CC-BY-SA-4.0"
+}
