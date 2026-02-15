@@ -7,7 +7,9 @@ import {
   useExerciseCountsByLanguage,
   groupExercisesByCefr,
   CEFR_LABELS,
+  useLessonsByLanguageCode,
 } from '@/hooks/useCourses';
+import LessonsSection from '@/components/courses/LessonsSection';
 import Header from '@/components/Header';
 import ExerciseCard from '@/components/elo/ExerciseCard';
 import { getCefrColor } from '@/lib/elo';
@@ -37,6 +39,7 @@ export default function CoursesPage() {
   const { data: languages, isLoading: langsLoading } = useLanguages();
   const { data: counts } = useExerciseCountsByLanguage();
   const { data: exercises, isLoading: exLoading, refetch } = useExercisesByLanguage(selectedLangId);
+  const selectedLang = languages?.find(l => l.id === selectedLangId);
 
   const courseLevels = exercises ? groupExercisesByCefr(exercises) : [];
 
@@ -228,6 +231,15 @@ export default function CoursesPage() {
                   Generera CEFR-kurser med AI
                 </Button>
               </div>
+            )}
+
+            {/* Lessons section */}
+            {selectedLang && (
+              <LessonsSection
+                languageCode={selectedLang.code}
+                languageName={selectedLang.name}
+                flagEmoji={selectedLang.flag_emoji}
+              />
             )}
           </div>
         )}
