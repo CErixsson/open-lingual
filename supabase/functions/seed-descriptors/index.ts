@@ -34,7 +34,7 @@ Deno.serve(async (req) => {
 
     // If no descriptors in body, fetch and parse the Excel
     if (rows.length === 0) {
-      const excelUrl = body.excelUrl || 'https://open-speak-buddy.lovable.app/data/CEFR_Descriptors_2020.xlsx';
+      const excelUrl = body.excelUrl || `${Deno.env.get('SUPABASE_URL')}/storage/v1/object/public/cefr-data/CEFR_Descriptors_2020.xlsx`;
       console.log(`[seed] Fetching Excel from ${excelUrl}`);
       const resp = await fetch(excelUrl, {
         headers: { 'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' },
@@ -262,7 +262,8 @@ All ${lang.name} text must be authentic. Return ONLY the JSON array, no markdown
       });
 
       if (!aiResponse.ok) {
-        console.warn(`[seed-ex] AI error for desc ${desc.descriptor_number}: ${aiResponse.status}`);
+        const errorBody = await aiResponse.text().catch(() => 'no body');
+        console.warn(`[seed-ex] AI error for desc ${desc.descriptor_number}: ${aiResponse.status} - ${errorBody.slice(0, 200)}`);
         continue;
       }
 
