@@ -3,15 +3,18 @@ import { useAuth } from '@/hooks/useAuth';
 import { useI18n } from '@/i18n';
 import { useMyProgress, useProgressStats, useRecentAttempts } from '@/hooks/useLearnerProgress';
 import { usePublishedLessons } from '@/hooks/useLessons';
+import { useUserLanguageProfiles } from '@/hooks/useLanguageProfile';
+import { useSkillTrends } from '@/hooks/useDashboardStats';
 import EmptyState from '@/components/shared/EmptyState';
 import ErrorPanel from '@/components/shared/ErrorPanel';
 import SkeletonCard from '@/components/shared/SkeletonCard';
+import SkillRatingsPanel from '@/components/dashboard/SkillRatingsPanel';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
   BookOpen, Flame, Trophy, ArrowRight, Play,
-  CheckCircle2, XCircle, BarChart3, Clock,
+  CheckCircle2, XCircle, BarChart3, Clock, MessageCircle,
 } from 'lucide-react';
 
 export default function LearnDashboard() {
@@ -23,6 +26,9 @@ export default function LearnDashboard() {
   const { data: stats, isLoading: statsLoading } = useProgressStats(user?.id ?? null);
   const { data: attempts } = useRecentAttempts(user?.id ?? null, 10);
   const { data: lessons, isLoading: lessonsLoading, error: lessonsError, refetch: refetchLessons } = usePublishedLessons();
+  const { data: profiles } = useUserLanguageProfiles();
+  const activeProfile = profiles?.[0];
+  const { data: skillTrends } = useSkillTrends(activeProfile?.id ?? null);
 
   // Find most recent in-progress lesson
   const continueLesson = progress?.find(
@@ -113,8 +119,20 @@ export default function LearnDashboard() {
         </Card>
       )}
 
-      {/* Quick link to skill ratings */}
-      <div className="flex justify-end">
+      {/* Skill ratings panel */}
+      {skillTrends && skillTrends.length > 0 && (
+        <SkillRatingsPanel
+          trends={skillTrends}
+          overallElo={activeProfile?.overall_elo}
+          overallCefr={activeProfile?.overall_cefr}
+        />
+      )}
+
+      {/* Quick links */}
+      <div className="flex justify-between">
+        <Button variant="ghost" size="sm" onClick={() => navigate('/scenarios')}>
+          <MessageCircle className="w-4 h-4 mr-1" /> Scenarios
+        </Button>
         <Button variant="ghost" size="sm" onClick={() => navigate('/dashboard/skills')} aria-label={t('dashboard.learn.viewSkills')}>
           <BarChart3 className="w-4 h-4 mr-1" /> {t('dashboard.learn.viewSkills')}
         </Button>

@@ -13,6 +13,8 @@ import ExercisePage from "./pages/Exercise";
 import LeaderboardPage from "./pages/Leaderboard";
 import CoursesPage from "./pages/Courses";
 import LessonEditor from "./pages/LessonEditor";
+import ScenariosPage from "./pages/Scenarios";
+import DialoguePlayer from "./pages/DialoguePlayer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +37,8 @@ const App = () => (
               <Route path="/courses" element={<CoursesPage />} />
               <Route path="/lessons/new" element={<LessonEditor />} />
               <Route path="/lessons/:id/edit" element={<LessonEditor />} />
+              <Route path="/scenarios" element={<ScenariosPage />} />
+              <Route path="/scenarios/:id" element={<DialoguePlayer />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

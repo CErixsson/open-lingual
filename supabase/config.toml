@@ -11,3 +11,6 @@ verify_jwt = false
 
 [functions.seed-demo-data]
 verify_jwt = false
+
+[functions.dialogue]
+verify_jwt = false

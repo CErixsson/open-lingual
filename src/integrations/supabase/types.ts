@@ -49,6 +49,106 @@ export type Database = {
           },
         ]
       }
+      dialogue_nodes: {
+        Row: {
+          ai_context: string | null
+          branching_paths: Json | null
+          created_at: string
+          difficulty_level: string
+          hints: Json | null
+          id: string
+          intent_type: string
+          node_order: number
+          possible_responses: Json | null
+          prompt_text: string
+          scenario_id: string
+        }
+        Insert: {
+          ai_context?: string | null
+          branching_paths?: Json | null
+          created_at?: string
+          difficulty_level?: string
+          hints?: Json | null
+          id?: string
+          intent_type?: string
+          node_order?: number
+          possible_responses?: Json | null
+          prompt_text: string
+          scenario_id: string
+        }
+        Update: {
+          ai_context?: string | null
+          branching_paths?: Json | null
+          created_at?: string
+          difficulty_level?: string
+          hints?: Json | null
+          id?: string
+          intent_type?: string
+          node_order?: number
+          possible_responses?: Json | null
+          prompt_text?: string
+          scenario_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dialogue_nodes_scenario_id_fkey"
+            columns: ["scenario_id"]
+            isOneToOne: false
+            referencedRelation: "scenarios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      dialogue_sessions: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          evaluation: Json | null
+          id: string
+          messages: Json
+          mode: string
+          scenario_id: string
+          score: number | null
+          skill_ratings_delta: Json | null
+          started_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          evaluation?: Json | null
+          id?: string
+          messages?: Json
+          mode?: string
+          scenario_id: string
+          score?: number | null
+          skill_ratings_delta?: Json | null
+          started_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          evaluation?: Json | null
+          id?: string
+          messages?: Json
+          mode?: string
+          scenario_id?: string
+          score?: number | null
+          skill_ratings_delta?: Json | null
+          started_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dialogue_sessions_scenario_id_fkey"
+            columns: ["scenario_id"]
+            isOneToOne: false
+            referencedRelation: "scenarios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       exercise_attempts: {
         Row: {
           completed_at: string | null
@@ -548,6 +648,122 @@ export type Database = {
           },
         ]
       }
+      scenario_packs: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon_name: string | null
+          id: string
+          is_premium: boolean | null
+          language_id: string | null
+          pack_order: number | null
+          rating_threshold: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          is_premium?: boolean | null
+          language_id?: string | null
+          pack_order?: number | null
+          rating_threshold?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          is_premium?: boolean | null
+          language_id?: string | null
+          pack_order?: number | null
+          rating_threshold?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scenario_packs_language_id_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "languages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scenarios: {
+        Row: {
+          cefr_target: string
+          created_at: string
+          cultural_notes: string | null
+          description: string | null
+          difficulty_elo: number
+          grammar_targets: string[] | null
+          id: string
+          language_id: string
+          pack_id: string | null
+          scenario_order: number | null
+          status: string
+          title: string
+          topic: string
+          updated_at: string
+          vocabulary_clusters: string[] | null
+        }
+        Insert: {
+          cefr_target?: string
+          created_at?: string
+          cultural_notes?: string | null
+          description?: string | null
+          difficulty_elo?: number
+          grammar_targets?: string[] | null
+          id?: string
+          language_id: string
+          pack_id?: string | null
+          scenario_order?: number | null
+          status?: string
+          title: string
+          topic?: string
+          updated_at?: string
+          vocabulary_clusters?: string[] | null
+        }
+        Update: {
+          cefr_target?: string
+          created_at?: string
+          cultural_notes?: string | null
+          description?: string | null
+          difficulty_elo?: number
+          grammar_targets?: string[] | null
+          id?: string
+          language_id?: string
+          pack_id?: string | null
+          scenario_order?: number | null
+          status?: string
+          title?: string
+          topic?: string
+          updated_at?: string
+          vocabulary_clusters?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scenarios_language_id_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "languages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scenarios_pack_id_fkey"
+            columns: ["pack_id"]
+            isOneToOne: false
+            referencedRelation: "scenario_packs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       skills: {
         Row: {
           display_name: string
@@ -680,6 +896,59 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      user_scenario_progress: {
+        Row: {
+          attempts_count: number | null
+          best_score: number | null
+          controlled_completed: boolean | null
+          created_at: string
+          guided_completed: boolean | null
+          id: string
+          last_played_at: string | null
+          mode_unlocked: string
+          open_completed: boolean | null
+          scenario_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts_count?: number | null
+          best_score?: number | null
+          controlled_completed?: boolean | null
+          created_at?: string
+          guided_completed?: boolean | null
+          id?: string
+          last_played_at?: string | null
+          mode_unlocked?: string
+          open_completed?: boolean | null
+          scenario_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts_count?: number | null
+          best_score?: number | null
+          controlled_completed?: boolean | null
+          created_at?: string
+          guided_completed?: boolean | null
+          id?: string
+          last_played_at?: string | null
+          mode_unlocked?: string
+          open_completed?: boolean | null
+          scenario_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_scenario_progress_scenario_id_fkey"
+            columns: ["scenario_id"]
+            isOneToOne: false
+            referencedRelation: "scenarios"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_skill_ratings: {
         Row: {
