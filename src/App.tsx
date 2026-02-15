@@ -15,6 +15,7 @@ import CoursesPage from "./pages/Courses";
 import LessonEditor from "./pages/LessonEditor";
 import ScenariosPage from "./pages/Scenarios";
 import DialoguePlayer from "./pages/DialoguePlayer";
+import LessonPlayer from "./pages/LessonPlayer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,8 @@ const App = () => (
               <Route path="/lessons/:id/edit" element={<LessonEditor />} />
               <Route path="/scenarios" element={<ScenariosPage />} />
               <Route path="/scenarios/:id" element={<DialoguePlayer />} />
+              <Route path="/lessons/:id" element={<LessonPlayer />} />
+              <Route path="*" element={<NotFound />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
