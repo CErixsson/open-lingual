@@ -17,3 +17,6 @@ verify_jwt = false
 
 [functions.seed-descriptor-lessons]
 verify_jwt = false
+
+[functions.seed-descriptors]
+verify_jwt = false
