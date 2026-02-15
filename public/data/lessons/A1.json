@@ -1,0 +1,191 @@
+{
+  "A1": {
+    "Spanish": {
+      "lessons": [
+        "Hola, ¿cómo estás?",
+        "Me llamo...",
+        "¿Cuál es tu nombre?",
+        "Gracias",
+        "Por favor",
+        "Lo siento",
+        "¿Dónde está el baño?"
+      ]
+    },
+    "French": {
+      "template": [
+        "Bonjour, comment ça va?",
+        "Je m'appelle...",
+        "Quel est ton nom?",
+        "Merci",
+        "S'il vous plaît",
+        "Je suis désolé",
+        "Où sont les toilettes?"
+      ]
+    },
+    "German": {
+      "template": [
+        "Hallo, wie geht's?",
+        "Ich heiße...",
+        "Wie heißt du?",
+        "Danke",
+        "Bitte",
+        "Es tut mir leid",
+        "Wo ist die Toilette?"
+      ]
+    },
+    "Italian": {
+      "template": [
+        "Ciao, come stai?",
+        "Mi chiamo...",
+        "Qual è il tuo nome?",
+        "Grazie",
+        "Per favore",
+        "Mi dispiace",
+        "Dove sono i bagni?"
+      ]
+    },
+    "Portuguese": {
+      "template": [
+        "Olá, como você está?",
+        "Meu nome é...",
+        "Qual é o seu nome?",
+        "Obrigado",
+        "Por favor",
+        "Desculpe",
+        "Onde fica o banheiro?"
+      ]
+    },
+    "Dutch": {
+      "template": [
+        "Hallo, hoe gaat het?",
+        "Ik heet...",
+        "Wat is jouw naam?",
+        "Dank je",
+        "Alsjeblieft",
+        "Het spijt me",
+        "Waar is het toilet?"
+      ]
+    },
+    "Polish": {
+      "template": [
+        "Cześć, jak się masz?",
+        "Nazywam się...",
+        "Jak masz na imię?",
+        "Dziękuję",
+        "Proszę",
+        "Przepraszam",
+        "Gdzie jest toaleta?"
+      ]
+    },
+    "Swedish": {
+      "template": [
+        "Hej, hur mår du?",
+        "Jag heter...",
+        "Vad heter du?",
+        "Tack",
+        "Snälla",
+        "Jag är ledsen",
+        "Var är toaletten?"
+      ]
+    },
+    "Danish": {
+      "template": [
+        "Hej, hvordan har du det?",
+        "Jeg hedder...",
+        "Hvad hedder du?",
+        "Tak",
+        "Vær så venlig",
+        "Undskyld",
+        "Hvor er toilettet?"
+      ]
+    },
+    "Norwegian": {
+      "template": [
+        "Hei, hvordan har du det?",
+        "Jeg heter...",
+        "Hva heter du?",
+        "Takk",
+        "Vær så snill",
+        "Beklager",
+        "Hvor er toalettet?"
+      ]
+    },
+    "Finnish": {
+      "template": [
+        "Hei, mitä kuuluu?",
+        "Minun nimeni on...",
+        "Mikä sinun nimesi on?",
+        "Kiitos",
+        "Ole hyvä",
+        "Anteeksi",
+        "Missä on vessa?"
+      ]
+    },
+    "Greek": {
+      "template": [
+        "Γειά σου, πώς είσαι؟",
+        "Με λένε...",
+        "Πώς σε λένε؟",
+        "Ευχαριστώ",
+        "Παρακαλώ",
+        "Συγγνώμη",
+        "Πού είναι η τουαλέτα؟"
+      ]
+    },
+    "Turkish": {
+      "template": [
+        "Merhaba, nasılsın?",
+        "Benim adım...",
+        "Adın ne?",
+        "Teşekkür ederim",
+        "Lütfen",
+        "Üzgünüm",
+        "Tuvalet nerede?"
+      ]
+    },
+    "Japanese": {
+      "template": [
+        "こんにちは、元気ですか？",
+        "私の名前は...です。",
+        "あなたの名前は何ですか？",
+        "ありがとう",
+        "お願いします",
+        "ごめんなさい",
+        "トイレはどこですか？"
+      ]
+    },
+    "Mandarin Chinese": {
+      "template": [
+        "你好，你好吗？",
+        "我叫...",
+        "你叫什么名字？",
+        "谢谢",
+        "请",
+        "对不起",
+        "洗手间在哪里？"
+      ]
+    },
+    "Korean": {
+      "template": [
+        "안녕하세요, 어떻게 지내세요?",
+        "제 이��은...입니다.",
+        "당신의 이름은 무엇입니까?",
+        "감사합니다",
+        "제발",
+        "죄송합니다",
+        "화장실은 어디에요?"
+      ]
+    },
+    "Arabic": {
+      "template": [
+        "مرحبا، كيف حالك؟",
+        "أنا اسمي...",
+        "ما اسمك؟",
+        "شكرا",
+        "من فضلك",
+        "أنا آسف",
+        "أين الحمام؟"
+      ]
+    }
+  }
+}
