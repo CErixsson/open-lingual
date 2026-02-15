@@ -110,7 +110,7 @@ export default function LearnDashboard() {
             </div>
             <Button
               size="sm"
-              onClick={() => navigate(`/lessons/${(continueLesson as any).lesson_id}/play`)}
+              onClick={() => navigate(`/lessons/${(continueLesson as any).lesson_id}`)}
               aria-label={t('dashboard.learn.resume')}
             >
               {t('dashboard.learn.resume')} <ArrowRight className="w-4 h-4" />
@@ -167,8 +167,8 @@ export default function LearnDashboard() {
                   tabIndex={0}
                   role="button"
                   aria-label={`${lesson.title} - ${lesson.level}`}
-                  onClick={() => navigate(`/lessons/${lesson.id}/play`)}
-                  onKeyDown={(e) => e.key === 'Enter' && navigate(`/lessons/${lesson.id}/play`)}
+                  onClick={() => navigate(`/lessons/${lesson.id}`)}
+                  onKeyDown={(e) => e.key === 'Enter' && navigate(`/lessons/${lesson.id}`)}
                 >
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between">
