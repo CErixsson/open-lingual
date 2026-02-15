@@ -72,6 +72,42 @@ export function groupExercisesByCefr(exercises: CourseExercise[]): CourseLevel[]
     .filter(g => g.exercises.length > 0);
 }
 
+export function useLessonsByLanguageCode(langCode: string | null) {
+  return useQuery({
+    queryKey: ['course-lessons', langCode],
+    enabled: !!langCode,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('lessons')
+        .select('*')
+        .eq('language', langCode!)
+        .eq('status', 'published')
+        .order('level');
+      if (error) throw error;
+      return data;
+    },
+  });
+}
+
+export interface LessonsByLevel {
+  level: string;
+  lessons: any[];
+}
+
+export function groupLessonsByCefr(lessons: any[]): LessonsByLevel[] {
+  const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+  const grouped: Record<string, any[]> = {};
+  levels.forEach(l => { grouped[l] = []; });
+  lessons.forEach(lesson => {
+    if (grouped[lesson.level]) {
+      grouped[lesson.level].push(lesson);
+    }
+  });
+  return levels
+    .map(level => ({ level, lessons: grouped[level] }))
+    .filter(g => g.lessons.length > 0);
+}
+
 export const CEFR_LABELS: Record<string, string> = {
   A1: 'Nybörjare',
   A2: 'Grundläggande',
