@@ -49,6 +49,93 @@ export type Database = {
           },
         ]
       }
+      cefr_descriptors: {
+        Row: {
+          activity: string
+          created_at: string
+          descriptor_number: number
+          descriptor_text: string
+          id: number
+          level: string
+          mode: string | null
+          scale: string
+          scheme: string
+        }
+        Insert: {
+          activity: string
+          created_at?: string
+          descriptor_number: number
+          descriptor_text: string
+          id?: number
+          level: string
+          mode?: string | null
+          scale: string
+          scheme: string
+        }
+        Update: {
+          activity?: string
+          created_at?: string
+          descriptor_number?: number
+          descriptor_text?: string
+          id?: number
+          level?: string
+          mode?: string | null
+          scale?: string
+          scheme?: string
+        }
+        Relationships: []
+      }
+      descriptor_exercises: {
+        Row: {
+          content_json: Json
+          created_at: string
+          descriptor_id: number
+          difficulty_elo: number
+          exercise_type: string
+          id: string
+          language_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          content_json?: Json
+          created_at?: string
+          descriptor_id: number
+          difficulty_elo?: number
+          exercise_type: string
+          id?: string
+          language_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          content_json?: Json
+          created_at?: string
+          descriptor_id?: number
+          difficulty_elo?: number
+          exercise_type?: string
+          id?: string
+          language_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "descriptor_exercises_descriptor_id_fkey"
+            columns: ["descriptor_id"]
+            isOneToOne: false
+            referencedRelation: "cefr_descriptors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "descriptor_exercises_language_id_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "languages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dialogue_nodes: {
         Row: {
           ai_context: string | null
