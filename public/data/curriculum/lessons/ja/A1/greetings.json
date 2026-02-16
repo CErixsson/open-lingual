@@ -1,0 +1,38 @@
+{
+  "id": "ja-a1-greetings",
+  "title": "Japanese: あいさつ",
+  "description": "Learn basic Japanese greetings and introductions.",
+  "language": "ja",
+  "level": "A1",
+  "tags": ["greetings", "basics"],
+  "objectives": ["Greet people in Japanese", "Introduce yourself", "Use polite forms"],
+  "descriptor_ids": [1151],
+  "phases": [
+    { "phase": 1, "type": "build", "title": "語彙と文法", "blocks": [
+      { "id": "vocab-01", "type": "vocabulary", "items": [
+        { "term": "こんにちは", "translation": "Hello / Good afternoon", "example": "こんにちは、お元気ですか？" },
+        { "term": "私の名前は…です", "translation": "My name is…", "example": "私の名前は田中です。" },
+        { "term": "お名前は何ですか？", "translation": "What is your name?", "example": "お名前は何ですか？" },
+        { "term": "はじめまして", "translation": "Nice to meet you", "example": "はじめまして、どうぞよろしく。" },
+        { "term": "さようなら", "translation": "Goodbye", "example": "さようなら、また明日！" }
+      ]},
+      { "id": "grammar-01", "type": "text", "content": "**Japanese politeness levels:**\n- *です/ます* form — polite (use with strangers)\n\n**Self-introduction pattern:**\n- *はじめまして* (Nice to meet you)\n- *私は* + name + *です* (I am…)\n- *どうぞよろしくお願いします* (Please be kind to me)\n\n**Writing systems:** Hiragana, Katakana, Kanji" }
+    ]},
+    { "phase": 2, "type": "controlled_practice", "title": "練習", "blocks": [
+      { "id": "ex-01", "type": "multiple_choice", "prompt": "What does 'はじめまして' mean?", "items": [
+        { "text": "Nice to meet you", "correct": true },
+        { "text": "Goodbye", "correct": false },
+        { "text": "Thank you", "correct": false }
+      ]}
+    ]},
+    { "phase": 3, "type": "guided_production", "title": "ガイド付き練習", "blocks": [
+      { "id": "guided-01", "type": "open_response", "prompt": "Write a polite self-introduction in Japanese using はじめまして.", "hints": ["Start with 'はじめまして'", "Use '私は…です'", "End with 'よろしくお願いします'"], "required_grammar": ["です"], "min_words": 5 }
+    ]},
+    { "phase": 4, "type": "free_performance", "title": "自由課題", "blocks": [
+      { "id": "perf-01", "type": "open_response", "prompt": "Write a conversation in Japanese where two people meet at a party, introduce themselves, and say goodbye.", "hints": [], "required_grammar": [], "min_words": 10, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+    ]}
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

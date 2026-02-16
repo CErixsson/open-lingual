@@ -1,0 +1,13 @@
+[
+  {
+    "id": "es-scenario-airport",
+    "title": "Facturación en el Aeropuerto",
+    "description": "Practice checking in at a Spanish-speaking airport.",
+    "cefr_target": "A2",
+    "topic": "travel",
+    "difficulty_elo": 1200,
+    "grammar_targets": ["necesito", "dónde está", "podría"],
+    "vocabulary_clusters": ["airport", "travel", "documents"],
+    "cultural_notes": "In Spanish-speaking countries, airports use both Spanish and English signage."
+  }
+]

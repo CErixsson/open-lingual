@@ -1,0 +1,36 @@
+{
+  "id": "fr-a2-shopping",
+  "title": "French: Faire les Courses",
+  "description": "Shop at a French market — ask prices, buy items.",
+  "language": "fr",
+  "level": "A2",
+  "tags": ["shopping", "vocabulary", "food"],
+  "objectives": ["Name common food items", "Ask for prices", "Make purchases"],
+  "descriptor_ids": [1152],
+  "phases": [
+    { "phase": 1, "type": "build", "title": "Vocabulaire et Grammaire", "blocks": [
+      { "id": "vocab-01", "type": "vocabulary", "items": [
+        { "term": "Combien ça coûte?", "translation": "How much does it cost?", "example": "Combien ça coûte, le fromage?" },
+        { "term": "Je voudrais…", "translation": "I would like…", "example": "Je voudrais un kilo de pommes." },
+        { "term": "C'est tout", "translation": "That's all", "example": "C'est tout, merci." },
+        { "term": "L'addition", "translation": "The bill", "example": "L'addition, s'il vous plaît." }
+      ]},
+      { "id": "grammar-01", "type": "text", "content": "**Quantities:**\n- *un kilo de…, un litre de…, une bouteille de…*\n- *Combien?* (How much/many?)\n\n**Partitive articles:**\n- *du* (masc), *de la* (fem), *des* (plural)\n- *Je voudrais du pain* (I'd like some bread)" }
+    ]},
+    { "phase": 2, "type": "controlled_practice", "title": "Pratique Contrôlée", "blocks": [
+      { "id": "ex-01", "type": "cloze", "prompt": "Je voudrais _____ kilo _____ tomates.", "items": [
+        { "answer": "un", "alternatives": [] },
+        { "answer": "de", "alternatives": [] }
+      ]}
+    ]},
+    { "phase": 3, "type": "guided_production", "title": "Production Guidée", "blocks": [
+      { "id": "guided-01", "type": "open_response", "prompt": "You are at a French market. Ask for 3 items, ask the price, and pay.", "hints": ["Use 'Je voudrais…'", "Use 'Combien…?'"], "required_grammar": ["je voudrais", "combien"], "min_words": 15 }
+    ]},
+    { "phase": 4, "type": "free_performance", "title": "Tâche de Performance", "blocks": [
+      { "id": "perf-01", "type": "open_response", "prompt": "Write a full dialogue at a French bakery. You want to buy bread, pastries, and a drink. Ask about options and prices.", "hints": [], "required_grammar": [], "min_words": 30, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+    ]}
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

@@ -1,0 +1,53 @@
+{
+  "id": "es-a1-introductions",
+  "title": "Spanish: Presentaciones",
+  "description": "Learn to talk about yourself in Spanish.",
+  "language": "es",
+  "level": "A1",
+  "tags": ["introductions", "personal", "basics"],
+  "objectives": ["Say your name and age", "Say where you are from", "Describe yourself"],
+  "descriptor_ids": [1151],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "Vocabulario y Gramática",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "Soy de…", "translation": "I am from…", "example": "Soy de México." },
+          { "term": "Tengo … años", "translation": "I am … years old", "example": "Tengo 22 años." },
+          { "term": "Vivo en…", "translation": "I live in…", "example": "Vivo en Madrid." },
+          { "term": "Me gusta…", "translation": "I like…", "example": "Me gusta la música." }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Verbo 'ser':** Yo **soy**, Tú **eres**, Él/Ella **es**\n\n**Verbo 'tener':** Yo **tengo**, Tú **tienes**\n\nIn Spanish, age uses 'tener' (to have), not 'ser' (to be):\n- *Tengo 25 años* (I have 25 years = I am 25)" }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "Práctica Controlada",
+      "blocks": [
+        { "id": "ex-01", "type": "cloze", "prompt": "_____ de Argentina. _____ 30 años.", "items": [
+          { "answer": "Soy", "alternatives": [] },
+          { "answer": "Tengo", "alternatives": [] }
+        ]},
+        { "id": "ex-02", "type": "multiple_choice", "prompt": "How do you say 'I am 18 years old' in Spanish?", "items": [
+          { "text": "Tengo 18 años.", "correct": true },
+          { "text": "Soy 18 años.", "correct": false },
+          { "text": "Estoy 18 años.", "correct": false }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "Producción Guiada",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Write 4 sentences about yourself in Spanish: name, age, origin, and one thing you like.", "hints": ["Use 'Me llamo…'", "Use 'Tengo…años'", "Use 'Soy de…'"], "required_grammar": ["soy", "tengo"], "min_words": 12 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "Tarea de Desempeño",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Imagina que conoces a un nuevo compañero de clase. Preséntate: di tu nombre, edad, de dónde eres, dónde vives y qué te gusta hacer.", "hints": [], "required_grammar": [], "min_words": 20, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

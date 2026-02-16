@@ -1,0 +1,36 @@
+{
+  "id": "es-b1-customer-service",
+  "title": "Spanish: Atención al Cliente",
+  "description": "Handle customer service interactions in Spanish.",
+  "language": "es",
+  "level": "B1",
+  "tags": ["business", "customer-service", "complaints"],
+  "objectives": ["Make a complaint", "Request help", "Negotiate a solution"],
+  "descriptor_ids": [45],
+  "phases": [
+    { "phase": 1, "type": "build", "title": "Vocabulario y Gramática", "blocks": [
+      { "id": "vocab-01", "type": "vocabulary", "items": [
+        { "term": "Tengo un problema con…", "translation": "I have a problem with…", "example": "Tengo un problema con mi pedido." },
+        { "term": "Me gustaría devolver…", "translation": "I would like to return…", "example": "Me gustaría devolver este producto." },
+        { "term": "¿Podría ayudarme?", "translation": "Could you help me?", "example": "¿Podría ayudarme con esto?" },
+        { "term": "Necesito hablar con el encargado", "translation": "I need to speak with the manager", "example": "Necesito hablar con el encargado, por favor." }
+      ]},
+      { "id": "grammar-01", "type": "text", "content": "**Conditional for politeness:**\n- *Me gustaría…* (I would like…)\n- *¿Podría…?* (Could you…?)\n- *¿Sería posible…?* (Would it be possible…?)\n\n**Explaining problems:**\n- *El producto está defectuoso*\n- *No funciona correctamente*\n- *No es lo que pedí*" }
+    ]},
+    { "phase": 2, "type": "controlled_practice", "title": "Práctica Controlada", "blocks": [
+      { "id": "ex-01", "type": "cloze", "prompt": "_____ un problema con mi reserva. _____ ayudarme?", "items": [
+        { "answer": "Tengo", "alternatives": [] },
+        { "answer": "¿Podría", "alternatives": ["Podría"] }
+      ]}
+    ]},
+    { "phase": 3, "type": "guided_production", "title": "Producción Guiada", "blocks": [
+      { "id": "guided-01", "type": "open_response", "prompt": "Compraste un producto en línea pero llegó dañado. Escribe un mensaje al servicio al cliente explicando el problema y pidiendo una solución.", "hints": ["Usa 'Tengo un problema con…'", "Usa 'Me gustaría…'", "Sé cortés con el condicional"], "required_grammar": ["me gustaría", "podría"], "min_words": 25 }
+    ]},
+    { "phase": 4, "type": "free_performance", "title": "Tarea de Desempeño", "blocks": [
+      { "id": "perf-01", "type": "open_response", "prompt": "Escribe un diálogo completo entre un cliente insatisfecho y un representante de servicio al cliente. El cliente tiene un problema, lo explica, y negocian una solución.", "hints": [], "required_grammar": [], "min_words": 50, "evaluation_criteria": { "grammar_weight": 0.25, "vocabulary_weight": 0.25, "structure_weight": 0.3, "fluency_weight": 0.2 } }
+    ]}
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

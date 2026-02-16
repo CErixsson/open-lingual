@@ -1,0 +1,13 @@
+[
+  {
+    "id": "sv-scenario-store-return",
+    "title": "Returnera i Butiken",
+    "description": "Practice returning an item at a Swedish store.",
+    "cefr_target": "A2",
+    "topic": "shopping",
+    "difficulty_elo": 1200,
+    "grammar_targets": ["jag vill", "kan jag", "det fungerar inte"],
+    "vocabulary_clusters": ["shopping", "returns", "customer-service"],
+    "cultural_notes": "In Sweden, you typically have 14-30 days to return items with a receipt."
+  }
+]
