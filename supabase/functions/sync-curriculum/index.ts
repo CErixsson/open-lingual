@@ -81,6 +81,7 @@ serve(async (req) => {
               if (!lessonRes.ok) continue;
 
               const lesson = await lessonRes.json();
+              // Upsert lesson with phases support
               const { error } = await supabase.from("lessons").upsert(
                 {
                   id: lesson.id,
@@ -91,6 +92,8 @@ serve(async (req) => {
                   tags: lesson.tags || [],
                   objectives: lesson.objectives || [],
                   exercises: lesson.exercises || [],
+                  phases: lesson.phases || [],
+                  descriptor_ids: lesson.descriptor_ids || [],
                   version: lesson.version || "1.0.0",
                   license: lesson.license || "CC-BY-SA-4.0",
                   status: "published",
@@ -98,7 +101,23 @@ serve(async (req) => {
                 },
                 { onConflict: "id" }
               );
-              if (!error) lessonsUpserted++;
+              if (!error) {
+                lessonsUpserted++;
+
+                // Sync descriptor mappings if present
+                if (lesson.descriptor_ids?.length) {
+                  for (const descId of lesson.descriptor_ids) {
+                    await supabase.from("lesson_descriptor_map").upsert(
+                      {
+                        lesson_id: lesson.id,
+                        descriptor_id: descId,
+                        is_primary: lesson.descriptor_ids.indexOf(descId) === 0,
+                      },
+                      { onConflict: "lesson_id,descriptor_id" }
+                    );
+                  }
+                }
+              }
             }
           }
         }
