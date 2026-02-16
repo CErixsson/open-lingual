@@ -1,36 +1,63 @@
 {
   "id": "adc2e3ab-6ba6-41ae-87b4-e67135c2cea5",
-  "title": "French: At the Market",
+  "title": "French: Au Marché",
   "description": "Vocabulary and phrases for shopping at a French market.",
   "language": "fr",
   "level": "A2",
   "tags": ["shopping", "vocabulary", "food"],
-  "objectives": [
-    "Name common fruits and vegetables in French",
-    "Ask for prices",
-    "Make purchases"
-  ],
-  "exercises": [
+  "objectives": ["Name common fruits and vegetables", "Ask for prices", "Make purchases"],
+  "descriptor_ids": [1152],
+  "phases": [
     {
-      "id": "ex-market-01",
-      "type": "match",
-      "prompt": "Match the French words to their English translations.",
-      "items": [
-        { "left": "pomme", "right": "apple" },
-        { "left": "fromage", "right": "cheese" },
-        { "left": "pain", "right": "bread" },
-        { "left": "lait", "right": "milk" }
+      "phase": 1, "type": "build", "title": "Vocabulaire et Grammaire",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "pomme", "translation": "apple", "example": "Je voudrais trois pommes." },
+          { "term": "fromage", "translation": "cheese", "example": "Avez-vous du fromage?" },
+          { "term": "pain", "translation": "bread", "example": "Une baguette de pain, s'il vous plaît." },
+          { "term": "lait", "translation": "milk", "example": "Un litre de lait." }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Asking prices:**\n- *Combien coûte…?* (How much does… cost?)\n- *C'est combien?* (How much is it?)\n\n**Quantities:**\n- *un kilo de…, un litre de…, une boîte de…*\n\n**Partitive articles:**\n- *du* (masc), *de la* (fem), *des* (plural)" }
       ]
     },
     {
-      "id": "ex-market-02",
-      "type": "translate",
-      "prompt": "Translate: 'How much does it cost?'",
-      "items": [
-        { "sourceText": "How much does it cost?", "expectedTranslation": "Combien ça coûte ?" }
+      "phase": 2, "type": "controlled_practice", "title": "Pratique Contrôlée",
+      "blocks": [
+        { "id": "ex-market-01", "type": "match", "prompt": "Match the French words to their English translations.", "items": [
+          { "left": "pomme", "right": "apple" },
+          { "left": "fromage", "right": "cheese" },
+          { "left": "pain", "right": "bread" },
+          { "left": "lait", "right": "milk" }
+        ]},
+        { "id": "ex-market-02", "type": "cloze", "prompt": "_____ coûte le fromage?", "items": [
+          { "answer": "Combien", "alternatives": [] }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "Production Guidée",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "You are at a French market. Write what you would say to buy fruit, cheese, and bread. Ask the prices.", "hints": ["Use 'Je voudrais…'", "Use 'Combien coûte…?'"], "required_grammar": ["je voudrais", "combien"], "min_words": 15 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "Tâche de Performance",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Write a complete dialogue at a French outdoor market. You want to buy ingredients for a dinner party. Ask about products, prices, and quantities.", "hints": [], "required_grammar": [], "min_words": 30, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
       ]
     }
   ],
-  "version": "1.0.0",
+  "exercises": [
+    { "id": "ex-market-01", "type": "match", "prompt": "Match the French words to their English translations.", "items": [
+      { "left": "pomme", "right": "apple" },
+      { "left": "fromage", "right": "cheese" },
+      { "left": "pain", "right": "bread" },
+      { "left": "lait", "right": "milk" }
+    ]},
+    { "id": "ex-market-02", "type": "translate", "prompt": "Translate: 'How much does it cost?'", "items": [
+      { "sourceText": "How much does it cost?", "expectedTranslation": "Combien ça coûte ?" }
+    ]}
+  ],
+  "version": "2.0.0",
   "license": "CC-BY-SA-4.0"
 }

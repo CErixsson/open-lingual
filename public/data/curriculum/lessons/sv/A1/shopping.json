@@ -1,0 +1,36 @@
+{
+  "id": "sv-a1-shopping",
+  "title": "Swedish: Handla",
+  "description": "Learn to shop and ask prices in Swedish.",
+  "language": "sv",
+  "level": "A1",
+  "tags": ["shopping", "basics", "vocabulary"],
+  "objectives": ["Ask for prices", "Name common items", "Make simple purchases"],
+  "descriptor_ids": [1151],
+  "phases": [
+    { "phase": 1, "type": "build", "title": "Ordförråd och Grammatik", "blocks": [
+      { "id": "vocab-01", "type": "vocabulary", "items": [
+        { "term": "Hur mycket kostar det?", "translation": "How much does it cost?", "example": "Hur mycket kostar den här tröjan?" },
+        { "term": "Jag vill ha…", "translation": "I want…", "example": "Jag vill ha en kaffe, tack." },
+        { "term": "Tack / Tack så mycket", "translation": "Thanks / Thank you very much", "example": "Tack så mycket!" },
+        { "term": "Ursäkta", "translation": "Excuse me", "example": "Ursäkta, var finns mjölken?" }
+      ]},
+      { "id": "grammar-01", "type": "text", "content": "**En/Ett words:**\n- *en* — common gender: en bok, en stol\n- *ett* — neuter gender: ett bord, ett äpple\n\n**Simple requests:**\n- *Jag vill ha* + noun (I want…)\n- *Kan jag få…?* (Can I have…?)\n- *Tack* (Thanks)" }
+    ]},
+    { "phase": 2, "type": "controlled_practice", "title": "Kontrollerad Övning", "blocks": [
+      { "id": "ex-01", "type": "cloze", "prompt": "Hur mycket _____ det? Jag _____ ha två äpplen.", "items": [
+        { "answer": "kostar", "alternatives": [] },
+        { "answer": "vill", "alternatives": [] }
+      ]}
+    ]},
+    { "phase": 3, "type": "guided_production", "title": "Guidad Produktion", "blocks": [
+      { "id": "guided-01", "type": "open_response", "prompt": "Du är i en svensk butik. Fråga om priset på två saker och köp en.", "hints": ["Använd 'Hur mycket kostar…?'", "Använd 'Jag vill ha…'"], "required_grammar": ["hur mycket", "jag vill"], "min_words": 10 }
+    ]},
+    { "phase": 4, "type": "free_performance", "title": "Fri Uppgift", "blocks": [
+      { "id": "perf-01", "type": "open_response", "prompt": "Skriv en dialog i en svensk matbutik. Du handlar till middag. Fråga om produkter, priser och betala.", "hints": [], "required_grammar": [], "min_words": 20, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+    ]}
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

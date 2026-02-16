@@ -1,0 +1,24 @@
+[
+  {
+    "id": "en-scenario-restaurant",
+    "title": "Ordering at a Restaurant",
+    "description": "Practice ordering food and drinks at an English-speaking restaurant.",
+    "cefr_target": "A2",
+    "topic": "dining",
+    "difficulty_elo": 1200,
+    "grammar_targets": ["would like", "can I have", "how much"],
+    "vocabulary_clusters": ["food", "drinks", "restaurant"],
+    "cultural_notes": "In English-speaking countries, it's common to tip 15-20% at restaurants."
+  },
+  {
+    "id": "en-scenario-airport",
+    "title": "Airport Check-in",
+    "description": "Navigate an English-speaking airport: check in, go through security, and find your gate.",
+    "cefr_target": "B1",
+    "topic": "travel",
+    "difficulty_elo": 1400,
+    "grammar_targets": ["could you", "I need to", "where is"],
+    "vocabulary_clusters": ["airport", "travel", "documents"],
+    "cultural_notes": "Arrive at the airport at least 2 hours before international flights."
+  }
+]

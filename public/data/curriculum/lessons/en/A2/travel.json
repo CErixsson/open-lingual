@@ -1,0 +1,53 @@
+{
+  "id": "en-a2-travel",
+  "title": "English: Travel Basics",
+  "description": "Essential phrases for traveling and getting around.",
+  "language": "en",
+  "level": "A2",
+  "tags": ["travel", "transport", "directions"],
+  "objectives": ["Ask for directions", "Buy tickets", "Describe a journey"],
+  "descriptor_ids": [1152],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "Key Vocabulary & Grammar",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "Where is…?", "translation": "Asking location", "example": "Where is the train station?" },
+          { "term": "Turn left/right", "translation": "Directions", "example": "Turn left at the traffic light." },
+          { "term": "A ticket to…", "translation": "Buying transport", "example": "A ticket to London, please." },
+          { "term": "How do I get to…?", "translation": "Asking route", "example": "How do I get to the airport?" }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Prepositions of place:**\n- *next to, opposite, between, near, far from*\n\n**Imperatives for directions:**\n- *Go straight, turn left, turn right, take the first/second street*\n\n**Modal 'can' for requests:**\n- *Can you tell me where…?*" }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "Controlled Practice",
+      "blocks": [
+        { "id": "ex-01", "type": "multiple_choice", "prompt": "How do you ask for directions politely?", "items": [
+          { "text": "Excuse me, can you tell me where the museum is?", "correct": true },
+          { "text": "Museum where?", "correct": false },
+          { "text": "Tell me museum.", "correct": false }
+        ]},
+        { "id": "ex-02", "type": "cloze", "prompt": "_____ left at the corner and go _____.", "items": [
+          { "answer": "Turn", "alternatives": [] },
+          { "answer": "straight", "alternatives": [] }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "Guided Production",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Explain to a tourist how to get from the train station to a nearby hotel. Use direction words.", "hints": ["Use 'go straight'", "Use 'turn left/right'", "Use 'next to' or 'opposite'"], "required_grammar": ["turn", "go straight"], "min_words": 15 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "Free Performance Task",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Describe a recent trip you took. How did you travel? Where did you go? What did you see? Include directions you followed.", "hints": [], "required_grammar": [], "min_words": 30, "evaluation_criteria": { "grammar_weight": 0.25, "vocabulary_weight": 0.3, "structure_weight": 0.25, "fluency_weight": 0.2 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

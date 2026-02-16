@@ -1,0 +1,52 @@
+{
+  "id": "en-b1-small-talk",
+  "title": "English: Small Talk",
+  "description": "Master the art of casual conversation.",
+  "language": "en",
+  "level": "B1",
+  "tags": ["conversation", "social", "speaking"],
+  "objectives": ["Start conversations", "Keep a discussion going", "Express opinions politely"],
+  "descriptor_ids": [45],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "Key Vocabulary & Grammar",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "By the way", "translation": "Introducing a new topic", "example": "By the way, have you seen the new café?" },
+          { "term": "I think / I believe", "translation": "Expressing opinion", "example": "I think the weather will be nice tomorrow." },
+          { "term": "What do you think about…?", "translation": "Asking opinion", "example": "What do you think about the new restaurant?" },
+          { "term": "Speaking of…", "translation": "Transitioning topic", "example": "Speaking of food, have you tried sushi?" }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Expressing opinions:**\n- *I think / I believe / In my opinion*\n- *I agree / I disagree*\n\n**Follow-up questions:**\n- *What about you?*\n- *How about…?*\n- *Really? Tell me more.*\n\n**Hedging:**\n- *I'm not sure, but…*\n- *It depends on…*" }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "Controlled Practice",
+      "blocks": [
+        { "id": "ex-01", "type": "multiple_choice", "prompt": "Which is the best follow-up to 'I went to Paris last weekend'?", "items": [
+          { "text": "Oh really? How was it?", "correct": true },
+          { "text": "OK.", "correct": false },
+          { "text": "I don't care.", "correct": false }
+        ]},
+        { "id": "ex-02", "type": "cloze", "prompt": "_____ my opinion, the best season is autumn.", "items": [
+          { "answer": "In", "alternatives": [] }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "Guided Production",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Your colleague mentions they went on holiday. Write 4 sentences continuing the conversation. Ask questions and share your opinion.", "hints": ["Ask 'Where did you go?'", "Use 'That sounds…'", "Share your experience too"], "required_grammar": ["I think", "what about"], "min_words": 20 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "Free Performance Task",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Write a natural small talk conversation between two colleagues at a coffee machine. Cover at least two different topics. Show how they transition between subjects.", "hints": [], "required_grammar": [], "min_words": 40, "evaluation_criteria": { "grammar_weight": 0.25, "vocabulary_weight": 0.25, "structure_weight": 0.3, "fluency_weight": 0.2 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

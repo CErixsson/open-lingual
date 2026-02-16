@@ -1,0 +1,53 @@
+{
+  "id": "en-a1-greetings",
+  "title": "English: Greetings & Introductions",
+  "description": "Learn to greet people and introduce yourself in English.",
+  "language": "en",
+  "level": "A1",
+  "tags": ["greetings", "basics", "conversation"],
+  "objectives": ["Greet people", "Introduce yourself", "Ask someone's name"],
+  "descriptor_ids": [1151],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "Key Vocabulary & Grammar",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "Hello", "translation": "A common greeting", "example": "Hello, how are you?" },
+          { "term": "My name is…", "translation": "Used to introduce yourself", "example": "My name is Anna." },
+          { "term": "Nice to meet you", "translation": "Said when meeting someone new", "example": "Nice to meet you, Tom!" },
+          { "term": "Goodbye", "translation": "Said when leaving", "example": "Goodbye, see you tomorrow!" }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Introducing yourself:**\n- *My name is* + your name\n- *I am* + your name\n\n**Asking someone's name:**\n- *What is your name?*\n- *What's your name?*\n\n**Common greetings:** Hello, Hi, Good morning, Good afternoon, Good evening." }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "Controlled Practice",
+      "blocks": [
+        { "id": "ex-01", "type": "multiple_choice", "prompt": "How do you respond to 'What's your name?'", "items": [
+          { "text": "My name is Alex.", "correct": true },
+          { "text": "I am fine.", "correct": false },
+          { "text": "Goodbye.", "correct": false }
+        ]},
+        { "id": "ex-02", "type": "cloze", "prompt": "_____ morning! My name _____ Sarah.", "items": [
+          { "answer": "Good", "alternatives": [] },
+          { "answer": "is", "alternatives": [] }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "Guided Production",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Write a short introduction. Say hello, give your name, and say nice to meet you.", "hints": ["Start with 'Hello' or 'Hi'", "Use 'My name is…'"], "required_grammar": ["my name is"], "min_words": 8 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "Free Performance Task",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "You arrive at a language class for the first time. Write what you would say to introduce yourself to your classmates and teacher.", "hints": [], "required_grammar": [], "min_words": 15, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

@@ -1,0 +1,52 @@
+{
+  "id": "en-b1-work-email",
+  "title": "English: Work Email Basics",
+  "description": "Write clear and professional emails in English.",
+  "language": "en",
+  "level": "B1",
+  "tags": ["writing", "business", "email"],
+  "objectives": ["Write a professional email", "Use formal register", "Structure an email clearly"],
+  "descriptor_ids": [46],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "Key Vocabulary & Grammar",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "Dear…", "translation": "Formal greeting", "example": "Dear Mr. Johnson," },
+          { "term": "I am writing to…", "translation": "Purpose statement", "example": "I am writing to inquire about…" },
+          { "term": "Kind regards", "translation": "Formal sign-off", "example": "Kind regards, Anna" },
+          { "term": "Please find attached", "translation": "Mentioning attachments", "example": "Please find attached the report." }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Email structure:**\n1. **Greeting:** Dear + name / Hi + name\n2. **Purpose:** I am writing to + verb\n3. **Body:** Details and requests\n4. **Closing:** Kind regards / Best wishes\n\n**Formal language:**\n- *Could you please…* (not 'Can you…')\n- *I would appreciate…* (not 'I want…')\n- *I look forward to hearing from you*" }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "Controlled Practice",
+      "blocks": [
+        { "id": "ex-01", "type": "word_order", "prompt": "Arrange: writing / I / to / am / about / inquire / the / meeting", "items": [
+          { "answer": "I am writing to inquire about the meeting" }
+        ]},
+        { "id": "ex-02", "type": "multiple_choice", "prompt": "Which closing is most professional?", "items": [
+          { "text": "Kind regards,", "correct": true },
+          { "text": "Later!", "correct": false },
+          { "text": "Bye bye", "correct": false }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "Guided Production",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Write an email to your manager asking for a day off next Friday. Use formal language.", "hints": ["Start with 'Dear…'", "Use 'I am writing to request…'", "End with 'Kind regards'"], "required_grammar": ["I am writing to", "could you"], "min_words": 25 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "Free Performance Task",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Write a professional email to a new client. Introduce yourself, explain your company's service, and suggest a meeting time.", "hints": [], "required_grammar": [], "min_words": 40, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.25, "structure_weight": 0.3, "fluency_weight": 0.15 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

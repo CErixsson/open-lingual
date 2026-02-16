@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useI18n } from '@/i18n';
 import { useMyProgress, useProgressStats, useRecentAttempts } from '@/hooks/useLearnerProgress';
-import { usePublishedLessons } from '@/hooks/useLessons';
 import { useUserLanguageProfiles } from '@/hooks/useLanguageProfile';
 import { useSkillTrends } from '@/hooks/useDashboardStats';
+import { useLessonsByLanguageCode } from '@/hooks/useCourses';
 import EmptyState from '@/components/shared/EmptyState';
 import ErrorPanel from '@/components/shared/ErrorPanel';
 import SkeletonCard from '@/components/shared/SkeletonCard';
@@ -25,10 +25,14 @@ export default function LearnDashboard() {
   const { data: progress, isLoading: progressLoading, error: progressError, refetch: refetchProgress } = useMyProgress(user?.id ?? null);
   const { data: stats, isLoading: statsLoading } = useProgressStats(user?.id ?? null);
   const { data: attempts } = useRecentAttempts(user?.id ?? null, 10);
-  const { data: lessons, isLoading: lessonsLoading, error: lessonsError, refetch: refetchLessons } = usePublishedLessons();
   const { data: profiles } = useUserLanguageProfiles();
   const activeProfile = profiles?.[0];
+  const activeLanguageCode = (activeProfile as any)?.languages?.code ?? null;
+  const { data: allLessons, isLoading: lessonsLoading, error: lessonsError, refetch: refetchLessons } = useLessonsByLanguageCode(activeLanguageCode);
   const { data: skillTrends } = useSkillTrends(activeProfile?.id ?? null);
+
+  // Only show lessons with real phases content (not descriptor-generated stubs)
+  const lessons = allLessons?.filter((l: any) => l.phases && Array.isArray(l.phases) && l.phases.length > 0);
 
   // Find most recent in-progress lesson
   const continueLesson = progress?.find(

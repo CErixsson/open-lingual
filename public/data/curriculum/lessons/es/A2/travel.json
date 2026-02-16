@@ -1,0 +1,41 @@
+{
+  "id": "es-a2-travel",
+  "title": "Spanish: Viajes",
+  "description": "Essential travel vocabulary and phrases in Spanish.",
+  "language": "es",
+  "level": "A2",
+  "tags": ["travel", "transport", "directions"],
+  "objectives": ["Ask for directions", "Buy tickets", "Describe a trip"],
+  "descriptor_ids": [1152],
+  "phases": [
+    { "phase": 1, "type": "build", "title": "Vocabulario y Gramática", "blocks": [
+      { "id": "vocab-01", "type": "vocabulary", "items": [
+        { "term": "¿Dónde está…?", "translation": "Where is…?", "example": "¿Dónde está la estación?" },
+        { "term": "Un billete para…", "translation": "A ticket to…", "example": "Un billete para Barcelona, por favor." },
+        { "term": "Gire a la izquierda/derecha", "translation": "Turn left/right", "example": "Gire a la derecha en la esquina." },
+        { "term": "¿Cuánto cuesta?", "translation": "How much does it cost?", "example": "¿Cuánto cuesta el billete?" }
+      ]},
+      { "id": "grammar-01", "type": "text", "content": "**Prepositions:** *a la izquierda, a la derecha, enfrente de, al lado de, cerca de, lejos de*\n\n**Imperative (usted):** *Gire, Siga, Tome*\n- *Siga recto* (Go straight)\n- *Tome la primera calle* (Take the first street)" }
+    ]},
+    { "phase": 2, "type": "controlled_practice", "title": "Práctica Controlada", "blocks": [
+      { "id": "ex-01", "type": "multiple_choice", "prompt": "¿Cómo se pregunta por una dirección?", "items": [
+        { "text": "¿Dónde está el museo?", "correct": true },
+        { "text": "Museo dónde.", "correct": false },
+        { "text": "Estar museo.", "correct": false }
+      ]},
+      { "id": "ex-02", "type": "cloze", "prompt": "Gire a la _____ y siga _____.", "items": [
+        { "answer": "derecha", "alternatives": ["izquierda"] },
+        { "answer": "recto", "alternatives": [] }
+      ]}
+    ]},
+    { "phase": 3, "type": "guided_production", "title": "Producción Guiada", "blocks": [
+      { "id": "guided-01", "type": "open_response", "prompt": "Explica cómo llegar desde tu casa a la tienda más cercana. Usa palabras de dirección.", "hints": ["Usa 'gire a la…'", "Usa 'siga recto'"], "required_grammar": ["gire", "siga"], "min_words": 15 }
+    ]},
+    { "phase": 4, "type": "free_performance", "title": "Tarea de Desempeño", "blocks": [
+      { "id": "perf-01", "type": "open_response", "prompt": "Escribe sobre un viaje que hiciste. ¿A dónde fuiste? ¿Cómo viajaste? ¿Qué hiciste allí?", "hints": [], "required_grammar": [], "min_words": 30, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+    ]}
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}
