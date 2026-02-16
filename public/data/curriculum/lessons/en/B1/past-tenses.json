@@ -10,6 +10,91 @@
     "Use correct tense in context",
     "Identify time markers"
   ],
+  "descriptor_ids": [45, 46],
+  "phases": [
+    {
+      "phase": 1,
+      "type": "build",
+      "title": "Key Vocabulary & Grammar",
+      "blocks": [
+        {
+          "id": "vocab-past-01",
+          "type": "vocabulary",
+          "items": [
+            { "term": "Simple Past", "translation": "Action completed in the past", "example": "I walked to school yesterday." },
+            { "term": "Past Continuous", "translation": "Action in progress in the past", "example": "I was walking when it started to rain." },
+            { "term": "Past Perfect", "translation": "Action completed before another past action", "example": "I had already eaten when she arrived." }
+          ]
+        },
+        {
+          "id": "grammar-past-01",
+          "type": "text",
+          "content": "**Simple Past**: Used for completed actions. Form: verb + -ed (regular) or irregular form.\n- *I played football.*\n\n**Past Continuous**: Used for actions in progress. Form: was/were + verb-ing.\n- *I was playing when he called.*\n\n**Past Perfect**: Used for an action before another past action. Form: had + past participle.\n- *She had left before I arrived.*\n\n**Time markers**: yesterday, last week, while, when, by the time, already."
+        }
+      ]
+    },
+    {
+      "phase": 2,
+      "type": "controlled_practice",
+      "title": "Controlled Practice",
+      "blocks": [
+        {
+          "id": "ex-past-01",
+          "type": "multiple_choice",
+          "prompt": "Which sentence uses the past continuous correctly?",
+          "items": [
+            { "text": "I was reading when the phone rang.", "correct": true },
+            { "text": "I was read when the phone rang.", "correct": false },
+            { "text": "I reading was when the phone rang.", "correct": false }
+          ]
+        },
+        {
+          "id": "ex-past-02",
+          "type": "cloze",
+          "prompt": "She _____ (already/leave) when I arrived.",
+          "items": [
+            { "answer": "had already left", "alternatives": ["had left already"] }
+          ]
+        }
+      ]
+    },
+    {
+      "phase": 3,
+      "type": "guided_production",
+      "title": "Guided Production",
+      "blocks": [
+        {
+          "id": "guided-past-01",
+          "type": "open_response",
+          "prompt": "Describe what you were doing yesterday at 3 PM when something unexpected happened. Use the past continuous and simple past.",
+          "hints": ["Use 'I was…-ing when…'", "Include a time marker like 'suddenly' or 'when'"],
+          "required_grammar": ["was/were + verb-ing", "simple past"],
+          "min_words": 15
+        }
+      ]
+    },
+    {
+      "phase": 4,
+      "type": "free_performance",
+      "title": "Free Performance Task",
+      "blocks": [
+        {
+          "id": "performance-past-01",
+          "type": "open_response",
+          "prompt": "Write a short story (4-6 sentences) about a memorable day. Use all three past tenses: simple past, past continuous, and past perfect.",
+          "hints": [],
+          "required_grammar": [],
+          "min_words": 30,
+          "evaluation_criteria": {
+            "grammar_weight": 0.35,
+            "vocabulary_weight": 0.25,
+            "structure_weight": 0.25,
+            "fluency_weight": 0.15
+          }
+        }
+      ]
+    }
+  ],
   "exercises": [
     {
       "id": "ex-past-01",
@@ -30,6 +115,6 @@
       ]
     }
   ],
-  "version": "1.0.0",
+  "version": "2.0.0",
   "license": "CC-BY-SA-4.0"
 }

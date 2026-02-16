@@ -136,6 +136,50 @@ export type Database = {
           },
         ]
       }
+      descriptor_requirements: {
+        Row: {
+          created_at: string
+          descriptor_id: number
+          id: string
+          minimum_accuracy_score: number
+          minimum_complexity_score: number
+          required_grammar_elements: string[] | null
+          required_success_count: number
+          required_vocabulary_range: string[] | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          descriptor_id: number
+          id?: string
+          minimum_accuracy_score?: number
+          minimum_complexity_score?: number
+          required_grammar_elements?: string[] | null
+          required_success_count?: number
+          required_vocabulary_range?: string[] | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          descriptor_id?: number
+          id?: string
+          minimum_accuracy_score?: number
+          minimum_complexity_score?: number
+          required_grammar_elements?: string[] | null
+          required_success_count?: number
+          required_vocabulary_range?: string[] | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "descriptor_requirements_descriptor_id_fkey"
+            columns: ["descriptor_id"]
+            isOneToOne: true
+            referencedRelation: "cefr_descriptors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dialogue_nodes: {
         Row: {
           ai_context: string | null
@@ -577,17 +621,58 @@ export type Database = {
           },
         ]
       }
+      lesson_descriptor_map: {
+        Row: {
+          created_at: string
+          descriptor_id: number
+          id: string
+          is_primary: boolean
+          lesson_id: string
+        }
+        Insert: {
+          created_at?: string
+          descriptor_id: number
+          id?: string
+          is_primary?: boolean
+          lesson_id: string
+        }
+        Update: {
+          created_at?: string
+          descriptor_id?: number
+          id?: string
+          is_primary?: boolean
+          lesson_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_descriptor_map_descriptor_id_fkey"
+            columns: ["descriptor_id"]
+            isOneToOne: false
+            referencedRelation: "cefr_descriptors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_descriptor_map_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lessons: {
         Row: {
           author_id: string
           created_at: string
           description: string | null
+          descriptor_ids: number[] | null
           exercises: Json | null
           id: string
           language: string
           level: string
           license: string
           objectives: string[] | null
+          phases: Json | null
           status: string
           tags: string[] | null
           title: string
@@ -598,12 +683,14 @@ export type Database = {
           author_id: string
           created_at?: string
           description?: string | null
+          descriptor_ids?: number[] | null
           exercises?: Json | null
           id?: string
           language: string
           level: string
           license?: string
           objectives?: string[] | null
+          phases?: Json | null
           status?: string
           tags?: string[] | null
           title: string
@@ -614,12 +701,14 @@ export type Database = {
           author_id?: string
           created_at?: string
           description?: string | null
+          descriptor_ids?: number[] | null
           exercises?: Json | null
           id?: string
           language?: string
           level?: string
           license?: string
           objectives?: string[] | null
+          phases?: Json | null
           status?: string
           tags?: string[] | null
           title?: string
@@ -660,6 +749,66 @@ export type Database = {
           width?: number | null
         }
         Relationships: []
+      }
+      performance_evaluations: {
+        Row: {
+          complexity_score: number
+          created_at: string
+          descriptor_id: number
+          evaluation_details: Json | null
+          fluency_score: number | null
+          grammar_accuracy: number
+          id: string
+          lesson_id: string
+          lexical_diversity: number
+          overall_score: number
+          phase: string
+          user_id: string
+        }
+        Insert: {
+          complexity_score?: number
+          created_at?: string
+          descriptor_id: number
+          evaluation_details?: Json | null
+          fluency_score?: number | null
+          grammar_accuracy?: number
+          id?: string
+          lesson_id: string
+          lexical_diversity?: number
+          overall_score?: number
+          phase?: string
+          user_id: string
+        }
+        Update: {
+          complexity_score?: number
+          created_at?: string
+          descriptor_id?: number
+          evaluation_details?: Json | null
+          fluency_score?: number | null
+          grammar_accuracy?: number
+          id?: string
+          lesson_id?: string
+          lexical_diversity?: number
+          overall_score?: number
+          phase?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "performance_evaluations_descriptor_id_fkey"
+            columns: ["descriptor_id"]
+            isOneToOne: false
+            referencedRelation: "cefr_descriptors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "performance_evaluations_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -909,6 +1058,72 @@ export type Database = {
             columns: ["lesson_id"]
             isOneToOne: false
             referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_descriptor_progress: {
+        Row: {
+          achieved_at: string | null
+          best_performance_score: number | null
+          created_at: string
+          descriptor_id: number
+          id: string
+          language_id: string
+          last_complexity_score: number | null
+          last_grammar_accuracy: number | null
+          last_lexical_diversity: number | null
+          mastered_at: string | null
+          status: string
+          success_count: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          achieved_at?: string | null
+          best_performance_score?: number | null
+          created_at?: string
+          descriptor_id: number
+          id?: string
+          language_id: string
+          last_complexity_score?: number | null
+          last_grammar_accuracy?: number | null
+          last_lexical_diversity?: number | null
+          mastered_at?: string | null
+          status?: string
+          success_count?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          achieved_at?: string | null
+          best_performance_score?: number | null
+          created_at?: string
+          descriptor_id?: number
+          id?: string
+          language_id?: string
+          last_complexity_score?: number | null
+          last_grammar_accuracy?: number | null
+          last_lexical_diversity?: number | null
+          mastered_at?: string | null
+          status?: string
+          success_count?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_descriptor_progress_descriptor_id_fkey"
+            columns: ["descriptor_id"]
+            isOneToOne: false
+            referencedRelation: "cefr_descriptors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_descriptor_progress_language_id_fkey"
+            columns: ["language_id"]
+            isOneToOne: false
+            referencedRelation: "languages"
             referencedColumns: ["id"]
           },
         ]
