@@ -1,0 +1,48 @@
+{
+  "id": "ru-a1-introductions",
+  "title": "Русский: О себе",
+  "description": "Introduce yourself in Russian — name, age, origin.",
+  "language": "ru",
+  "level": "A1",
+  "tags": ["introductions", "personal", "basics"],
+  "objectives": ["Say your name", "Talk about origin", "Express interests"],
+  "descriptor_ids": [1151, 1152],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "Словарь и грамматика",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "Меня зовут…", "translation": "My name is…", "example": "Меня зовут Анна." },
+          { "term": "Я из…", "translation": "I am from…", "example": "Я из Швеции." },
+          { "term": "Мне … лет", "translation": "I am … years old", "example": "Мне 25 лет." },
+          { "term": "Я люблю…", "translation": "I love/like…", "example": "Я люблю футбол." }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Verb быть (to be)** — omitted in present tense!\n- Я студент. (I am a student.)\n\n**Key structures:**\n- *Меня зовут* + name\n- *Я из* + country (genitive not needed at A1)\n- *Мне* + number + *лет/год/года*" }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "Упражнения",
+      "blocks": [
+        { "id": "ex-01", "type": "cloze", "prompt": "Меня _____ Анна. Я _____ Швеции.", "items": [
+          { "answer": "зовут", "alternatives": [] },
+          { "answer": "из", "alternatives": [] }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "Направленное письмо",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Write 3 sentences in Russian: your name, where you are from, and something you like.", "hints": ["Use 'Меня зовут…'", "Use 'Я люблю…'"], "required_grammar": ["Меня зовут", "Я из"], "min_words": 8 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "Свободное задание",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Write a short introduction about yourself for a Russian pen pal.", "hints": [], "required_grammar": [], "min_words": 15, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

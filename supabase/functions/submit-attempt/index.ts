@@ -240,9 +240,9 @@ Deno.serve(async (req) => {
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('submit-attempt error:', error);
-    return new Response(JSON.stringify({ error: error.message || 'Internal error' }), {
+    return new Response(JSON.stringify({ error: (error as Error).message || 'Internal error' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

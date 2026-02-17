@@ -1,0 +1,49 @@
+{
+  "id": "ja-a1-introductions",
+  "title": "日本語: 自己紹介",
+  "description": "Introduce yourself in Japanese — name, origin, and interests.",
+  "language": "ja",
+  "level": "A1",
+  "tags": ["introductions", "personal", "basics"],
+  "objectives": ["Say your name", "Say where you are from", "Express likes"],
+  "descriptor_ids": [1151, 1152],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "語彙と文法",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "私は…です", "translation": "I am…", "example": "私はアンナです。" },
+          { "term": "…から来ました", "translation": "I came from…", "example": "スウェーデンから来ました。" },
+          { "term": "…が好きです", "translation": "I like…", "example": "サッカーが好きです。" },
+          { "term": "…歳です", "translation": "I am … years old", "example": "25歳です。" }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Basic sentence structure:** Subject + は + Predicate + です\n\n**Particles:**\n- は (wa) — topic marker\n- が (ga) — subject marker (with 好き)\n- から (kara) — from\n\n**Examples:**\n- 私は学生です。(I am a student.)\n- 音楽が好きです。(I like music.)" }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "練習",
+      "blocks": [
+        { "id": "ex-01", "type": "multiple_choice", "prompt": "How do you say 'I am from Japan'?", "items": [
+          { "text": "日本から来ました。", "correct": true },
+          { "text": "日本は来ました。", "correct": false },
+          { "text": "来ました日本から。", "correct": false }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "ガイド付き作文",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Write 3 sentences about yourself in Japanese: your name, where you're from, and something you like.", "hints": ["Use '私は…です'", "Use '…が好きです'"], "required_grammar": ["です"], "min_words": 5 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "自由課題",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Write a self-introduction for your first day at a Japanese language school.", "hints": [], "required_grammar": [], "min_words": 15, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

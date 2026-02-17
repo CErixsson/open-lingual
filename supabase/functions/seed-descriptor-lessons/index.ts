@@ -185,7 +185,7 @@ All ${lang.name} text must be authentic. Return ONLY the JSON array.`;
     // Self-chain: trigger next batch automatically
     if (hasMore && autoChain) {
       const selfUrl = `${Deno.env.get('SUPABASE_URL')}/functions/v1/seed-descriptor-lessons`;
-      EdgeRuntime.waitUntil(
+      globalThis.EdgeRuntime?.waitUntil?.(
         fetch(selfUrl, {
           method: 'POST',
           headers: {
@@ -215,9 +215,9 @@ All ${lang.name} text must be authentic. Return ONLY the JSON array.`;
     }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[seed] Fatal error:', error);
-    return new Response(JSON.stringify({ error: error.message || 'Internal error' }), {
+    return new Response(JSON.stringify({ error: (error as Error).message || 'Internal error' }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

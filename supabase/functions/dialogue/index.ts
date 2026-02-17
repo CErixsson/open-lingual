@@ -484,9 +484,9 @@ Then continue the conversation naturally. Keep responses to 2-3 sentences.`;
     return new Response(JSON.stringify({ error: 'Invalid action' }), {
       status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('dialogue error:', error);
-    return new Response(JSON.stringify({ error: error.message || 'Internal error' }), {
+    return new Response(JSON.stringify({ error: (error as Error).message || 'Internal error' }), {
       status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
