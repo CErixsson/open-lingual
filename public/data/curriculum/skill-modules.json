@@ -1,0 +1,94 @@
+{
+  "modules": [
+    {
+      "id": "basic-greetings",
+      "title": "Basic Greetings",
+      "descriptor_id": "sociolinguistic-appropriateness",
+      "level": "A1",
+      "skill": "speaking",
+      "order": 1,
+      "lessons": ["greetings-1", "greetings-2"]
+    },
+    {
+      "id": "introductions",
+      "title": "Introducing Yourself",
+      "descriptor_id": "describing-experience",
+      "level": "A1",
+      "skill": "speaking",
+      "order": 2,
+      "lessons": ["introductions-1", "introductions-2"]
+    },
+    {
+      "id": "basic-numbers",
+      "title": "Numbers & Counting",
+      "descriptor_id": "vocabulary-range",
+      "level": "A1",
+      "skill": "vocabulary",
+      "order": 3,
+      "lessons": ["numbers-1"]
+    },
+    {
+      "id": "simple-questions",
+      "title": "Asking Simple Questions",
+      "descriptor_id": "information-exchange",
+      "level": "A1",
+      "skill": "speaking",
+      "order": 4,
+      "lessons": ["questions-1"]
+    },
+    {
+      "id": "polite-expressions",
+      "title": "Polite Expressions",
+      "descriptor_id": "sociolinguistic-appropriateness",
+      "level": "A1",
+      "skill": "speaking",
+      "order": 5,
+      "lessons": ["polite-1"]
+    },
+    {
+      "id": "reading-signs",
+      "title": "Reading Simple Signs & Labels",
+      "descriptor_id": "overall-reading",
+      "level": "A1",
+      "skill": "reading",
+      "order": 6,
+      "lessons": ["reading-signs-1"]
+    },
+    {
+      "id": "simple-writing",
+      "title": "Writing Simple Phrases",
+      "descriptor_id": "overall-written-production",
+      "level": "A1",
+      "skill": "writing",
+      "order": 7,
+      "lessons": ["writing-1"]
+    },
+    {
+      "id": "shopping-basics",
+      "title": "Shopping & Transactions",
+      "descriptor_id": "transactions",
+      "level": "A2",
+      "skill": "speaking",
+      "order": 1,
+      "lessons": ["shopping-1", "shopping-2"]
+    },
+    {
+      "id": "daily-routines",
+      "title": "Daily Routines",
+      "descriptor_id": "describing-experience",
+      "level": "A2",
+      "skill": "speaking",
+      "order": 2,
+      "lessons": ["routines-1"]
+    },
+    {
+      "id": "reading-simple-texts",
+      "title": "Reading Simple Texts",
+      "descriptor_id": "reading-information",
+      "level": "A2",
+      "skill": "reading",
+      "order": 3,
+      "lessons": ["reading-texts-1"]
+    }
+  ]
+}

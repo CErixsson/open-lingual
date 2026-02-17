@@ -1,0 +1,28 @@
+{
+  "id": "ko-a1-greetings-1",
+  "title": "인사 1",
+  "description": "Learn basic Korean greetings",
+  "language": "ko",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "안녕하세요", "translation": "Hello", "example": "안녕하세요! 잘 지내세요?" },
+        { "word": "안녕히 가세요", "translation": "Goodbye (to person leaving)", "example": "안녕히 가세요!" },
+        { "word": "감사합니다", "translation": "Thank you", "example": "감사합니다!" },
+        { "word": "네", "translation": "Yes", "example": "네, 맞아요." }
+      ]
+    },
+    { "type": "multiple_choice", "prompt": "What does 안녕하세요 mean?", "options": ["Hello", "Goodbye", "Sorry"], "correct": 0 },
+    { "type": "match_pairs", "pairs": [{ "left": "안녕하세요", "right": "Hello" }, { "left": "감사합니다", "right": "Thank you" }, { "left": "네", "right": "Yes" }, { "left": "안녕히 가세요", "right": "Goodbye" }] },
+    { "type": "fill_blank", "sentence": "___! 잘 지내세요?", "answer": "안녕하세요", "options": ["안녕하세요", "감사합니다", "네"] },
+    { "type": "translate", "prompt": "Translate to English:", "source": "감사합니다", "answer": "Thank you", "alternatives": ["thank you", "thanks"] },
+    { "type": "multiple_choice", "prompt": "Which means 'Yes' in Korean?", "options": ["네", "안녕하세요", "감사합니다"], "correct": 0 },
+    { "type": "multiple_choice", "prompt": "Which is 'Goodbye'?", "options": ["안녕히 가세요", "안녕하세요", "감사합니다"], "correct": 0 },
+    { "type": "fill_blank", "sentence": "___! (Thank you)", "answer": "감사합니다", "options": ["감사합니다", "안녕하세요", "네"] }
+  ]
+}

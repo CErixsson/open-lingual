@@ -1,0 +1,28 @@
+{
+  "id": "it-a1-greetings-1",
+  "title": "Saluti 1",
+  "description": "Impara a salutare in italiano",
+  "language": "it",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Ciao", "translation": "Hello / Bye (informal)", "example": "Ciao! Come stai?" },
+        { "word": "Buongiorno", "translation": "Good morning", "example": "Buongiorno, signora!" },
+        { "word": "Arrivederci", "translation": "Goodbye (formal)", "example": "Arrivederci!" },
+        { "word": "Grazie", "translation": "Thank you", "example": "Grazie mille!" }
+      ]
+    },
+    { "type": "multiple_choice", "prompt": "What does 'Ciao' mean?", "options": ["Hello/Bye", "Please", "Sorry"], "correct": 0 },
+    { "type": "match_pairs", "pairs": [{ "left": "Ciao", "right": "Hello" }, { "left": "Grazie", "right": "Thank you" }, { "left": "Buongiorno", "right": "Good morning" }, { "left": "Arrivederci", "right": "Goodbye" }] },
+    { "type": "fill_blank", "sentence": "___! Come stai?", "answer": "Ciao", "options": ["Ciao", "Grazie", "Arrivederci"] },
+    { "type": "translate", "prompt": "Translate to English:", "source": "Grazie", "answer": "Thank you", "alternatives": ["thank you", "thanks"] },
+    { "type": "multiple_choice", "prompt": "Formal goodbye in Italian:", "options": ["Arrivederci", "Ciao", "Grazie"], "correct": 0 },
+    { "type": "word_order", "prompt": "Build the greeting:", "words": ["mille", "Grazie"], "correct_order": [1, 0] },
+    { "type": "fill_blank", "sentence": "___, signora!", "answer": "Buongiorno", "options": ["Buongiorno", "Ciao", "Grazie"] }
+  ]
+}

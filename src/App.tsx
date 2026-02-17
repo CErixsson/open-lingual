@@ -16,6 +16,7 @@ import LessonEditor from "./pages/LessonEditor";
 import ScenariosPage from "./pages/Scenarios";
 import DialoguePlayer from "./pages/DialoguePlayer";
 import LessonPlayer from "./pages/LessonPlayer";
+import CurriculumPlayer from "./pages/CurriculumPlayer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => (
               <Route path="/scenarios" element={<ScenariosPage />} />
               <Route path="/scenarios/:id" element={<DialoguePlayer />} />
               <Route path="/lessons/:id" element={<LessonPlayer />} />
+              <Route path="/learn/:lang/:level/:lessonId" element={<CurriculumPlayer />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

@@ -1,0 +1,28 @@
+{
+  "id": "zh-a1-greetings-1",
+  "title": "问候 1",
+  "description": "Learn basic Chinese greetings",
+  "language": "zh",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "你好", "translation": "Hello", "example": "你好！你好吗？" },
+        { "word": "再见", "translation": "Goodbye", "example": "再见！明天见！" },
+        { "word": "早上好", "translation": "Good morning", "example": "早上好，老师！" },
+        { "word": "谢谢", "translation": "Thank you", "example": "谢谢你！" }
+      ]
+    },
+    { "type": "multiple_choice", "prompt": "What does 你好 mean?", "options": ["Hello", "Goodbye", "Please"], "correct": 0 },
+    { "type": "match_pairs", "pairs": [{ "left": "你好", "right": "Hello" }, { "left": "再见", "right": "Goodbye" }, { "left": "谢谢", "right": "Thank you" }, { "left": "早上好", "right": "Good morning" }] },
+    { "type": "fill_blank", "sentence": "___！你好吗？(Hello)", "answer": "你好", "options": ["你好", "再见", "谢谢"] },
+    { "type": "translate", "prompt": "Translate to English:", "source": "谢谢", "answer": "Thank you", "alternatives": ["thank you", "thanks"] },
+    { "type": "multiple_choice", "prompt": "Which means 'Goodbye'?", "options": ["再见", "你好", "谢谢"], "correct": 0 },
+    { "type": "fill_blank", "sentence": "___好！(Good morning)", "answer": "早上", "options": ["早上", "你", "谢"] },
+    { "type": "multiple_choice", "prompt": "Morning greeting in Chinese:", "options": ["早上好", "再见", "谢谢"], "correct": 0 }
+  ]
+}

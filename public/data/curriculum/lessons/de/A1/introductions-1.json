@@ -1,0 +1,73 @@
+{
+  "id": "de-a1-introductions-1",
+  "title": "Vorstellungen 1",
+  "description": "Lerne dich auf Deutsch vorzustellen",
+  "language": "de",
+  "level": "A1",
+  "module_id": "introductions",
+  "descriptor_ids": ["describing-experience"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Ich heiße…", "translation": "My name is…", "example": "Ich heiße Thomas." },
+        { "word": "Wie heißen Sie?", "translation": "What is your name? (formal)", "example": "Wie heißen Sie?" },
+        { "word": "Wie heißt du?", "translation": "What is your name? (informal)", "example": "Wie heißt du?" },
+        { "word": "Freut mich", "translation": "Nice to meet you", "example": "Freut mich, Anna!" }
+      ]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "How do you say 'My name is…' in German?",
+      "options": ["Ich heiße…", "Ich bin gut", "Wie geht's"],
+      "correct": 0
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Ich ___ Maria.",
+      "answer": "heiße",
+      "options": ["heiße", "bin", "heißt"]
+    },
+    {
+      "type": "match_pairs",
+      "pairs": [
+        { "left": "Ich heiße…", "right": "My name is…" },
+        { "left": "Freut mich", "right": "Nice to meet you" },
+        { "left": "Wie heißt du?", "right": "What's your name?" },
+        { "left": "Wie heißen Sie?", "right": "What's your name? (formal)" }
+      ]
+    },
+    {
+      "type": "word_order",
+      "prompt": "Build the sentence:",
+      "words": ["heiße", "Ich", "Anna"],
+      "correct_order": [1, 0, 2]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "'Wie heißt du?' is:",
+      "options": ["Informal 'What is your name?'", "Goodbye", "Thank you"],
+      "correct": 0
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to German:",
+      "source": "Nice to meet you",
+      "answer": "Freut mich",
+      "alternatives": ["freut mich", "Es freut mich"]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Wie ___ du?",
+      "answer": "heißt",
+      "options": ["heißt", "heiße", "heißen"]
+    },
+    {
+      "type": "word_order",
+      "prompt": "Ask formally:",
+      "words": ["Sie", "heißen", "Wie"],
+      "correct_order": [2, 1, 0]
+    }
+  ]
+}

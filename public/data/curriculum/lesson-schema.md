@@ -1,90 +1,129 @@
-# Lesson Schema v2 – 4-Phase Performance Model
+# Lesson Schema v3 – Duolingo-Style Exercise Model
 
-## Principles
+## Architecture
 
-1. **Descriptors are NEVER tested directly** — they are validated outcomes
-2. **Lessons train ability** — through vocabulary, grammar, and practice
-3. **System validates ability** — through Phase 4 performance evaluation  
-4. **Descriptors certify ability** — marked as Achieved when thresholds are met
+```
+Descriptor (CEFR Can-Do statement)
+  → Skill Module (focused learning unit)
+    → Lesson (3-5 min session, 8-12 exercises)
+      → Exercise (single interactive task)
+```
 
-## Phase Structure
+## Key Principles
 
-### Phase 1 – Build (Input)
-- Teach key vocabulary with translations and examples
-- Explain grammar structures with clear rules
-- Provide example sentences in context
+1. **Lessons are JSON files** – not stored in database
+2. **Descriptors are outcome markers** – they certify ability, NOT lesson content
+3. **Start easy** – A1 lessons use recognition before production
+4. **Varied exercise types** – keeps engagement high
+5. **Each lesson = 8-12 exercises** – takes ~3-5 minutes
 
-Block types: `vocabulary`, `text`
+## Exercise Types
 
-### Phase 2 – Controlled Practice
-- Fill-in-the-blank (cloze)
-- Multiple choice
-- Sentence reordering
-- Focus on accuracy, not production
+### `vocabulary_intro`
+Show new words with translations and example sentences.
+```json
+{
+  "type": "vocabulary_intro",
+  "items": [
+    { "word": "Hallo", "translation": "Hello", "example": "Hallo, wie geht's?" }
+  ]
+}
+```
 
-Block types: `multiple_choice`, `cloze`, `order_words`
+### `multiple_choice`
+Pick the correct answer from options.
+```json
+{
+  "type": "multiple_choice",
+  "prompt": "What does 'Hallo' mean?",
+  "options": ["Hello", "Goodbye", "Please"],
+  "correct": 0
+}
+```
 
-### Phase 3 – Guided Production
-- Short open response tasks
-- Hints are allowed
-- Must use target grammar
-- Minimum word count enforced
+### `translate`
+Translate a word or short phrase (user types or picks).
+```json
+{
+  "type": "translate",
+  "prompt": "Translate to English:",
+  "source": "Guten Morgen",
+  "answer": "Good morning",
+  "alternatives": ["good morning"]
+}
+```
 
-Block types: `open_response` (with `hints` and `required_grammar`)
+### `match_pairs`
+Match words to their translations (drag or tap).
+```json
+{
+  "type": "match_pairs",
+  "pairs": [
+    { "left": "Hello", "right": "Hallo" },
+    { "left": "Goodbye", "right": "Tschüss" }
+  ]
+}
+```
 
-### Phase 4 – Free Performance Task
-- Fully open production
-- No hints provided
-- Real communicative prompt
-- Evaluated for grammar, vocabulary, structure, fluency
-- Scores determine descriptor achievement
+### `fill_blank`
+Complete a sentence by choosing the correct word.
+```json
+{
+  "type": "fill_blank",
+  "sentence": "Ich ___ Anna.",
+  "answer": "heiße",
+  "options": ["heiße", "bin", "komme"]
+}
+```
 
-Block types: `open_response` (with `evaluation_criteria`, no hints)
+### `word_order`
+Arrange words into the correct sentence.
+```json
+{
+  "type": "word_order",
+  "prompt": "Arrange into a sentence:",
+  "words": ["heiße", "Anna", "Ich"],
+  "correct_order": [2, 0, 1]
+}
+```
 
-## Descriptor Mapping
+### `listen_type` (future)
+Listen to audio and type what you hear.
 
-Each lesson's `descriptor_ids` array references CEFR descriptor IDs.
-The lesson trains users toward being able to perform those descriptors.
+### `speak` (future)
+Say the sentence aloud (microphone required).
 
-## JSON Example
+## Lesson JSON Format
 
 ```json
 {
-  "id": "uuid",
-  "title": "Lesson Title",
-  "description": "What the lesson teaches",
-  "language": "es",
+  "id": "en-a1-greetings-1",
+  "title": "Greetings 1",
+  "description": "Learn to say hello and goodbye",
+  "language": "en",
   "level": "A1",
-  "tags": ["greetings"],
-  "objectives": ["Greet people"],
-  "descriptor_ids": [1151],
-  "phases": [
-    {
-      "phase": 1,
-      "type": "build",
-      "title": "Key Vocabulary",
-      "blocks": [...]
-    },
-    {
-      "phase": 2,
-      "type": "controlled_practice",
-      "title": "Practice",
-      "blocks": [...]
-    },
-    {
-      "phase": 3,
-      "type": "guided_production",
-      "title": "Guided Writing",
-      "blocks": [...]
-    },
-    {
-      "phase": 4,
-      "type": "free_performance",
-      "title": "Performance Task",
-      "blocks": [...]
-    }
-  ],
-  "version": "2.0.0",
-  "license": "CC-BY-SA-4.0"
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [ ... ]
 }
+```
+
+## File Structure
+
+```
+public/data/curriculum/
+├── skill-modules.json        # Module definitions
+├── lessons/
+│   ├── en/
+│   │   ├── A1/
+│   │   │   ├── index.json    # ["greetings-1.json", "introductions-1.json"]
+│   │   │   ├── greetings-1.json
+│   │   │   └── introductions-1.json
+│   │   └── A2/
+│   ├── de/
+│   │   ├── A1/
+│   │   │   ├── index.json
+│   │   │   ├── greetings-1.json
+│   │   │   └── introductions-1.json
 ```

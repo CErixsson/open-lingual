@@ -1,0 +1,73 @@
+{
+  "id": "en-a1-greetings-1",
+  "title": "Greetings 1",
+  "description": "Learn to say hello and goodbye in English",
+  "language": "en",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Hello", "translation": "A greeting", "example": "Hello! How are you?" },
+        { "word": "Goodbye", "translation": "Said when leaving", "example": "Goodbye! See you!" },
+        { "word": "Good morning", "translation": "Morning greeting", "example": "Good morning, teacher!" },
+        { "word": "Thank you", "translation": "Expressing gratitude", "example": "Thank you very much!" }
+      ]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "Which word means a greeting?",
+      "options": ["Hello", "Goodbye", "Sorry"],
+      "correct": 0
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "What do you say when you leave?",
+      "options": ["Good morning", "Thank you", "Goodbye"],
+      "correct": 2
+    },
+    {
+      "type": "match_pairs",
+      "pairs": [
+        { "left": "Hello", "right": "Greeting" },
+        { "left": "Goodbye", "right": "Farewell" },
+        { "left": "Thank you", "right": "Gratitude" },
+        { "left": "Good morning", "right": "Morning" }
+      ]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Good ___! How are you?",
+      "answer": "morning",
+      "options": ["morning", "goodbye", "thank"]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "You meet your teacher at 8 AM. What do you say?",
+      "options": ["Good morning", "Goodbye", "Good night"],
+      "correct": 0
+    },
+    {
+      "type": "word_order",
+      "prompt": "Make a sentence:",
+      "words": ["you", "Thank", "much", "very"],
+      "correct_order": [1, 0, 3, 2]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "___, how are you?",
+      "answer": "Hello",
+      "options": ["Hello", "Goodbye", "Sorry"]
+    },
+    {
+      "type": "translate",
+      "prompt": "How do you greet someone?",
+      "source": "Hello",
+      "answer": "Hello",
+      "alternatives": ["Hi", "Hey"]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "id": "en-a1-introductions-1",
+  "title": "Introductions 1",
+  "description": "Learn to introduce yourself in English",
+  "language": "en",
+  "level": "A1",
+  "module_id": "introductions",
+  "descriptor_ids": ["describing-experience"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "My name is…", "translation": "Used to say your name", "example": "My name is Anna." },
+        { "word": "I am…", "translation": "Another way to say your name", "example": "I am Tom." },
+        { "word": "Nice to meet you", "translation": "Said when meeting someone", "example": "Nice to meet you!" },
+        { "word": "What is your name?", "translation": "Asking someone's name", "example": "Hello! What is your name?" }
+      ]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "Someone asks 'What is your name?' You say:",
+      "options": ["My name is Alex", "I am fine", "Goodbye"],
+      "correct": 0
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "My ___ is Maria.",
+      "answer": "name",
+      "options": ["name", "hello", "morning"]
+    },
+    {
+      "type": "match_pairs",
+      "pairs": [
+        { "left": "My name is…", "right": "Say your name" },
+        { "left": "Nice to meet you", "right": "First meeting" },
+        { "left": "What is your name?", "right": "Ask a name" },
+        { "left": "I am…", "right": "Introduce yourself" }
+      ]
+    },
+    {
+      "type": "word_order",
+      "prompt": "Make a sentence:",
+      "words": ["name", "is", "My", "Tom"],
+      "correct_order": [2, 0, 1, 3]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "What do you say when you meet someone new?",
+      "options": ["Nice to meet you", "Goodbye", "Thank you"],
+      "correct": 0
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Nice to ___ you!",
+      "answer": "meet",
+      "options": ["meet", "name", "say"]
+    },
+    {
+      "type": "word_order",
+      "prompt": "Make a question:",
+      "words": ["your", "is", "What", "name"],
+      "correct_order": [2, 1, 0, 3]
+    },
+    {
+      "type": "translate",
+      "prompt": "Say your name:",
+      "source": "My name is…",
+      "answer": "My name is",
+      "alternatives": ["my name is", "I am"]
+    }
+  ]
+}

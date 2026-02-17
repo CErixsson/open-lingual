@@ -1,0 +1,28 @@
+{
+  "id": "ar-a1-greetings-1",
+  "title": "تحيات 1",
+  "description": "Learn basic Arabic greetings",
+  "language": "ar",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "مرحبا", "translation": "Hello", "example": "!مرحبا! كيف حالك؟" },
+        { "word": "مع السلامة", "translation": "Goodbye", "example": "!مع السلامة" },
+        { "word": "صباح الخير", "translation": "Good morning", "example": "!صباح الخير" },
+        { "word": "شكراً", "translation": "Thank you", "example": "!شكراً جزيلاً" }
+      ]
+    },
+    { "type": "multiple_choice", "prompt": "What does مرحبا mean?", "options": ["Hello", "Goodbye", "Please"], "correct": 0 },
+    { "type": "match_pairs", "pairs": [{ "left": "مرحبا", "right": "Hello" }, { "left": "مع السلامة", "right": "Goodbye" }, { "left": "شكراً", "right": "Thank you" }, { "left": "صباح الخير", "right": "Good morning" }] },
+    { "type": "fill_blank", "sentence": "___ الخير! (Good morning)", "answer": "صباح", "options": ["صباح", "مرحبا", "شكراً"] },
+    { "type": "translate", "prompt": "Translate to English:", "source": "شكراً", "answer": "Thank you", "alternatives": ["thank you", "thanks"] },
+    { "type": "multiple_choice", "prompt": "Which means 'Goodbye'?", "options": ["مع السلامة", "مرحبا", "شكراً"], "correct": 0 },
+    { "type": "fill_blank", "sentence": "___! كيف حالك؟ (Hello)", "answer": "مرحبا", "options": ["مرحبا", "شكراً", "صباح"] },
+    { "type": "multiple_choice", "prompt": "Morning greeting in Arabic:", "options": ["صباح الخير", "مع السلامة", "شكراً"], "correct": 0 }
+  ]
+}

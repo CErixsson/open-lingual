@@ -1,24 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useLanguages } from '@/hooks/useLanguages';
 import { useLanguageProfile } from '@/hooks/useLanguageProfile';
-import {
-  useLessonsByLanguageCode,
-  groupLessonsByCefr,
-  getCefrLabels,
-} from '@/hooks/useCourses';
+import { getCefrLabels } from '@/hooks/useCourses';
+import { useCurriculumLessons, CurriculumLesson } from '@/hooks/useCurriculumLessons';
 import { useI18n } from '@/i18n';
 import Header from '@/components/Header';
 import CefrLevelGrid from '@/components/courses/CefrLevelGrid';
-import LessonCard from '@/components/courses/LessonCard';
 import { getCefrColor, mapEloToCefr } from '@/lib/elo';
 import {
-  GraduationCap,
-  Loader2,
-  BookOpen,
-  Sparkles,
-  Target,
+  GraduationCap, Loader2, BookOpen, Sparkles, Target, ArrowRight,
 } from 'lucide-react';
 
 export default function CoursesPage() {
@@ -36,29 +28,39 @@ export default function CoursesPage() {
   const { data: languages, isLoading: langsLoading } = useLanguages();
   const selectedLang = languages?.find(l => l.id === selectedLangId);
   const { data: profile } = useLanguageProfile(selectedLangId);
-  const { data: lessons, isLoading: lessonsLoading } = useLessonsByLanguageCode(selectedLang?.code ?? null);
 
-  // Auto-select user's CEFR level when profile loads
+  // Load curriculum lessons from JSON files
+  const { data: curriculumLessons, isLoading: lessonsLoading } = useCurriculumLessons(
+    selectedLang?.code ?? null,
+    selectedLevel ?? undefined
+  );
+
+  // Auto-select user's CEFR level
   useEffect(() => {
     if (profile && !selectedLevel) {
-      const userLevel = mapEloToCefr(profile.overall_elo);
-      setSelectedLevel(userLevel);
+      setSelectedLevel(mapEloToCefr(profile.overall_elo));
     }
   }, [profile, selectedLevel]);
 
-  // Reset level selection when language changes
   useEffect(() => {
     setSelectedLevel(null);
   }, [selectedLangId]);
 
-  // Only show lessons with real phases (not descriptor-generated stubs)
-  const realLessons = lessons?.filter((l: any) => l.phases && Array.isArray(l.phases) && l.phases.length > 0);
-  const lessonLevels = realLessons ? groupLessonsByCefr(realLessons) : [];
-  const filteredLessons = selectedLevel
-    ? lessonLevels.find(l => l.level === selectedLevel)?.lessons ?? []
-    : lessonLevels.flatMap(l => l.lessons);
-
   const userLevel = profile ? mapEloToCefr(profile.overall_elo) : null;
+
+  // Group by level
+  const lessonsByLevel = (curriculumLessons || []).reduce<Record<string, CurriculumLesson[]>>((acc, l) => {
+    if (!acc[l.level]) acc[l.level] = [];
+    acc[l.level].push(l);
+    return acc;
+  }, {});
+
+  const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+  const displayLevels = selectedLevel
+    ? [{ level: selectedLevel, lessons: lessonsByLevel[selectedLevel] || [] }]
+    : levels.map(l => ({ level: l, lessons: lessonsByLevel[l] || [] })).filter(g => g.lessons.length > 0);
+
+  const totalLessons = displayLevels.reduce((s, l) => s + l.lessons.length, 0);
 
   if (authLoading || langsLoading) {
     return (
@@ -82,19 +84,12 @@ export default function CoursesPage() {
           {languages?.map(lang => {
             const isSelected = selectedLangId === lang.id;
             return (
-              <button
-                key={lang.id}
-                onClick={() => setSelectedLangId(lang.id)}
+              <button key={lang.id} onClick={() => setSelectedLangId(lang.id)}
                 className={`flex flex-col items-center gap-1 rounded-xl border-2 p-3 transition-all cursor-pointer ${
-                  isSelected
-                    ? 'border-primary bg-primary/5 shadow-soft'
-                    : 'border-border/50 hover:border-primary/30 bg-card'
-                }`}
-              >
+                  isSelected ? 'border-primary bg-primary/5 shadow-soft' : 'border-border/50 hover:border-primary/30 bg-card'
+                }`}>
                 <span className="text-2xl">{lang.flag_emoji}</span>
-                <span className="text-xs font-medium truncate w-full text-center">
-                  {lang.name}
-                </span>
+                <span className="text-xs font-medium truncate w-full text-center">{lang.name}</span>
               </button>
             );
           })}
@@ -105,65 +100,49 @@ export default function CoursesPage() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <BookOpen className="w-5 h-5 text-primary" />
-              <h2 className="text-xl font-bold">
-                {selectedLang.flag_emoji} {selectedLang.name}
-              </h2>
+              <h2 className="text-xl font-bold">{selectedLang.flag_emoji} {selectedLang.name}</h2>
               {userLevel && (
-                <span
-                  className="text-xs font-bold px-2 py-0.5 rounded-md ml-2"
-                  style={{
-                    backgroundColor: `hsl(${getCefrColor(userLevel)} / 0.15)`,
-                    color: `hsl(${getCefrColor(userLevel)})`,
-                  }}
-                >
+                <span className="text-xs font-bold px-2 py-0.5 rounded-md ml-2"
+                  style={{ backgroundColor: `hsl(${getCefrColor(userLevel)} / 0.15)`, color: `hsl(${getCefrColor(userLevel)})` }}>
                   <Target className="w-3 h-3 inline mr-1" />
-                  {locale === 'sv' ? 'Din nivå' : locale === 'es' ? 'Tu nivel' : 'Your level'}: {userLevel}
+                  {locale === 'sv' ? 'Din nivå' : 'Your level'}: {userLevel}
                 </span>
               )}
             </div>
 
-            {/* CEFR Level Grid - Lichess-inspired */}
             <div className="mb-6">
-              <CefrLevelGrid
-                selectedLevel={selectedLevel}
+              <CefrLevelGrid selectedLevel={selectedLevel}
                 onSelectLevel={level => setSelectedLevel(prev => prev === level ? null : level)}
-                userElo={profile?.overall_elo}
-              />
+                userElo={profile?.overall_elo} />
             </div>
 
-            {/* Recommended / Filtered lessons */}
             {lessonsLoading ? (
               <div className="flex justify-center py-12">
                 <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
               </div>
-            ) : filteredLessons.length > 0 ? (
-              <div>
-                <h3 className="text-sm font-semibold text-muted-foreground mb-3 flex items-center gap-2">
-                  {selectedLevel ? (
-                    <>
-                      <span
-                        className="font-bold"
-                        style={{ color: `hsl(${getCefrColor(selectedLevel)})` }}
-                      >
-                        {selectedLevel}
-                      </span>
-                      {cefrLabels[selectedLevel]} – {filteredLessons.length} {locale === 'sv' ? 'lektioner' : 'lessons'}
-                    </>
-                  ) : (
-                    <>{locale === 'sv' ? 'Alla lektioner' : 'All lessons'} – {filteredLessons.length}</>
-                  )}
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {filteredLessons.map((lesson: any) => (
-                    <LessonCard key={lesson.id} lesson={lesson} />
-                  ))}
-                </div>
+            ) : totalLessons > 0 ? (
+              <div className="space-y-6">
+                {displayLevels.map(({ level, lessons }) => (
+                  <div key={level}>
+                    <h3 className="text-sm font-semibold text-muted-foreground mb-3 flex items-center gap-2">
+                      <span className="font-bold" style={{ color: `hsl(${getCefrColor(level)})` }}>{level}</span>
+                      {cefrLabels[level]} – {lessons.length} {locale === 'sv' ? 'lektioner' : 'lessons'}
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                      {lessons.map(lesson => (
+                        <CurriculumLessonCard key={lesson.id} lesson={lesson} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : (
               <div className="text-center py-12 rounded-2xl border border-border/50 bg-card">
                 <Sparkles className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
                 <p className="text-muted-foreground">
-                  {locale === 'sv' ? `Inga lektioner för ${selectedLevel ? `nivå ${selectedLevel}` : 'detta språk'} ännu.` : `No lessons for ${selectedLevel ? `level ${selectedLevel}` : 'this language'} yet.`}
+                  {locale === 'sv'
+                    ? `Inga lektioner för ${selectedLevel ? `nivå ${selectedLevel}` : 'detta språk'} ännu.`
+                    : `No lessons for ${selectedLevel ? `level ${selectedLevel}` : 'this language'} yet.`}
                 </p>
               </div>
             )}
@@ -173,10 +152,39 @@ export default function CoursesPage() {
         {!selectedLangId && (
           <div className="text-center py-16 text-muted-foreground">
             <GraduationCap className="w-12 h-12 mx-auto mb-4 opacity-50" />
-            <p className="text-lg">{locale === 'sv' ? 'Välj ett språk ovan för att se tillgängliga kurser' : 'Select a language above to see available courses'}</p>
+            <p className="text-lg">{locale === 'sv' ? 'Välj ett språk ovan' : 'Select a language above to start'}</p>
           </div>
         )}
       </main>
     </div>
+  );
+}
+
+function CurriculumLessonCard({ lesson }: { lesson: CurriculumLesson }) {
+  const cefrColor = getCefrColor(lesson.level);
+  const exerciseCount = lesson.exercises.filter(e => e.type !== 'vocabulary_intro').length;
+
+  return (
+    <Link to={`/learn/${lesson.language}/${lesson.level}/${lesson.id}`}
+      className="group flex flex-col gap-2 rounded-xl border border-border/50 bg-card p-4 shadow-soft hover:shadow-card hover:border-primary/30 transition-all">
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex-1 min-w-0">
+          <h4 className="font-semibold text-sm truncate group-hover:text-primary transition-colors">
+            {lesson.title}
+          </h4>
+          <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{lesson.description}</p>
+        </div>
+        <span className="text-xs font-bold px-2 py-0.5 rounded-md shrink-0"
+          style={{ backgroundColor: `hsl(${cefrColor} / 0.15)`, color: `hsl(${cefrColor})` }}>
+          {lesson.level}
+        </span>
+      </div>
+      <div className="flex items-center justify-between text-xs text-muted-foreground">
+        <span>{exerciseCount} exercises</span>
+        <span className="flex items-center gap-1">
+          +{lesson.xp} XP <ArrowRight className="w-3 h-3" />
+        </span>
+      </div>
+    </Link>
   );
 }
