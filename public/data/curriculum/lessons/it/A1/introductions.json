@@ -1,0 +1,53 @@
+{
+  "id": "it-a1-introductions",
+  "title": "Italiano: Presentarsi",
+  "description": "Introduce yourself in Italian — name, age, origin, and interests.",
+  "language": "it",
+  "level": "A1",
+  "tags": ["introductions", "personal", "basics"],
+  "objectives": ["Say your name", "Talk about age and origin", "Express likes"],
+  "descriptor_ids": [1151, 1152],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "Vocabolario e Grammatica",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "Sono di…", "translation": "I am from…", "example": "Sono di Roma." },
+          { "term": "Ho … anni", "translation": "I am … years old", "example": "Ho 25 anni." },
+          { "term": "Mi piace…", "translation": "I like…", "example": "Mi piace il calcio." },
+          { "term": "Abito a…", "translation": "I live in…", "example": "Abito a Milano." }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Key verbs:**\n- *essere*: io **sono**, tu **sei**, lui/lei **è**\n- *avere*: io **ho**, tu **hai**, lui/lei **ha**\n\n**Structures:**\n- *Sono di* + city/country (origin)\n- *Ho* + number + *anni* (age)\n- *Mi piace* + noun (likes)" }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "Pratica Controllata",
+      "blocks": [
+        { "id": "ex-01", "type": "cloze", "prompt": "_____ di Roma. _____ 20 anni.", "items": [
+          { "answer": "Sono", "alternatives": [] },
+          { "answer": "Ho", "alternatives": [] }
+        ]},
+        { "id": "ex-02", "type": "multiple_choice", "prompt": "How do you say 'I like pizza' in Italian?", "items": [
+          { "text": "Mi piace la pizza.", "correct": true },
+          { "text": "Io piace pizza.", "correct": false },
+          { "text": "Pizza mi piace io.", "correct": false }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "Produzione Guidata",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Write 3 sentences introducing yourself in Italian.", "hints": ["Use 'Sono di…'", "Use 'Mi piace…'"], "required_grammar": ["Sono", "Ho"], "min_words": 10 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "Compito Libero",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Write a short introduction for a new Italian class. Include your name, where you're from, your age, and what you enjoy.", "hints": [], "required_grammar": [], "min_words": 20, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

@@ -1,0 +1,53 @@
+{
+  "id": "de-a1-introductions",
+  "title": "Deutsch: Über Mich",
+  "description": "Talk about yourself in German — name, age, origin.",
+  "language": "de",
+  "level": "A1",
+  "tags": ["introductions", "personal", "basics"],
+  "objectives": ["Say where you are from", "Talk about age", "Express hobbies"],
+  "descriptor_ids": [1151, 1152],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "Wortschatz & Grammatik",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "Ich komme aus…", "translation": "I come from…", "example": "Ich komme aus Deutschland." },
+          { "term": "Ich bin … Jahre alt", "translation": "I am … years old", "example": "Ich bin 25 Jahre alt." },
+          { "term": "Ich mag…", "translation": "I like…", "example": "Ich mag Fußball." },
+          { "term": "Ich wohne in…", "translation": "I live in…", "example": "Ich wohne in Berlin." }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Verb conjugation (sein / kommen):**\n- ich **bin** / ich **komme**\n- du **bist** / du **kommst**\n- er/sie **ist** / er/sie **kommt**\n\n**Word order:** Subject + Verb + Object\n- *Ich komme aus* + country\n- *Ich bin* + age + *Jahre alt*" }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "Kontrollierte Übung",
+      "blocks": [
+        { "id": "ex-01", "type": "cloze", "prompt": "Ich _____ aus Schweden. Ich _____ 20 Jahre alt.", "items": [
+          { "answer": "komme", "alternatives": [] },
+          { "answer": "bin", "alternatives": [] }
+        ]},
+        { "id": "ex-02", "type": "multiple_choice", "prompt": "Which sentence is correct?", "items": [
+          { "text": "Ich komme aus Brasilien.", "correct": true },
+          { "text": "Ich aus komme Brasilien.", "correct": false },
+          { "text": "Aus ich komme Brasilien.", "correct": false }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "Angeleitete Produktion",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Write 3 sentences about yourself in German: where you are from, how old you are, and one hobby.", "hints": ["Use 'Ich komme aus…'", "Use 'Ich mag…'"], "required_grammar": ["Ich bin", "Ich komme"], "min_words": 10 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "Freie Aufgabe",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Write a short paragraph introducing yourself to a German pen pal. Include your name, age, where you live, and what you enjoy.", "hints": [], "required_grammar": [], "min_words": 20, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

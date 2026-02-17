@@ -1,0 +1,49 @@
+{
+  "id": "zh-a1-introductions",
+  "title": "中文: 自我介绍",
+  "description": "Introduce yourself in Chinese — name, age, and interests.",
+  "language": "zh-Hans",
+  "level": "A1",
+  "tags": ["introductions", "personal", "basics"],
+  "objectives": ["Say your name", "Talk about age", "Express likes"],
+  "descriptor_ids": [1151, 1152],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "词汇与语法",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "我叫…", "translation": "My name is…", "example": "我叫安娜。" },
+          { "term": "我是…人", "translation": "I am from… (nationality)", "example": "我是瑞典人。" },
+          { "term": "我…岁", "translation": "I am … years old", "example": "我二十五岁。" },
+          { "term": "我喜欢…", "translation": "I like…", "example": "我喜欢足球。" }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Basic sentence:** Subject + Verb + Object\n\n**Key patterns:**\n- 我叫 + name\n- 我是 + nationality + 人\n- 我 + number + 岁\n- 我喜欢 + noun\n\nChinese has **no verb conjugation** — the verb stays the same regardless of subject." }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "练习",
+      "blocks": [
+        { "id": "ex-01", "type": "multiple_choice", "prompt": "How do you say 'My name is Anna' in Chinese?", "items": [
+          { "text": "我叫安娜。", "correct": true },
+          { "text": "安娜叫我。", "correct": false },
+          { "text": "我是叫安娜。", "correct": false }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "引导写作",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Write 3 sentences about yourself in Chinese.", "hints": ["Use '我叫…'", "Use '我喜欢…'"], "required_grammar": ["我叫", "我是"], "min_words": 5 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "自由任务",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Write a self-introduction for a new Chinese class.", "hints": [], "required_grammar": [], "min_words": 15, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}

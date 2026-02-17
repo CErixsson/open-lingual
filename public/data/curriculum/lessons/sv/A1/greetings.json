@@ -1,0 +1,49 @@
+{
+  "id": "sv-a1-greetings",
+  "title": "Svenska: Hälsningar",
+  "description": "Learn basic Swedish greetings and introductions.",
+  "language": "sv",
+  "level": "A1",
+  "tags": ["greetings", "basics"],
+  "objectives": ["Greet people in Swedish", "Introduce yourself", "Say goodbye"],
+  "descriptor_ids": [1151],
+  "phases": [
+    {
+      "phase": 1, "type": "build", "title": "Ordförråd & Grammatik",
+      "blocks": [
+        { "id": "vocab-01", "type": "vocabulary", "items": [
+          { "term": "Hej / Hallå", "translation": "Hello / Hi", "example": "Hej, hur mår du?" },
+          { "term": "Jag heter…", "translation": "My name is…", "example": "Jag heter Anna." },
+          { "term": "Trevligt att träffas", "translation": "Nice to meet you", "example": "Hej, trevligt att träffas!" },
+          { "term": "Hej då", "translation": "Goodbye", "example": "Hej då, vi ses!" }
+        ]},
+        { "id": "grammar-01", "type": "text", "content": "**Swedish greetings:**\n- *Hej* — informal, most common\n- *Hallå* — casual\n- *God morgon/dag/kväll* — formal\n\n**Introducing yourself:**\n- *Jag heter* + name\n- *Vad heter du?* — What is your name?\n- *Hur mår du?* — How are you?" }
+      ]
+    },
+    {
+      "phase": 2, "type": "controlled_practice", "title": "Kontrollerad Övning",
+      "blocks": [
+        { "id": "ex-01", "type": "multiple_choice", "prompt": "How do you say 'My name is…' in Swedish?", "items": [
+          { "text": "Jag heter…", "correct": true },
+          { "text": "Jag är…", "correct": false },
+          { "text": "Mitt namn…", "correct": false }
+        ]}
+      ]
+    },
+    {
+      "phase": 3, "type": "guided_production", "title": "Guidad Produktion",
+      "blocks": [
+        { "id": "guided-01", "type": "open_response", "prompt": "Write a short greeting dialogue in Swedish.", "hints": ["Use 'Hej'", "Use 'Jag heter…'"], "required_grammar": ["Jag heter"], "min_words": 8 }
+      ]
+    },
+    {
+      "phase": 4, "type": "free_performance", "title": "Fri Uppgift",
+      "blocks": [
+        { "id": "perf-01", "type": "open_response", "prompt": "Write a short conversation between two people meeting for the first time in Swedish.", "hints": [], "required_grammar": [], "min_words": 20, "evaluation_criteria": { "grammar_weight": 0.3, "vocabulary_weight": 0.3, "structure_weight": 0.2, "fluency_weight": 0.2 } }
+      ]
+    }
+  ],
+  "exercises": [],
+  "version": "2.0.0",
+  "license": "CC-BY-SA-4.0"
+}
