@@ -48,7 +48,9 @@ export default function CoursesPage() {
     setSelectedLevel(null);
   }, [selectedLangId]);
 
-  const lessonLevels = lessons ? groupLessonsByCefr(lessons) : [];
+  // Only show lessons with real phases (not descriptor-generated stubs)
+  const realLessons = lessons?.filter((l: any) => l.phases && Array.isArray(l.phases) && l.phases.length > 0);
+  const lessonLevels = realLessons ? groupLessonsByCefr(realLessons) : [];
   const filteredLessons = selectedLevel
     ? lessonLevels.find(l => l.level === selectedLevel)?.lessons ?? []
     : lessonLevels.flatMap(l => l.lessons);

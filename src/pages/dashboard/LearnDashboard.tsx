@@ -27,7 +27,10 @@ export default function LearnDashboard() {
   const { data: attempts } = useRecentAttempts(user?.id ?? null, 10);
   const { data: profiles } = useUserLanguageProfiles();
   const activeProfile = profiles?.[0];
-  const activeLanguageCode = (activeProfile as any)?.languages?.code ?? null;
+  const activeLanguage = (activeProfile as any)?.languages;
+  const activeLanguageCode = activeLanguage?.code ?? null;
+  const activeLanguageName = activeLanguage?.name ?? null;
+  const activeLanguageFlag = activeLanguage?.flag_emoji ?? null;
   const { data: allLessons, isLoading: lessonsLoading, error: lessonsError, refetch: refetchLessons } = useLessonsByLanguageCode(activeLanguageCode);
   const { data: skillTrends } = useSkillTrends(activeProfile?.id ?? null);
 
@@ -129,6 +132,8 @@ export default function LearnDashboard() {
           trends={skillTrends}
           overallElo={activeProfile?.overall_elo}
           overallCefr={activeProfile?.overall_cefr}
+          languageName={activeLanguageName}
+          languageFlag={activeLanguageFlag}
         />
       )}
 
