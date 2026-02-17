@@ -1,0 +1,75 @@
+{
+  "id": "fr-a1-greetings-1",
+  "title": "Salutations 1",
+  "description": "Apprenez à saluer et dire au revoir en français",
+  "language": "fr",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Bonjour", "translation": "Hello / Good morning", "example": "Bonjour, comment allez-vous ?" },
+        { "word": "Au revoir", "translation": "Goodbye", "example": "Au revoir ! À demain !" },
+        { "word": "Merci", "translation": "Thank you", "example": "Merci beaucoup !" },
+        { "word": "S'il vous plaît", "translation": "Please (formal)", "example": "Un café, s'il vous plaît." },
+        { "word": "Bonsoir", "translation": "Good evening", "example": "Bonsoir, madame !" }
+      ]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "What does 'Bonjour' mean?",
+      "options": ["Hello", "Goodbye", "Thank you"],
+      "correct": 0
+    },
+    {
+      "type": "match_pairs",
+      "pairs": [
+        { "left": "Bonjour", "right": "Hello" },
+        { "left": "Au revoir", "right": "Goodbye" },
+        { "left": "Merci", "right": "Thank you" },
+        { "left": "S'il vous plaît", "right": "Please" }
+      ]
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to English:",
+      "source": "Bonsoir",
+      "answer": "Good evening",
+      "alternatives": ["good evening"]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "___, comment allez-vous ?",
+      "answer": "Bonjour",
+      "options": ["Bonjour", "Merci", "Au revoir"]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "You leave a shop. You say:",
+      "options": ["Au revoir", "Bonjour", "Merci"],
+      "correct": 0
+    },
+    {
+      "type": "word_order",
+      "prompt": "Build the phrase:",
+      "words": ["beaucoup", "Merci"],
+      "correct_order": [1, 0]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Un café, s'il vous ___.",
+      "answer": "plaît",
+      "options": ["plaît", "revoir", "soir"]
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to French:",
+      "source": "Thank you",
+      "answer": "Merci",
+      "alternatives": ["merci", "Merci beaucoup"]
+    }
+  ]
+}

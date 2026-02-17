@@ -1,0 +1,81 @@
+{
+  "id": "de-a1-greetings-1",
+  "title": "Begrüßungen 1",
+  "description": "Lerne Hallo und Tschüss auf Deutsch",
+  "language": "de",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Hallo", "translation": "Hello", "example": "Hallo! Wie geht's?" },
+        { "word": "Tschüss", "translation": "Bye", "example": "Tschüss! Bis morgen!" },
+        { "word": "Guten Morgen", "translation": "Good morning", "example": "Guten Morgen, Frau Müller!" },
+        { "word": "Guten Tag", "translation": "Good day", "example": "Guten Tag! Wie geht es Ihnen?" },
+        { "word": "Danke", "translation": "Thank you", "example": "Danke schön!" }
+      ]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "What does 'Hallo' mean?",
+      "options": ["Hello", "Goodbye", "Please"],
+      "correct": 0
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "What does 'Tschüss' mean?",
+      "options": ["Good morning", "Bye", "Thank you"],
+      "correct": 1
+    },
+    {
+      "type": "match_pairs",
+      "pairs": [
+        { "left": "Hallo", "right": "Hello" },
+        { "left": "Tschüss", "right": "Bye" },
+        { "left": "Danke", "right": "Thank you" },
+        { "left": "Guten Morgen", "right": "Good morning" }
+      ]
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to English:",
+      "source": "Guten Tag",
+      "answer": "Good day",
+      "alternatives": ["good day", "hello", "good afternoon"]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Guten ___! Wie geht es Ihnen?",
+      "answer": "Tag",
+      "options": ["Tag", "Tschüss", "Danke"]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "It's 8 AM. Which greeting fits?",
+      "options": ["Guten Morgen", "Guten Abend", "Tschüss"],
+      "correct": 0
+    },
+    {
+      "type": "word_order",
+      "prompt": "Build the greeting:",
+      "words": ["Morgen", "Guten"],
+      "correct_order": [1, 0]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "___! Bis morgen!",
+      "answer": "Tschüss",
+      "options": ["Tschüss", "Hallo", "Danke"]
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to German:",
+      "source": "Thank you",
+      "answer": "Danke",
+      "alternatives": ["danke", "Danke schön", "danke schön"]
+    }
+  ]
+}

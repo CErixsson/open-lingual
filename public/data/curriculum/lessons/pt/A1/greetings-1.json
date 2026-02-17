@@ -1,0 +1,28 @@
+{
+  "id": "pt-a1-greetings-1",
+  "title": "Saudações 1",
+  "description": "Aprenda a cumprimentar em português",
+  "language": "pt",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Olá", "translation": "Hello", "example": "Olá! Tudo bem?" },
+        { "word": "Tchau", "translation": "Bye", "example": "Tchau! Até amanhã!" },
+        { "word": "Bom dia", "translation": "Good morning", "example": "Bom dia, professor!" },
+        { "word": "Obrigado/a", "translation": "Thank you", "example": "Muito obrigado!" }
+      ]
+    },
+    { "type": "multiple_choice", "prompt": "What does 'Olá' mean?", "options": ["Hello", "Goodbye", "Please"], "correct": 0 },
+    { "type": "match_pairs", "pairs": [{ "left": "Olá", "right": "Hello" }, { "left": "Tchau", "right": "Bye" }, { "left": "Obrigado", "right": "Thank you" }, { "left": "Bom dia", "right": "Good morning" }] },
+    { "type": "fill_blank", "sentence": "Bom ___! Tudo bem?", "answer": "dia", "options": ["dia", "tchau", "olá"] },
+    { "type": "translate", "prompt": "Translate to English:", "source": "Obrigado", "answer": "Thank you", "alternatives": ["thank you", "thanks"] },
+    { "type": "multiple_choice", "prompt": "You leave. You say:", "options": ["Tchau", "Bom dia", "Obrigado"], "correct": 0 },
+    { "type": "word_order", "prompt": "Build the phrase:", "words": ["obrigado", "Muito"], "correct_order": [1, 0] },
+    { "type": "fill_blank", "sentence": "___! Até amanhã!", "answer": "Tchau", "options": ["Tchau", "Olá", "Obrigado"] }
+  ]
+}

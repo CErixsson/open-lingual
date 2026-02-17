@@ -1,0 +1,67 @@
+{
+  "id": "es-a1-introductions-1",
+  "title": "Presentaciones 1",
+  "description": "Aprende a presentarte en español",
+  "language": "es",
+  "level": "A1",
+  "module_id": "introductions",
+  "descriptor_ids": ["describing-experience"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Me llamo…", "translation": "My name is…", "example": "Me llamo María." },
+        { "word": "¿Cómo te llamas?", "translation": "What is your name?", "example": "¿Cómo te llamas?" },
+        { "word": "Mucho gusto", "translation": "Nice to meet you", "example": "¡Mucho gusto!" },
+        { "word": "Soy…", "translation": "I am…", "example": "Soy estudiante." }
+      ]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "How do you say 'My name is…' in Spanish?",
+      "options": ["Me llamo…", "Mucho gusto", "Buenos días"],
+      "correct": 0
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Me ___ Carlos.",
+      "answer": "llamo",
+      "options": ["llamo", "llamas", "gusto"]
+    },
+    {
+      "type": "match_pairs",
+      "pairs": [
+        { "left": "Me llamo…", "right": "My name is…" },
+        { "left": "Mucho gusto", "right": "Nice to meet you" },
+        { "left": "¿Cómo te llamas?", "right": "What's your name?" },
+        { "left": "Soy…", "right": "I am…" }
+      ]
+    },
+    {
+      "type": "word_order",
+      "prompt": "Build the sentence:",
+      "words": ["llamo", "Me", "Ana"],
+      "correct_order": [1, 0, 2]
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to Spanish:",
+      "source": "Nice to meet you",
+      "answer": "Mucho gusto",
+      "alternatives": ["mucho gusto", "Encantado", "encantado"]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "¿Cómo te ___?",
+      "answer": "llamas",
+      "options": ["llamas", "llamo", "gusto"]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "'Mucho gusto' means:",
+      "options": ["Nice to meet you", "Good morning", "Thank you"],
+      "correct": 0
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "ru-a1-greetings-1",
+  "title": "Приветствия 1",
+  "description": "Выучите основные приветствия на русском",
+  "language": "ru",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Привет", "translation": "Hello (informal)", "example": "Привет! Как дела?" },
+        { "word": "Здравствуйте", "translation": "Hello (formal)", "example": "Здравствуйте!" },
+        { "word": "До свидания", "translation": "Goodbye", "example": "До свидания!" },
+        { "word": "Спасибо", "translation": "Thank you", "example": "Спасибо большое!" }
+      ]
+    },
+    { "type": "multiple_choice", "prompt": "What does Привет mean?", "options": ["Hello", "Goodbye", "Please"], "correct": 0 },
+    { "type": "match_pairs", "pairs": [{ "left": "Привет", "right": "Hello" }, { "left": "До свидания", "right": "Goodbye" }, { "left": "Спасибо", "right": "Thank you" }, { "left": "Здравствуйте", "right": "Hello (formal)" }] },
+    { "type": "fill_blank", "sentence": "___! Как дела?", "answer": "Привет", "options": ["Привет", "Спасибо", "До свидания"] },
+    { "type": "translate", "prompt": "Translate to English:", "source": "Спасибо", "answer": "Thank you", "alternatives": ["thank you", "thanks"] },
+    { "type": "multiple_choice", "prompt": "Formal hello in Russian:", "options": ["Здравствуйте", "Привет", "Спасибо"], "correct": 0 },
+    { "type": "fill_blank", "sentence": "До ___! (Goodbye)", "answer": "свидания", "options": ["свидания", "привет", "спасибо"] },
+    { "type": "multiple_choice", "prompt": "Which means 'Goodbye'?", "options": ["До свидания", "Привет", "Спасибо"], "correct": 0 }
+  ]
+}

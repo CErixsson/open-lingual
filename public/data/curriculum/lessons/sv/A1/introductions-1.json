@@ -1,0 +1,67 @@
+{
+  "id": "sv-a1-introductions-1",
+  "title": "Presentationer 1",
+  "description": "Lär dig att presentera dig själv på svenska",
+  "language": "sv",
+  "level": "A1",
+  "module_id": "introductions",
+  "descriptor_ids": ["describing-experience"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Jag heter…", "translation": "My name is…", "example": "Jag heter Erik." },
+        { "word": "Vad heter du?", "translation": "What is your name?", "example": "Hej! Vad heter du?" },
+        { "word": "Trevligt att träffas", "translation": "Nice to meet you", "example": "Trevligt att träffas!" },
+        { "word": "Jag är…", "translation": "I am…", "example": "Jag är student." }
+      ]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "How do you say 'My name is…' in Swedish?",
+      "options": ["Jag heter…", "Hej då", "Tack"],
+      "correct": 0
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Jag ___ Anna.",
+      "answer": "heter",
+      "options": ["heter", "är", "hej"]
+    },
+    {
+      "type": "match_pairs",
+      "pairs": [
+        { "left": "Jag heter…", "right": "My name is…" },
+        { "left": "Trevligt att träffas", "right": "Nice to meet you" },
+        { "left": "Vad heter du?", "right": "What's your name?" },
+        { "left": "Jag är…", "right": "I am…" }
+      ]
+    },
+    {
+      "type": "word_order",
+      "prompt": "Build the sentence:",
+      "words": ["heter", "Jag", "Erik"],
+      "correct_order": [1, 0, 2]
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to Swedish:",
+      "source": "Nice to meet you",
+      "answer": "Trevligt att träffas",
+      "alternatives": ["trevligt att träffas"]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Vad ___ du?",
+      "answer": "heter",
+      "options": ["heter", "är", "tack"]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "'Trevligt att träffas' means:",
+      "options": ["Nice to meet you", "Good morning", "Goodbye"],
+      "correct": 0
+    }
+  ]
+}

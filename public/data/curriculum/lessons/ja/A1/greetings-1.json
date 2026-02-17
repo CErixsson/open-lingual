@@ -1,0 +1,28 @@
+{
+  "id": "ja-a1-greetings-1",
+  "title": "あいさつ 1",
+  "description": "Learn basic Japanese greetings",
+  "language": "ja",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "こんにちは", "translation": "Hello", "example": "こんにちは！元気ですか？" },
+        { "word": "さようなら", "translation": "Goodbye", "example": "さようなら！また明日！" },
+        { "word": "おはようございます", "translation": "Good morning", "example": "おはようございます、先生！" },
+        { "word": "ありがとう", "translation": "Thank you", "example": "ありがとうございます！" }
+      ]
+    },
+    { "type": "multiple_choice", "prompt": "What does こんにちは mean?", "options": ["Hello", "Goodbye", "Sorry"], "correct": 0 },
+    { "type": "match_pairs", "pairs": [{ "left": "こんにちは", "right": "Hello" }, { "left": "さようなら", "right": "Goodbye" }, { "left": "ありがとう", "right": "Thank you" }, { "left": "おはよう", "right": "Good morning" }] },
+    { "type": "fill_blank", "sentence": "___！元気ですか？", "answer": "こんにちは", "options": ["こんにちは", "さようなら", "ありがとう"] },
+    { "type": "translate", "prompt": "Translate to English:", "source": "ありがとう", "answer": "Thank you", "alternatives": ["thank you", "thanks"] },
+    { "type": "multiple_choice", "prompt": "Morning greeting in Japanese:", "options": ["おはようございます", "こんにちは", "さようなら"], "correct": 0 },
+    { "type": "multiple_choice", "prompt": "Which means 'Goodbye'?", "options": ["さようなら", "こんにちは", "ありがとう"], "correct": 0 },
+    { "type": "fill_blank", "sentence": "___ございます！(Thank you)", "answer": "ありがとう", "options": ["ありがとう", "おはよう", "こんにちは"] }
+  ]
+}

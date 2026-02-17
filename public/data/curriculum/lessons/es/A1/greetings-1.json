@@ -1,0 +1,75 @@
+{
+  "id": "es-a1-greetings-1",
+  "title": "Saludos 1",
+  "description": "Aprende a saludar y despedirte en español",
+  "language": "es",
+  "level": "A1",
+  "module_id": "basic-greetings",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Hola", "translation": "Hello", "example": "¡Hola! ¿Cómo estás?" },
+        { "word": "Adiós", "translation": "Goodbye", "example": "¡Adiós! ¡Hasta mañana!" },
+        { "word": "Buenos días", "translation": "Good morning", "example": "Buenos días, señora." },
+        { "word": "Gracias", "translation": "Thank you", "example": "¡Muchas gracias!" },
+        { "word": "Por favor", "translation": "Please", "example": "Un café, por favor." }
+      ]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "What does 'Hola' mean?",
+      "options": ["Hello", "Goodbye", "Please"],
+      "correct": 0
+    },
+    {
+      "type": "match_pairs",
+      "pairs": [
+        { "left": "Hola", "right": "Hello" },
+        { "left": "Adiós", "right": "Goodbye" },
+        { "left": "Gracias", "right": "Thank you" },
+        { "left": "Por favor", "right": "Please" }
+      ]
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to English:",
+      "source": "Buenos días",
+      "answer": "Good morning",
+      "alternatives": ["good morning"]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Buenos ___! ¿Cómo estás?",
+      "answer": "días",
+      "options": ["días", "adiós", "gracias"]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "You want to say 'Thank you'. Which word?",
+      "options": ["Gracias", "Hola", "Adiós"],
+      "correct": 0
+    },
+    {
+      "type": "word_order",
+      "prompt": "Build the sentence:",
+      "words": ["gracias", "Muchas"],
+      "correct_order": [1, 0]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Un café, ___ favor.",
+      "answer": "por",
+      "options": ["por", "hola", "buenos"]
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to Spanish:",
+      "source": "Goodbye",
+      "answer": "Adiós",
+      "alternatives": ["adiós", "Adios", "adios"]
+    }
+  ]
+}

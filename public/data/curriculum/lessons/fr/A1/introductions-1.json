@@ -1,0 +1,67 @@
+{
+  "id": "fr-a1-introductions-1",
+  "title": "Présentations 1",
+  "description": "Apprenez à vous présenter en français",
+  "language": "fr",
+  "level": "A1",
+  "module_id": "introductions",
+  "descriptor_ids": ["describing-experience"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Je m'appelle…", "translation": "My name is…", "example": "Je m'appelle Marie." },
+        { "word": "Comment vous appelez-vous ?", "translation": "What is your name? (formal)", "example": "Comment vous appelez-vous ?" },
+        { "word": "Enchanté(e)", "translation": "Nice to meet you", "example": "Enchanté, Pierre !" },
+        { "word": "Je suis…", "translation": "I am…", "example": "Je suis étudiant." }
+      ]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "How do you say 'My name is…' in French?",
+      "options": ["Je m'appelle…", "Au revoir", "Merci"],
+      "correct": 0
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Je ___ Marie.",
+      "answer": "m'appelle",
+      "options": ["m'appelle", "suis", "vous"]
+    },
+    {
+      "type": "match_pairs",
+      "pairs": [
+        { "left": "Je m'appelle…", "right": "My name is…" },
+        { "left": "Enchanté(e)", "right": "Nice to meet you" },
+        { "left": "Comment vous appelez-vous ?", "right": "What's your name?" },
+        { "left": "Je suis…", "right": "I am…" }
+      ]
+    },
+    {
+      "type": "word_order",
+      "prompt": "Build the sentence:",
+      "words": ["m'appelle", "Je", "Pierre"],
+      "correct_order": [1, 0, 2]
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to French:",
+      "source": "Nice to meet you",
+      "answer": "Enchanté",
+      "alternatives": ["enchanté", "Enchantée", "enchantée"]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "Comment vous ___-vous ?",
+      "answer": "appelez",
+      "options": ["appelez", "appelle", "suis"]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "'Enchanté' means:",
+      "options": ["Nice to meet you", "Good morning", "Goodbye"],
+      "correct": 0
+    }
+  ]
+}
