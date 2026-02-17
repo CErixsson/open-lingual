@@ -14,5 +14,5 @@
   { "code": "ru", "name": "Русский", "flag_emoji": "🇷🇺" },
   { "code": "sv", "name": "Svenska", "flag_emoji": "🇸🇪" },
   { "code": "tr", "name": "Türkçe", "flag_emoji": "🇹🇷" },
-  { "code": "zh-Hans", "name": "中文 (简体)", "flag_emoji": "🇨🇳" }
+  { "code": "zh", "name": "中文 (简体)", "flag_emoji": "🇨🇳" }
 ]

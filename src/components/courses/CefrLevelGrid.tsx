@@ -1,5 +1,6 @@
 import { getCefrColor, mapEloToCefr } from '@/lib/elo';
-import { CEFR_LABELS } from '@/hooks/useCourses';
+import { getCefrLabels } from '@/hooks/useCourses';
+import { useI18n } from '@/i18n';
 
 interface CefrLevelGridProps {
   selectedLevel: string | null;
@@ -10,6 +11,8 @@ interface CefrLevelGridProps {
 const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
 export default function CefrLevelGrid({ selectedLevel, onSelectLevel, userElo }: CefrLevelGridProps) {
+  const { locale } = useI18n();
+  const cefrLabels = getCefrLabels(locale);
   const userLevel = userElo ? mapEloToCefr(userElo) : null;
 
   return (
@@ -40,7 +43,7 @@ export default function CefrLevelGrid({ selectedLevel, onSelectLevel, userElo }:
               {level}
             </span>
             <span className="text-[10px] text-muted-foreground leading-tight text-center">
-              {CEFR_LABELS[level]}
+              {cefrLabels[level]}
             </span>
             {isUserLevel && (
               <span className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full bg-primary border-2 border-background" />

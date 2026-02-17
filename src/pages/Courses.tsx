@@ -6,8 +6,9 @@ import { useLanguageProfile } from '@/hooks/useLanguageProfile';
 import {
   useLessonsByLanguageCode,
   groupLessonsByCefr,
-  CEFR_LABELS,
+  getCefrLabels,
 } from '@/hooks/useCourses';
+import { useI18n } from '@/i18n';
 import Header from '@/components/Header';
 import CefrLevelGrid from '@/components/courses/CefrLevelGrid';
 import LessonCard from '@/components/courses/LessonCard';
@@ -21,6 +22,8 @@ import {
 } from 'lucide-react';
 
 export default function CoursesPage() {
+  const { locale, t } = useI18n();
+  const cefrLabels = getCefrLabels(locale);
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
   const [selectedLangId, setSelectedLangId] = useState<string | null>(null);
@@ -71,7 +74,7 @@ export default function CoursesPage() {
       <main className="container mx-auto px-4 pt-24 pb-12 max-w-5xl">
         <div className="flex items-center gap-3 mb-8">
           <GraduationCap className="w-7 h-7 text-primary" />
-          <h1 className="text-2xl font-bold">Kurser</h1>
+          <h1 className="text-2xl font-bold">{t('nav.courses')}</h1>
         </div>
 
         {/* Language grid */}
@@ -114,7 +117,7 @@ export default function CoursesPage() {
                   }}
                 >
                   <Target className="w-3 h-3 inline mr-1" />
-                  Din nivå: {userLevel}
+                  {locale === 'sv' ? 'Din nivå' : locale === 'es' ? 'Tu nivel' : 'Your level'}: {userLevel}
                 </span>
               )}
             </div>
@@ -144,10 +147,10 @@ export default function CoursesPage() {
                       >
                         {selectedLevel}
                       </span>
-                      {CEFR_LABELS[selectedLevel]} – {filteredLessons.length} lektioner
+                      {cefrLabels[selectedLevel]} – {filteredLessons.length} {locale === 'sv' ? 'lektioner' : 'lessons'}
                     </>
                   ) : (
-                    <>Alla lektioner – {filteredLessons.length} st</>
+                    <>{locale === 'sv' ? 'Alla lektioner' : 'All lessons'} – {filteredLessons.length}</>
                   )}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -160,7 +163,7 @@ export default function CoursesPage() {
               <div className="text-center py-12 rounded-2xl border border-border/50 bg-card">
                 <Sparkles className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
                 <p className="text-muted-foreground">
-                  Inga lektioner för {selectedLevel ? `nivå ${selectedLevel}` : 'detta språk'} ännu.
+                  {locale === 'sv' ? `Inga lektioner för ${selectedLevel ? `nivå ${selectedLevel}` : 'detta språk'} ännu.` : `No lessons for ${selectedLevel ? `level ${selectedLevel}` : 'this language'} yet.`}
                 </p>
               </div>
             )}
@@ -170,7 +173,7 @@ export default function CoursesPage() {
         {!selectedLangId && (
           <div className="text-center py-16 text-muted-foreground">
             <GraduationCap className="w-12 h-12 mx-auto mb-4 opacity-50" />
-            <p className="text-lg">Välj ett språk ovan för att se tillgängliga kurser</p>
+            <p className="text-lg">{locale === 'sv' ? 'Välj ett språk ovan för att se tillgängliga kurser' : 'Select a language above to see available courses'}</p>
           </div>
         )}
       </main>
