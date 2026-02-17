@@ -108,11 +108,14 @@ export function groupLessonsByCefr(lessons: any[]): LessonsByLevel[] {
     .filter(g => g.lessons.length > 0);
 }
 
-export const CEFR_LABELS: Record<string, string> = {
-  A1: 'Nybörjare',
-  A2: 'Grundläggande',
-  B1: 'Mellannivå',
-  B2: 'Övre mellannivå',
-  C1: 'Avancerad',
-  C2: 'Mästerskap',
+export const CEFR_LABELS_I18N: Record<string, Record<string, string>> = {
+  en: { A1: 'Beginner', A2: 'Elementary', B1: 'Intermediate', B2: 'Upper Intermediate', C1: 'Advanced', C2: 'Mastery' },
+  es: { A1: 'Principiante', A2: 'Elemental', B1: 'Intermedio', B2: 'Intermedio alto', C1: 'Avanzado', C2: 'Maestría' },
+  sv: { A1: 'Nybörjare', A2: 'Grundläggande', B1: 'Mellannivå', B2: 'Övre mellannivå', C1: 'Avancerad', C2: 'Mästerskap' },
 };
+
+export const CEFR_LABELS: Record<string, string> = CEFR_LABELS_I18N.en;
+
+export function getCefrLabels(locale: string): Record<string, string> {
+  return CEFR_LABELS_I18N[locale] || CEFR_LABELS_I18N.en;
+}

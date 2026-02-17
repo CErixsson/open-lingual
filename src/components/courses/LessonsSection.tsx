@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { useLessonsByLanguageCode, groupLessonsByCefr, CEFR_LABELS } from '@/hooks/useCourses';
+import { useLessonsByLanguageCode, groupLessonsByCefr, getCefrLabels } from '@/hooks/useCourses';
+import { useI18n } from '@/i18n';
 import { getCefrColor } from '@/lib/elo';
 import { ChevronDown, ChevronRight, BookOpen, Loader2, FileText } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -13,6 +14,8 @@ interface LessonsSectionProps {
 }
 
 export default function LessonsSection({ languageCode, languageName, flagEmoji }: LessonsSectionProps) {
+  const { locale } = useI18n();
+  const cefrLabels = getCefrLabels(locale);
   const { data: lessons, isLoading } = useLessonsByLanguageCode(languageCode);
   const [expandedLevels, setExpandedLevels] = useState<Set<string>>(new Set(['A1', 'A2']));
 
@@ -66,9 +69,9 @@ export default function LessonsSection({ languageCode, languageName, flagEmoji }
                   >
                     {level}
                   </span>
-                  <span className="font-semibold">{CEFR_LABELS[level]}</span>
+                  <span className="font-semibold">{cefrLabels[level]}</span>
                   <span className="text-sm text-muted-foreground">
-                    {levelLessons.length} lektioner
+                    {levelLessons.length} {locale === 'sv' ? 'lektioner' : 'lessons'}
                   </span>
                 </div>
                 {isExpanded ? (
