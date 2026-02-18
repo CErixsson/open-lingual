@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useCurriculumLesson, useCurriculumLessons, CurriculumExercise } from '@/hooks/useCurriculumLessons';
+import { useCurriculumProgress } from '@/hooks/useCurriculumProgress';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -17,6 +18,7 @@ export default function CurriculumPlayer() {
   const { user, loading: authLoading } = useAuth();
   const { data: lesson, isLoading } = useCurriculumLesson(lang ?? null, level ?? null, lessonId ?? null);
   const { data: allLessons } = useCurriculumLessons(lang ?? null, level);
+  const { setLessonProgress, getLessonCompletion } = useCurriculumProgress();
 
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answered, setAnswered] = useState(false);
@@ -67,12 +69,15 @@ export default function CurriculumPlayer() {
 
   const goNext = useCallback(() => {
     if (currentIdx + 1 < total) {
+      const pct = Math.round(((currentIdx + 1) / total) * 100);
+      if (lessonId) setLessonProgress(lessonId, pct, 0);
       setCurrentIdx(i => i + 1);
       resetExercise();
     } else {
+      if (lessonId && lesson) setLessonProgress(lessonId, 100, lesson.xp);
       setFinished(true);
     }
-  }, [currentIdx, total, resetExercise]);
+  }, [currentIdx, total, resetExercise, lessonId, lesson, setLessonProgress]);
 
   const checkAnswer = useCallback(() => {
     if (!exercise) return;

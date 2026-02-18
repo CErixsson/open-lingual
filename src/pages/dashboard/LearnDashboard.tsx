@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useI18n } from '@/i18n';
-import { useMyProgress, useProgressStats, useRecentAttempts } from '@/hooks/useLearnerProgress';
+import { useProgressStats, useRecentAttempts } from '@/hooks/useLearnerProgress';
 import { useActiveLanguage } from '@/hooks/useActiveLanguage';
 import { useSkillTrends } from '@/hooks/useDashboardStats';
 import { useCurriculumLessons } from '@/hooks/useCurriculumLessons';
+import { useCurriculumProgress } from '@/hooks/useCurriculumProgress';
 import { useDescriptorProgressByLevel } from '@/hooks/useDescriptorProgress';
 import EmptyState from '@/components/shared/EmptyState';
 import SkeletonCard from '@/components/shared/SkeletonCard';
@@ -46,11 +47,11 @@ export default function LearnDashboard() {
     setActiveProfileId,
   } = useActiveLanguage();
 
-  const { data: progress, isLoading: progressLoading } = useMyProgress(user?.id ?? null);
   const { data: stats, isLoading: statsLoading } = useProgressStats(user?.id ?? null);
   const { data: attempts } = useRecentAttempts(user?.id ?? null, 10);
   const { data: skillTrends } = useSkillTrends(activeProfile?.id ?? null);
   const { data: descriptorsByLevel } = useDescriptorProgressByLevel(user?.id ?? null, activeProfile?.language_id);
+  const { getLessonCompletion, isLessonComplete, completedCount: curriculumCompleted } = useCurriculumProgress();
 
   // Load all curriculum lessons for active language (all levels)
   const { data: curriculumLessons, isLoading: lessonsLoading } = useCurriculumLessons(activeLanguageCode);
@@ -61,10 +62,7 @@ export default function LearnDashboard() {
 
   const levelStatuses = LEVELS.map((level, idx) => {
     const lessonsAtLevel = (curriculumLessons || []).filter(l => l.level === level);
-    const completedAtLevel = lessonsAtLevel.filter(l => {
-      const p = progress?.find((p: any) => p.lesson_id === l.id);
-      return (p as any)?.completion_percent >= 100;
-    });
+    const completedAtLevel = lessonsAtLevel.filter(l => isLessonComplete(l.id));
     return {
       level,
       totalLessons: lessonsAtLevel.length,
@@ -78,8 +76,7 @@ export default function LearnDashboard() {
     for (const level of LEVELS) {
       const lessonsAtLevel = (curriculumLessons || []).filter(l => l.level === level);
       for (const lesson of lessonsAtLevel) {
-        const p = progress?.find((p: any) => p.lesson_id === lesson.id);
-        const pct = (p as any)?.completion_percent ?? 0;
+        const pct = getLessonCompletion(lesson.id);
         if (pct < 100) return { lesson, pct };
       }
     }
@@ -87,9 +84,14 @@ export default function LearnDashboard() {
   })();
 
   // Continue lesson: most recent in-progress
-  const continueLesson = progress?.find(
-    (p: any) => p.completion_percent > 0 && p.completion_percent < 100
-  );
+  const continueLesson = (() => {
+    const all = curriculumLessons || [];
+    for (const lesson of all) {
+      const pct = getLessonCompletion(lesson.id);
+      if (pct > 0 && pct < 100) return { lesson, pct };
+    }
+    return null;
+  })();
 
   // Recent curriculum lesson attempts grouped by lesson_id
   const recentLessonIds = [...new Set(attempts?.map((a: any) => a.lesson_id) ?? [])].slice(0, 5);
@@ -158,7 +160,7 @@ export default function LearnDashboard() {
       )}
 
       {/* No language selected yet */}
-      {profiles.length === 0 && !progressLoading && (
+      {profiles.length === 0 && !statsLoading && (
         <Card className="border-primary/20 bg-primary/5">
           <CardContent className="pt-5 pb-4 flex items-center justify-between gap-4">
             <div>
@@ -250,7 +252,7 @@ export default function LearnDashboard() {
                   <>
                     <p className="font-semibold">Continue Lesson</p>
                     <p className="text-sm text-muted-foreground">
-                      {(continueLesson as any).lessons?.title} · {(continueLesson as any).completion_percent}%
+                      {continueLesson.lesson.title} · {continueLesson.pct}%
                     </p>
                   </>
                 ) : nextLesson ? (
@@ -266,10 +268,9 @@ export default function LearnDashboard() {
             <Button
               size="sm"
               onClick={() => {
-                if (continueLesson) {
-                  navigate(`/lessons/${(continueLesson as any).lesson_id}`);
-                } else if (nextLesson) {
-                  navigate(`/learn/${activeLanguageCode}/${nextLesson.lesson.level}/${nextLesson.lesson.id}`);
+                const target = continueLesson ?? nextLesson;
+                if (target) {
+                  navigate(`/learn/${activeLanguageCode}/${target.lesson.level}/${target.lesson.id}`);
                 }
               }}
             >
@@ -312,7 +313,7 @@ export default function LearnDashboard() {
             {activeLanguageFlag && <span>{activeLanguageFlag}</span>}
           </h2>
 
-          {lessonsLoading || progressLoading ? (
+          {lessonsLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[1, 2, 3].map(i => <SkeletonCard key={i} />)}
             </div>
@@ -377,16 +378,15 @@ export default function LearnDashboard() {
                         {/* Lessons grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                           {lessonsAtLevel.map((lesson) => {
-                            const myProgress = progress?.find((p: any) => p.lesson_id === lesson.id);
-                            const completionPct = (myProgress as any)?.completion_percent ?? 0;
-                            const isLessonComplete = completionPct >= 100;
+                            const completionPct = getLessonCompletion(lesson.id);
+                            const lessonDone = isLessonComplete(lesson.id);
                             const exerciseCount = lesson.exercises.filter(e => e.type !== 'vocabulary_intro').length;
 
                             return (
                               <div
                                 key={lesson.id}
                                 className={`rounded-xl border p-3 cursor-pointer hover:shadow-card transition-all group ${
-                                  isLessonComplete
+                                  lessonDone
                                     ? 'border-primary/30 bg-primary/5'
                                     : 'border-border/50 bg-background hover:border-primary/30'
                                 }`}
@@ -400,7 +400,7 @@ export default function LearnDashboard() {
                                   <p className="font-medium text-sm group-hover:text-primary transition-colors truncate">
                                     {lesson.title}
                                   </p>
-                                  {isLessonComplete && <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />}
+                                  {lessonDone && <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />}
                                 </div>
                                 <p className="text-xs text-muted-foreground line-clamp-1 mb-2">{lesson.description}</p>
                                 <div className="flex items-center gap-2">
