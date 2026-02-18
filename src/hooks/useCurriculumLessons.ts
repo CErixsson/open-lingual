@@ -34,15 +34,27 @@ export interface CurriculumLesson {
 }
 
 async function fetchCurriculumIndex(lang: string, level: string): Promise<string[]> {
-  const res = await fetch(`/data/curriculum/lessons/${lang}/${level}/index.json`);
-  if (!res.ok) return [];
-  return res.json();
+  try {
+    const res = await fetch(`/data/curriculum/lessons/${lang}/${level}/index.json`);
+    if (!res.ok) return [];
+    const contentType = res.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) return [];
+    return res.json();
+  } catch {
+    return [];
+  }
 }
 
 async function fetchCurriculumLesson(lang: string, level: string, file: string): Promise<CurriculumLesson | null> {
-  const res = await fetch(`/data/curriculum/lessons/${lang}/${level}/${file}`);
-  if (!res.ok) return null;
-  return res.json();
+  try {
+    const res = await fetch(`/data/curriculum/lessons/${lang}/${level}/${file}`);
+    if (!res.ok) return null;
+    const contentType = res.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) return null;
+    return res.json();
+  } catch {
+    return null;
+  }
 }
 
 export function useCurriculumLessons(lang: string | null, level?: string) {
@@ -53,12 +65,17 @@ export function useCurriculumLessons(lang: string | null, level?: string) {
       const levels = level ? [level] : ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
       const allLessons: CurriculumLesson[] = [];
 
-      for (const lvl of levels) {
-        const files = await fetchCurriculumIndex(lang!, lvl);
-        const lessonPromises = files.map(f => fetchCurriculumLesson(lang!, lvl, f));
-        const lessons = await Promise.all(lessonPromises);
-        allLessons.push(...lessons.filter(Boolean) as CurriculumLesson[]);
-      }
+      // Fetch all level indexes in parallel
+      const indexResults = await Promise.all(
+        levels.map(lvl => fetchCurriculumIndex(lang!, lvl).then(files => ({ lvl, files })))
+      );
+
+      // Fetch all lessons in parallel
+      const lessonPromises = indexResults.flatMap(({ lvl, files }) =>
+        files.map(f => fetchCurriculumLesson(lang!, lvl, f))
+      );
+      const lessons = await Promise.all(lessonPromises);
+      allLessons.push(...lessons.filter(Boolean) as CurriculumLesson[]);
 
       return allLessons;
     },
@@ -71,11 +88,8 @@ export function useCurriculumLesson(lang: string | null, level: string | null, l
     enabled: !!lang && !!level && !!lessonId,
     queryFn: async () => {
       const files = await fetchCurriculumIndex(lang!, level!);
-      for (const file of files) {
-        const lesson = await fetchCurriculumLesson(lang!, level!, file);
-        if (lesson && lesson.id === lessonId) return lesson;
-      }
-      return null;
+      const lessons = await Promise.all(files.map(f => fetchCurriculumLesson(lang!, level!, f)));
+      return lessons.find(l => l && l.id === lessonId) ?? null;
     },
   });
 }
