@@ -15,4 +15,31 @@
   { "code": "sv", "name": "Svenska", "flag_emoji": "🇸🇪" },
   { "code": "tr", "name": "Türkçe", "flag_emoji": "🇹🇷" },
   { "code": "zh", "name": "中文 (简体)", "flag_emoji": "🇨🇳" }
+  
+  { "code": "sw", "name": "Kiswahili", "flag_emoji": "🇰🇪" },
+  { "code": "am", "name": "አማርኛ", "flag_emoji": "🇪ት🇮" },
+  { "code": "yo", "name": "Yorùbá", "flag_emoji": "🇳🇬" },
+
+  { "code": "fa", "name": "فارسی", "flag_emoji": "🇮🇷" },
+  { "code": "he", "name": "עברית", "flag_emoji": "🇮🇱" },
+
+  { "code": "bn", "name": "বাংলা", "flag_emoji": "🇧🇩" },
+  { "code": "ta", "name": "தமிழ்", "flag_emoji": "🇮🇳" },
+  { "code": "vi", "name": "Tiếng Việt", "flag_emoji": "🇻🇳" },
+  { "code": "th", "name": "ไทย", "flag_emoji": "🇹🇭" },
+
+  { "code": "zh-Hant", "name": "中文 (繁體)", "flag_emoji": "🇹🇼" },
+
+  { "code": "el", "name": "Ελληνικά", "flag_emoji": "🇬🇷" },
+  { "code": "cs", "name": "Čeština", "flag_emoji": "🇨🇿" },
+  { "code": "da", "name": "Dansk", "flag_emoji": "🇩🇰" },
+  { "code": "fi", "name": "Suomi", "flag_emoji": "🇫🇮" },
+  { "code": "hu", "name": "Magyar", "flag_emoji": "🇭🇺" },
+  { "code": "ro", "name": "Română", "flag_emoji": "🇷🇴" },
+
+  { "code": "qu", "name": "Runasimi (Quechua)", "flag_emoji": "🇵🇪" },
+  { "code": "ht", "name": "Kreyòl Ayisyen", "flag_emoji": "🇭🇹" },
+
+  { "code": "mi", "name": "Māori", "flag_emoji": "🇳🇿" }
+
 ]
