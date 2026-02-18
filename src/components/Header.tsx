@@ -62,7 +62,7 @@ const Header = () => {
                 </a>
               </>
             )}
-            <a href="https://github.com/CErixsson/open-dialectdrift" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <a href="https://github.com/CErixsson/open-lingual" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               GitHub
             </a>
           </nav>

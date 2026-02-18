@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useLanguages } from '@/hooks/useLanguages';
 import { useActiveLanguage } from '@/hooks/useActiveLanguage';
-import { useCreateLanguageProfile } from '@/hooks/useLanguageProfile';
+import { useCreateLanguageProfile, useDeleteLanguageProfile } from '@/hooks/useLanguageProfile';
 import { getCefrLabels } from '@/hooks/useCourses';
 import { useCurriculumLessons } from '@/hooks/useCurriculumLessons';
 import { useCurriculumProgress } from '@/hooks/useCurriculumProgress';
@@ -12,11 +12,11 @@ import Header from '@/components/Header';
 import { getCefrColor, mapEloToCefr } from '@/lib/elo';
 import {
   GraduationCap, Loader2, BookOpen, Sparkles, ArrowRight,
-  CheckCircle2, Lock, Play, Plus, LayoutDashboard, X, Globe,
+  CheckCircle2, Lock, Play, Plus, Globe, Trash2, AlertTriangle,
 } from 'lucide-react';
 import type { CurriculumLesson } from '@/hooks/useCurriculumLessons';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { toast } from 'sonner';
 
 const LEVELS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
@@ -30,6 +30,8 @@ export default function CoursesPage() {
   const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
   const [addLangOpen, setAddLangOpen] = useState(false);
   const [enrollingId, setEnrollingId] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) navigate('/auth');
@@ -47,6 +49,7 @@ export default function CoursesPage() {
   } = useActiveLanguage();
 
   const createProfile = useCreateLanguageProfile();
+  const deleteProfile = useDeleteLanguageProfile();
 
   // Handle query params for level and auto-open add modal
   useEffect(() => {
@@ -66,10 +69,10 @@ export default function CoursesPage() {
   // Load ALL curriculum lessons for active language
   const { data: curriculumLessons, isLoading: lessonsLoading } = useCurriculumLessons(activeLanguageCode);
 
-  // Filter to only new-format lessons (with actual exercises array)
+  // Show all lessons that have at least one exercise (including vocabulary_intro only)
   const validLessons = (curriculumLessons || []).filter(l => Array.isArray(l.exercises) && l.exercises.length > 0);
 
-  const userLevel = activeProfile ? mapEloToCefr(activeProfile.overall_elo) : 'A1';
+  const userLevel = activeProfile ? mapEloToCefr((activeProfile as any).overall_elo ?? 1000) : 'A1';
   const userLevelIndex = LEVELS.indexOf(userLevel);
 
   // Group lessons by level
@@ -109,11 +112,28 @@ export default function CoursesPage() {
       const profile = await createProfile.mutateAsync(languageId);
       setActiveProfileId(profile.id);
       setAddLangOpen(false);
-      toast.success(`Language added! Start learning now.`);
+      toast.success('Language added! Start learning now.');
     } catch (e: any) {
       toast.error(e.message || 'Could not add language');
     } finally {
       setEnrollingId(null);
+    }
+  };
+
+  const handleDeleteLanguage = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      await deleteProfile.mutateAsync(deleteTarget.id);
+      // If the deleted profile was active, switch to another
+      const remaining = profiles.filter((p: any) => p.id !== deleteTarget.id);
+      if (remaining.length > 0) setActiveProfileId((remaining[0] as any).id);
+      setDeleteTarget(null);
+      toast.success(`${deleteTarget.name} removed. All progress deleted.`);
+    } catch (e: any) {
+      toast.error(e.message || 'Could not remove language');
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -169,24 +189,32 @@ export default function CoursesPage() {
                   const isSelected = activeLanguageCode === lang.code;
                   const langLevel = mapEloToCefr(p.overall_elo);
                   return (
-                    <button
+                    <div
                       key={p.id}
-                      onClick={() => setActiveProfileId(p.id)}
-                      className={`flex items-center gap-2 rounded-xl border-2 px-3 py-2 transition-all cursor-pointer ${
+                      className={`group flex items-center gap-2 rounded-xl border-2 px-3 py-2 transition-all ${
                         isSelected
                           ? 'border-primary bg-primary/5 shadow-sm'
                           : 'border-border/50 hover:border-primary/30 bg-card'
                       }`}
                     >
-                      <span className="text-lg">{lang.flag_emoji}</span>
-                      <span className="text-sm font-medium">{lang.name}</span>
-                      <span
-                        className="text-[10px] font-bold px-1.5 py-0.5 rounded"
-                        style={{ backgroundColor: `hsl(${getCefrColor(langLevel)} / 0.15)`, color: `hsl(${getCefrColor(langLevel)})` }}
+                      <button onClick={() => setActiveProfileId(p.id)} className="flex items-center gap-2">
+                        <span className="text-lg">{lang.flag_emoji}</span>
+                        <span className="text-sm font-medium">{lang.name}</span>
+                        <span
+                          className="text-[10px] font-bold px-1.5 py-0.5 rounded"
+                          style={{ backgroundColor: `hsl(${getCefrColor(langLevel)} / 0.15)`, color: `hsl(${getCefrColor(langLevel)})` }}
+                        >
+                          {langLevel}
+                        </span>
+                      </button>
+                      <button
+                        onClick={() => setDeleteTarget({ id: p.id, name: lang.name })}
+                        className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-destructive"
+                        title={`Remove ${lang.name}`}
                       >
-                        {langLevel}
-                      </span>
-                    </button>
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   );
                 })}
               </div>
@@ -379,6 +407,32 @@ export default function CoursesPage() {
               </div>
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Language Confirmation Dialog */}
+      <Dialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-destructive">
+              <AlertTriangle className="w-5 h-5" />
+              Remove {deleteTarget?.name}?
+            </DialogTitle>
+            <DialogDescription className="pt-2">
+              <span className="font-medium text-foreground">⚠️ All your progress for {deleteTarget?.name} will be permanently deleted.</span>
+              <br /><br />
+              This includes all exercise attempts, skill ratings, and learning history. This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2 mt-2">
+            <Button variant="outline" onClick={() => setDeleteTarget(null)} disabled={deleting}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={handleDeleteLanguage} disabled={deleting}>
+              {deleting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Trash2 className="w-4 h-4 mr-2" />}
+              Delete & Remove
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

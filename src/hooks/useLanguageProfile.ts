@@ -36,6 +36,32 @@ export function useUserLanguageProfiles() {
   });
 }
 
+export function useDeleteLanguageProfile() {
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (profileId: string) => {
+      // Delete skill ratings first
+      await supabase.from('user_skill_ratings').delete().eq('user_language_profile_id', profileId);
+      // Delete exercise attempts
+      await supabase.from('exercise_attempts').delete().eq('user_language_profile_id', profileId);
+      // Delete the profile itself
+      const { error } = await supabase
+        .from('user_language_profiles')
+        .delete()
+        .eq('id', profileId)
+        .eq('user_id', user!.id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['language-profile'] });
+      queryClient.invalidateQueries({ queryKey: ['all-language-profiles'] });
+      queryClient.invalidateQueries({ queryKey: ['skill-ratings'] });
+    },
+  });
+}
+
 export function useCreateLanguageProfile() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
