@@ -58,5 +58,8 @@
   { "code": "is", "name": "Íslenska", "flag_emoji": "🇮🇸" },
   { "code": "mn", "name": "Монгол", "flag_emoji": "🇲🇳" }
 
+  { "code": "ils", "name": "International Sign (IS)", "flag_emoji": "🌐" }, 
+
+  { "code": "braille-en", "name": "Braille (English)", "flag_emoji": "⠿" },
 
 ]
