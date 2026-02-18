@@ -30,6 +30,7 @@ export default function CurriculumPlayer() {
   const [wordOrderSelected, setWordOrderSelected] = useState<number[]>([]);
   const [totalCorrect, setTotalCorrect] = useState(0);
   const [finished, setFinished] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
 
   // Reset when lesson changes
   useEffect(() => {
@@ -43,6 +44,7 @@ export default function CurriculumPlayer() {
     setWordOrderSelected([]);
     setTotalCorrect(0);
     setFinished(false);
+    setShowFeedback(false);
   }, [lessonId]);
 
   const exercises = lesson?.exercises ?? [];
@@ -65,6 +67,7 @@ export default function CurriculumPlayer() {
     setMatchedPairs(new Set());
     setMatchLeft(null);
     setWordOrderSelected([]);
+    setShowFeedback(false);
   }, []);
 
   const goNext = useCallback(() => {
@@ -102,6 +105,7 @@ export default function CurriculumPlayer() {
     setCorrect(isCorrect);
     if (isCorrect) setTotalCorrect(n => n + 1);
     setAnswered(true);
+    setShowFeedback(true);
   }, [exercise, selectedAnswer, textAnswer, wordOrderSelected, matchedPairs]);
 
   // Match pairs logic
@@ -351,11 +355,12 @@ export default function CurriculumPlayer() {
               <MatchPairsExercise
                 pairs={exercise.pairs || []}
                 answered={answered}
-                onComplete={() => {
+              onComplete={() => {
                   setMatchedPairs(new Set(exercise.pairs?.map((_, i) => i) || []));
                   setCorrect(true);
                   setTotalCorrect(n => n + 1);
                   setAnswered(true);
+                  setShowFeedback(true);
                 }}
               />
             </div>
@@ -363,11 +368,37 @@ export default function CurriculumPlayer() {
         </div>
 
         {/* Action */}
+        {/* Feedback banner + action button */}
         {exercise.type === 'vocabulary_intro' ? (
           <Button onClick={goNext} className="w-full h-12 text-base">
             Continue <ArrowRight className="w-4 h-4 ml-1" />
           </Button>
-        ) : !answered ? (
+        ) : showFeedback ? (
+          <div className={`rounded-2xl p-4 flex items-center justify-between gap-4 ${correct ? 'bg-primary/10 border border-primary/30' : 'bg-destructive/10 border border-destructive/30'}`}>
+            <div className="flex items-center gap-3">
+              {correct
+                ? <CheckCircle2 className="w-6 h-6 text-primary shrink-0" />
+                : <XCircle className="w-6 h-6 text-destructive shrink-0" />}
+              <div>
+                <p className={`font-semibold ${correct ? 'text-primary' : 'text-destructive'}`}>
+                  {correct ? 'Correct!' : 'Incorrect'}
+                </p>
+                {!correct && exercise.type !== 'match_pairs' && (
+                  <p className="text-sm text-muted-foreground">
+                    Answer: <span className="font-medium">{
+                      exercise.type === 'multiple_choice' ? exercise.options?.[exercise.correct ?? 0]
+                      : exercise.type === 'word_order' ? exercise.correct_order?.map(i => exercise.words?.[i]).join(' ')
+                      : exercise.answer
+                    }</span>
+                  </p>
+                )}
+              </div>
+            </div>
+            <Button onClick={goNext} className="shrink-0 h-10 px-6">
+              {currentIdx + 1 >= total ? 'Finish' : 'Continue'} <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </div>
+        ) : (
           <Button onClick={checkAnswer} className="w-full h-12 text-base"
             disabled={
               (exercise.type === 'multiple_choice' && selectedAnswer === null) ||
@@ -377,10 +408,6 @@ export default function CurriculumPlayer() {
               (exercise.type === 'match_pairs')
             }>
             Check
-          </Button>
-        ) : (
-          <Button onClick={goNext} className="w-full h-12 text-base">
-            {currentIdx + 1 >= total ? 'Finish' : 'Continue'} <ArrowRight className="w-4 h-4 ml-1" />
           </Button>
         )}
       </main>
