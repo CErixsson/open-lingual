@@ -1,0 +1,69 @@
+{
+  "id": "it-a1-introductions-1",
+  "title": "Presentazioni 1",
+  "description": "Impara a presentarti in italiano",
+  "language": "it",
+  "level": "A1",
+  "module_id": "introductions",
+  "descriptor_ids": ["sociolinguistic-appropriateness"],
+  "xp": 10,
+  "exercises": [
+    {
+      "type": "vocabulary_intro",
+      "items": [
+        { "word": "Mi chiamo…", "translation": "My name is…", "example": "Mi chiamo Luca." },
+        { "word": "Come ti chiami?", "translation": "What's your name?", "example": "Ciao, come ti chiami?" },
+        { "word": "Piacere", "translation": "Nice to meet you", "example": "Piacere di conoscerti!" },
+        { "word": "Sono di…", "translation": "I'm from…", "example": "Sono di Roma." },
+        { "word": "Quanti anni hai?", "translation": "How old are you?", "example": "Quanti anni hai?" }
+      ]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "How do you say 'My name is' in Italian?",
+      "options": ["Mi chiamo", "Come ti chiami?", "Piacere"],
+      "correct": 0
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to English:",
+      "source": "Mi chiamo Sofia.",
+      "answer": "My name is Sofia.",
+      "alternatives": ["my name is sofia"]
+    },
+    {
+      "type": "match_pairs",
+      "pairs": [
+        { "left": "Mi chiamo", "right": "My name is" },
+        { "left": "Piacere", "right": "Nice to meet you" },
+        { "left": "Sono di", "right": "I'm from" },
+        { "left": "Come ti chiami?", "right": "What's your name?" }
+      ]
+    },
+    {
+      "type": "fill_blank",
+      "sentence": "___ chiamo Marco.",
+      "answer": "Mi",
+      "options": ["Mi", "Sono", "Piacere"]
+    },
+    {
+      "type": "multiple_choice",
+      "prompt": "What does 'Piacere' mean?",
+      "options": ["Nice to meet you", "My name is", "I'm from"],
+      "correct": 0
+    },
+    {
+      "type": "word_order",
+      "prompt": "Build the sentence:",
+      "words": ["Roma.", "di", "Sono"],
+      "correct_order": [2, 1, 0]
+    },
+    {
+      "type": "translate",
+      "prompt": "Translate to Italian:",
+      "source": "Nice to meet you",
+      "answer": "Piacere",
+      "alternatives": ["piacere"]
+    }
+  ]
+}

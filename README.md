@@ -5,7 +5,7 @@ DialectDrift: an open-source language learning platform with role-based dashboar
 ## Quick Start
 
 ```sh
-git clone https://github.com/CErixsson/open-dialectdrift
+git clone https://github.com/CErixsson/open-lingual.git
 cd open-dialectdrift
 npm install
 cp .env.example .env   # fill in your Lovable Cloud credentials
