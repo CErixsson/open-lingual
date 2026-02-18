@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useLanguages } from '@/hooks/useLanguages';
-import { useLanguageProfile } from '@/hooks/useLanguageProfile';
+import { useActiveLanguage } from '@/hooks/useActiveLanguage';
 import { getCefrLabels } from '@/hooks/useCourses';
 import { useCurriculumLessons, CurriculumLesson } from '@/hooks/useCurriculumLessons';
 import { useI18n } from '@/i18n';
@@ -10,7 +10,7 @@ import Header from '@/components/Header';
 import CefrLevelGrid from '@/components/courses/CefrLevelGrid';
 import { getCefrColor, mapEloToCefr } from '@/lib/elo';
 import {
-  GraduationCap, Loader2, BookOpen, Sparkles, Target, ArrowRight,
+  GraduationCap, Loader2, BookOpen, Sparkles, Target, ArrowRight, CheckCircle2,
 } from 'lucide-react';
 
 export default function CoursesPage() {
@@ -26,8 +26,24 @@ export default function CoursesPage() {
   }, [authLoading, user, navigate]);
 
   const { data: languages, isLoading: langsLoading } = useLanguages();
+  const {
+    activeProfile,
+    activeLanguage,
+    setActiveProfileId,
+    profiles,
+  } = useActiveLanguage();
+
+  // Auto-select the active language on mount
+  useEffect(() => {
+    if (activeLanguage && !selectedLangId) {
+      const lang = languages?.find(l => l.code === activeLanguage.code);
+      if (lang) setSelectedLangId(lang.id);
+    }
+  }, [activeLanguage, languages, selectedLangId]);
+
   const selectedLang = languages?.find(l => l.id === selectedLangId);
-  const { data: profile } = useLanguageProfile(selectedLangId);
+  // Use profile for the selected language
+  const profile = profiles?.find((p: any) => p.languages?.id === selectedLangId) ?? activeProfile;
 
   // Load curriculum lessons from JSON files
   const { data: curriculumLessons, isLoading: lessonsLoading } = useCurriculumLessons(
@@ -79,20 +95,29 @@ export default function CoursesPage() {
           <h1 className="text-2xl font-bold">{t('nav.courses')}</h1>
         </div>
 
-        {/* Language grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 gap-2 mb-8">
-          {languages?.map(lang => {
-            const isSelected = selectedLangId === lang.id;
-            return (
-              <button key={lang.id} onClick={() => setSelectedLangId(lang.id)}
-                className={`flex flex-col items-center gap-1 rounded-xl border-2 p-3 transition-all cursor-pointer ${
-                  isSelected ? 'border-primary bg-primary/5 shadow-soft' : 'border-border/50 hover:border-primary/30 bg-card'
-                }`}>
-                <span className="text-2xl">{lang.flag_emoji}</span>
-                <span className="text-xs font-medium truncate w-full text-center">{lang.name}</span>
-              </button>
-            );
-          })}
+        {/* Language grid - enrolled languages first */}
+        <div className="mb-8">
+          {profiles.length > 0 && (
+            <p className="text-xs text-muted-foreground mb-2 font-medium uppercase tracking-wide">Your languages</p>
+          )}
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 gap-2">
+            {languages?.map(lang => {
+              const isSelected = selectedLangId === lang.id;
+              const isEnrolled = profiles.some((p: any) => p.languages?.code === lang.code);
+              return (
+                <button key={lang.id} onClick={() => setSelectedLangId(lang.id)}
+                  className={`flex flex-col items-center gap-1 rounded-xl border-2 p-3 transition-all cursor-pointer relative ${
+                    isSelected ? 'border-primary bg-primary/5 shadow-soft' : 'border-border/50 hover:border-primary/30 bg-card'
+                  }`}>
+                  <span className="text-2xl">{lang.flag_emoji}</span>
+                  <span className="text-xs font-medium truncate w-full text-center">{lang.name}</span>
+                  {isEnrolled && (
+                    <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary" title="Enrolled" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Selected language content */}
@@ -166,7 +191,7 @@ function CurriculumLessonCard({ lesson }: { lesson: CurriculumLesson }) {
 
   return (
     <Link to={`/learn/${lesson.language}/${lesson.level}/${lesson.id}`}
-      className="group flex flex-col gap-2 rounded-xl border border-border/50 bg-card p-4 shadow-soft hover:shadow-card hover:border-primary/30 transition-all">
+      className="group flex flex-col gap-3 rounded-xl border border-border/50 bg-card p-4 shadow-soft hover:shadow-card hover:border-primary/30 transition-all">
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
           <h4 className="font-semibold text-sm truncate group-hover:text-primary transition-colors">
@@ -181,7 +206,7 @@ function CurriculumLessonCard({ lesson }: { lesson: CurriculumLesson }) {
       </div>
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <span>{exerciseCount} exercises</span>
-        <span className="flex items-center gap-1">
+        <span className="flex items-center gap-1 text-primary font-medium">
           +{lesson.xp} XP <ArrowRight className="w-3 h-3" />
         </span>
       </div>
