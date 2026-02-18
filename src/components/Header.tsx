@@ -35,7 +35,7 @@ const Header = () => {
             <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center shadow-soft">
               <Globe className="w-5 h-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold">LinguaFlow</span>
+            <span className="text-xl font-bold">DialectDrift</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -62,8 +62,8 @@ const Header = () => {
                 </a>
               </>
             )}
-            <a href="https://github.com/CErixsson/open-lingual" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              {t('nav.github')}
+            <a href="https://github.com/CErixsson/open-dialectdrift" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+              GitHub
             </a>
           </nav>
 

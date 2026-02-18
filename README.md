@@ -1,12 +1,12 @@
-# LinguaFlow — Language Learning Platform
+# DialectDrift — Open-Source Language Learning Platform
 
-An open-source, role-based language learning app with Elo-rated skill tracking, lesson authoring, moderation workflows, and adaptive coaching.
+DialectDrift: an open-source language learning platform with role-based dashboards, Elo-rated skill tracking, and adaptive lesson authoring using React and Supabase.
 
 ## Quick Start
 
 ```sh
-git clone <YOUR_GIT_URL>
-cd <YOUR_PROJECT_NAME>
+git clone https://github.com/CErixsson/open-dialectdrift
+cd open-dialectdrift
 npm install
 cp .env.example .env   # fill in your Lovable Cloud credentials
 npm run dev
@@ -23,14 +23,11 @@ After seeding, use these accounts (password: `Demo1234!`):
 | author@demo.com    | author, learner    |
 | learner@demo.com   | learner            |
 
-## Seeding
-
-Invoke the `seed-demo-data` backend function to populate demo users, lessons, progress, and a reviewer queue item.
-
 ## Architecture
 
 - **Frontend**: React 18 + Vite + TypeScript + Tailwind CSS + shadcn/ui
 - **Backend**: Lovable Cloud (Supabase) — Postgres, Auth, Edge Functions
+- **Curriculum**: JSON-based lesson files, CEFR descriptor-linked, Duolingo-style exercises
 - **i18n**: English (complete), Spanish & Swedish (stubs)
 - **Auth**: Email/password + Google OAuth via Lovable Cloud Auth
 
@@ -38,29 +35,30 @@ Invoke the `seed-demo-data` backend function to populate demo users, lessons, pr
 
 | Role     | Dashboard Features                                          |
 | -------- | ----------------------------------------------------------- |
-| Learner  | XP, streaks, assigned lessons, skill ratings, coaching      |
+| Learner  | XP, streaks, CEFR progress, descriptor mastery, skill ratings |
 | Author   | Draft management, lesson editor, submit for review          |
 | Reviewer | Moderation queue, approve/request changes with comments     |
 | Admin    | Metrics, user management, content health checks             |
 
 Users with multiple roles see a tab switcher at the top of their dashboard.
 
-## Lesson Editor
+## Curriculum Structure
 
-Block-based editor supporting: Text, Vocabulary, MCQ, Cloze, Match, Order Words, Translate, Audio, Image blocks. Features live preview, JSON import/export, and validation panel.
+```
+Descriptor (CEFR) → Skill Module → Lesson → Exercises
+```
+
+Lessons are JSON files in `public/data/curriculum/lessons/{lang}/{level}/`. Each lesson:
+- Focuses on one skill or theme
+- Contains 5–15 exercises (vocabulary_intro, multiple_choice, translate, match_pairs, fill_blank, word_order)
+- Awards XP on completion
+- Is linked to CEFR descriptor IDs
 
 ## Testing
 
 ```sh
 npm test
 ```
-
-## Tech Stack
-
-- Vite, TypeScript, React, shadcn/ui, Tailwind CSS
-- Recharts for data visualization
-- Tanstack Query for data fetching
-- Framer-motion ready for animations
 
 ## License
 
