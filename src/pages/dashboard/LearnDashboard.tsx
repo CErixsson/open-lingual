@@ -146,13 +146,13 @@ export default function LearnDashboard() {
                     </DropdownMenuItem>
                   );
                 })}
-                <DropdownMenuItem onClick={() => navigate('/courses')} className="border-t mt-1 pt-2 text-primary">
+                <DropdownMenuItem onClick={() => navigate('/courses?addlang=1')} className="border-t mt-1 pt-2 text-primary">
                   <GraduationCap className="w-4 h-4 mr-2" /> Add a language
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="ghost" size="sm" onClick={() => navigate('/courses')}>
+            <Button variant="outline" size="sm" onClick={() => navigate('/courses?addlang=1')}>
               <GraduationCap className="w-4 h-4 mr-1" /> Add language
             </Button>
           )}
