@@ -42,4 +42,21 @@
 
   { "code": "mi", "name": "Māori", "flag_emoji": "🇳🇿" }
 
+  
+  { "code": "id", "name": "Bahasa Indonesia", "flag_emoji": "🇮🇩" },
+  { "code": "ur", "name": "اردو", "flag_emoji": "🇵🇰" },
+  { "code": "uk", "name": "Українська", "flag_emoji": "🇺🇦" },
+
+  { "code": "fil", "name": "Filipino", "flag_emoji": "🇵🇭" },
+  { "code": "ku", "name": "Kurdî (Kurmanji)", "flag_emoji": "🇹🇯" },
+  { "code": "ps", "name": "پښتو", "flag_emoji": "🇦🇫" },
+
+  { "code": "ca", "name": "Català", "flag_emoji": "🇦🇩" },
+  { "code": "eu", "name": "Euskara", "flag_emoji": "🇪🇺" },
+  { "code": "cy", "name": "Cymraeg", "flag_emoji": "🏴" },
+
+  { "code": "is", "name": "Íslenska", "flag_emoji": "🇮🇸" },
+  { "code": "mn", "name": "Монгол", "flag_emoji": "🇲🇳" }
+
+
 ]
