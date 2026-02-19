@@ -1,1 +1,60 @@
-[]
+[
+  {
+    "id": "sv-ex-001",
+    "lesson_id": "sv-a1-greetings",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "Hur säger man 'Good morning' på svenska?",
+    "options": ["God morgon", "God kväll", "Hejdå"],
+    "correct": 0
+  },
+  {
+    "id": "sv-ex-002",
+    "lesson_id": "sv-a1-greetings",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "___, hur mår du?",
+    "answer": "Hej",
+    "options": ["Hej", "Tack", "Hejdå"]
+  },
+  {
+    "id": "sv-ex-003",
+    "lesson_id": "sv-a1-greetings",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Tack så mycket",
+    "answer": "Thank you very much",
+    "alternatives": ["thank you very much", "thanks a lot"]
+  },
+  {
+    "id": "sv-ex-004",
+    "lesson_id": "sv-a1-greetings",
+    "level": "A1",
+    "type": "match_pairs",
+    "pairs": [
+      { "left": "Hej", "right": "Hello / Hi" },
+      { "left": "Hejdå", "right": "Goodbye" },
+      { "left": "Tack", "right": "Thank you" },
+      { "left": "God morgon", "right": "Good morning" }
+    ]
+  },
+  {
+    "id": "sv-ex-005",
+    "lesson_id": "sv-a1-shopping",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "I affären frågar du: 'Vad ___ det?'",
+    "options": ["kostar", "är", "har"],
+    "correct": 0
+  },
+  {
+    "id": "sv-ex-006",
+    "lesson_id": "sv-a1-shopping",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "Jag skulle vilja ___ ett kilo äpplen.",
+    "answer": "ha",
+    "options": ["ha", "är", "vill"]
+  }
+]

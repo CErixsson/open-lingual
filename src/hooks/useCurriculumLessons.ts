@@ -104,3 +104,28 @@ export function useSkillModules() {
     },
   });
 }
+
+export interface CurriculumExerciseEntry extends CurriculumExercise {
+  id: string;
+  lesson_id: string;
+  level: string;
+}
+
+export function useCurriculumExercises(lang: string | null) {
+  return useQuery({
+    queryKey: ['curriculum-exercises', lang],
+    enabled: !!lang,
+    queryFn: async () => {
+      try {
+        const res = await fetch(`/data/curriculum/exercises/${lang}/exercises.json`);
+        if (!res.ok) return [] as CurriculumExerciseEntry[];
+        const ct = res.headers.get('content-type') || '';
+        if (!ct.includes('application/json')) return [] as CurriculumExerciseEntry[];
+        return res.json() as Promise<CurriculumExerciseEntry[]>;
+      } catch {
+        return [] as CurriculumExerciseEntry[];
+      }
+    },
+  });
+}
+

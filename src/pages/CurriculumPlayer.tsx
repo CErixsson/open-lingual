@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import { useCurriculumLesson, useCurriculumLessons, CurriculumExercise } from '@/hooks/useCurriculumLessons';
+import { useCurriculumLesson, useCurriculumLessons, useCurriculumExercises, CurriculumExercise } from '@/hooks/useCurriculumLessons';
 import { useCurriculumProgress } from '@/hooks/useCurriculumProgress';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,7 @@ export default function CurriculumPlayer() {
   const { user, loading: authLoading } = useAuth();
   const { data: lesson, isLoading } = useCurriculumLesson(lang ?? null, level ?? null, lessonId ?? null);
   const { data: allLessons } = useCurriculumLessons(lang ?? null, level);
+  const { data: allExercises } = useCurriculumExercises(lang ?? null);
   const { setLessonProgress, getLessonCompletion } = useCurriculumProgress();
 
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -47,7 +48,14 @@ export default function CurriculumPlayer() {
     setShowFeedback(false);
   }, [lessonId]);
 
-  const exercises = lesson?.exercises ?? [];
+  // Merge inline exercises with linked exercises from JSON file
+  const exercises = useMemo(() => {
+    const inline = lesson?.exercises ?? [];
+    if (inline.length > 0) return inline;
+    // Fall back to exercises linked by lesson_id from the exercises.json
+    return (allExercises ?? []).filter(ex => ex.lesson_id === lessonId) as CurriculumExercise[];
+  }, [lesson, allExercises, lessonId]);
+
   const exercise = exercises[currentIdx];
   const total = exercises.length;
   const progressPct = total > 0 ? ((currentIdx + (answered || exercise?.type === 'vocabulary_intro' ? 1 : 0)) / total) * 100 : 0;

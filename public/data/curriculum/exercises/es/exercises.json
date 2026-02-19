@@ -1,1 +1,106 @@
-[]
+[
+  {
+    "id": "es-ex-001",
+    "lesson_id": "es-a1-greetings-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "¿Cómo se dice 'Good morning' en español?",
+    "options": ["Buenos días", "Buenas noches", "Hasta luego"],
+    "correct": 0
+  },
+  {
+    "id": "es-ex-002",
+    "lesson_id": "es-a1-greetings-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "___ tardes! ¿Cómo estás?",
+    "answer": "Buenas",
+    "options": ["Buenas", "Buenos", "Hola"]
+  },
+  {
+    "id": "es-ex-003",
+    "lesson_id": "es-a1-greetings-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Gracias",
+    "answer": "Thank you",
+    "alternatives": ["thank you", "thanks"]
+  },
+  {
+    "id": "es-ex-004",
+    "lesson_id": "es-a1-greetings-1",
+    "level": "A1",
+    "type": "word_order",
+    "prompt": "Build the phrase:",
+    "words": ["me", "Mucho", "gusto"],
+    "correct_order": [1, 0, 2]
+  },
+  {
+    "id": "es-ex-005",
+    "lesson_id": "es-a1-greetings-1",
+    "level": "A1",
+    "type": "match_pairs",
+    "pairs": [
+      { "left": "Hola", "right": "Hello" },
+      { "left": "Adiós", "right": "Goodbye" },
+      { "left": "Gracias", "right": "Thank you" },
+      { "left": "Buenos días", "right": "Good morning" }
+    ]
+  },
+  {
+    "id": "es-ex-006",
+    "lesson_id": "es-a1-introductions-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "¿Cómo te llamas? means:",
+    "options": ["What is your name?", "Where are you from?", "How old are you?"],
+    "correct": 0
+  },
+  {
+    "id": "es-ex-007",
+    "lesson_id": "es-a1-introductions-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "Me ___ Carlos.",
+    "answer": "llamo",
+    "options": ["llamo", "llamas", "llama"]
+  },
+  {
+    "id": "es-ex-008",
+    "lesson_id": "es-a1-introductions-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Soy de España",
+    "answer": "I am from Spain",
+    "alternatives": ["i am from spain", "I'm from Spain", "i'm from spain"]
+  },
+  {
+    "id": "es-ex-009",
+    "lesson_id": "es-a2-travel",
+    "level": "A2",
+    "type": "multiple_choice",
+    "prompt": "En el aeropuerto preguntas: '¿Dónde ___ la puerta de embarque?'",
+    "options": ["está", "es", "son"],
+    "correct": 0
+  },
+  {
+    "id": "es-ex-010",
+    "lesson_id": "es-a2-dining",
+    "level": "A2",
+    "type": "fill_blank",
+    "sentence": "Quisiera ___ mesa para dos personas.",
+    "answer": "una",
+    "options": ["una", "un", "unos"]
+  },
+  {
+    "id": "es-ex-011",
+    "lesson_id": "es-b1-customer_service",
+    "level": "B1",
+    "type": "multiple_choice",
+    "prompt": "A customer is unhappy. You say:",
+    "options": ["Lamento mucho los inconvenientes.", "No es mi problema.", "Llame más tarde."],
+    "correct": 0
+  }
+]

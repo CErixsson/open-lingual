@@ -1,1 +1,97 @@
-[]
+[
+  {
+    "id": "fr-ex-001",
+    "lesson_id": "fr-a1-greetings",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "Comment dit-on 'Good morning' en français?",
+    "options": ["Bonjour", "Bonsoir", "Au revoir"],
+    "correct": 0
+  },
+  {
+    "id": "fr-ex-002",
+    "lesson_id": "fr-a1-greetings",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "___, comment allez-vous?",
+    "answer": "Bonjour",
+    "options": ["Bonjour", "Bonsoir", "Salut"]
+  },
+  {
+    "id": "fr-ex-003",
+    "lesson_id": "fr-a1-greetings",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Merci beaucoup",
+    "answer": "Thank you very much",
+    "alternatives": ["thank you very much", "thanks a lot", "many thanks"]
+  },
+  {
+    "id": "fr-ex-004",
+    "lesson_id": "fr-a1-greetings",
+    "level": "A1",
+    "type": "word_order",
+    "prompt": "Build the sentence:",
+    "words": ["vous", "Comment", "allez", "?"],
+    "correct_order": [1, 2, 0, 3]
+  },
+  {
+    "id": "fr-ex-005",
+    "lesson_id": "fr-a1-greetings",
+    "level": "A1",
+    "type": "match_pairs",
+    "pairs": [
+      { "left": "Bonjour", "right": "Hello / Good morning" },
+      { "left": "Au revoir", "right": "Goodbye" },
+      { "left": "Merci", "right": "Thank you" },
+      { "left": "S'il vous plaît", "right": "Please" }
+    ]
+  },
+  {
+    "id": "fr-ex-006",
+    "lesson_id": "fr-a1-introductions",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "'Je m'appelle' means:",
+    "options": ["My name is", "I am from", "I speak"],
+    "correct": 0
+  },
+  {
+    "id": "fr-ex-007",
+    "lesson_id": "fr-a1-introductions",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "Je ___ française.",
+    "answer": "suis",
+    "options": ["suis", "es", "est"]
+  },
+  {
+    "id": "fr-ex-008",
+    "lesson_id": "fr-a2-shopping",
+    "level": "A2",
+    "type": "multiple_choice",
+    "prompt": "Au magasin tu demandes: 'C'est ___ prix?'",
+    "options": ["quel", "quelle", "quels"],
+    "correct": 0
+  },
+  {
+    "id": "fr-ex-009",
+    "lesson_id": "fr-a2-market",
+    "level": "A2",
+    "type": "fill_blank",
+    "sentence": "Je voudrais ___ kilo de pommes.",
+    "answer": "un",
+    "options": ["un", "une", "des"]
+  },
+  {
+    "id": "fr-ex-010",
+    "lesson_id": "fr-a2-shopping",
+    "level": "A2",
+    "type": "translate",
+    "prompt": "Translate to French:",
+    "source": "Do you have this in blue?",
+    "answer": "Vous avez ça en bleu?",
+    "alternatives": ["avez-vous cela en bleu", "vous avez cela en bleu"]
+  }
+]

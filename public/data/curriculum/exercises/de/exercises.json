@@ -1,1 +1,79 @@
-[]
+[
+  {
+    "id": "de-ex-001",
+    "lesson_id": "de-a1-greetings-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "Wie sagt man 'Good morning' auf Deutsch?",
+    "options": ["Guten Morgen", "Guten Abend", "Auf Wiedersehen"],
+    "correct": 0
+  },
+  {
+    "id": "de-ex-002",
+    "lesson_id": "de-a1-greetings-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "Guten ___, wie geht es Ihnen?",
+    "answer": "Tag",
+    "options": ["Tag", "Morgen", "Abend"]
+  },
+  {
+    "id": "de-ex-003",
+    "lesson_id": "de-a1-greetings-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Danke schön",
+    "answer": "Thank you very much",
+    "alternatives": ["thank you", "thanks", "thank you very much"]
+  },
+  {
+    "id": "de-ex-004",
+    "lesson_id": "de-a1-greetings-1",
+    "level": "A1",
+    "type": "word_order",
+    "prompt": "Build the greeting:",
+    "words": ["Morgen", "Guten", "!"],
+    "correct_order": [1, 0, 2]
+  },
+  {
+    "id": "de-ex-005",
+    "lesson_id": "de-a1-greetings-1",
+    "level": "A1",
+    "type": "match_pairs",
+    "pairs": [
+      { "left": "Hallo", "right": "Hello" },
+      { "left": "Tschüss", "right": "Bye" },
+      { "left": "Danke", "right": "Thank you" },
+      { "left": "Bitte", "right": "Please / You're welcome" }
+    ]
+  },
+  {
+    "id": "de-ex-006",
+    "lesson_id": "de-a1-introductions-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "'Wie heißen Sie?' means:",
+    "options": ["What is your name?", "Where are you from?", "How old are you?"],
+    "correct": 0
+  },
+  {
+    "id": "de-ex-007",
+    "lesson_id": "de-a1-introductions-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "Ich ___ aus Deutschland.",
+    "answer": "komme",
+    "options": ["komme", "kommen", "kommst"]
+  },
+  {
+    "id": "de-ex-008",
+    "lesson_id": "de-a1-introductions-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Mein Name ist Thomas.",
+    "answer": "My name is Thomas",
+    "alternatives": ["my name is thomas", "I am Thomas", "i am thomas"]
+  }
+]

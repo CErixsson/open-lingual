@@ -1,1 +1,69 @@
-[]
+[
+  {
+    "id": "pt-ex-001",
+    "lesson_id": "pt-a1-greetings-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "Como se diz 'Good morning' em português?",
+    "options": ["Bom dia", "Boa tarde", "Tchau"],
+    "correct": 0
+  },
+  {
+    "id": "pt-ex-002",
+    "lesson_id": "pt-a1-greetings-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "___ noite! Como vai?",
+    "answer": "Boa",
+    "options": ["Boa", "Bom", "Olá"]
+  },
+  {
+    "id": "pt-ex-003",
+    "lesson_id": "pt-a1-greetings-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Obrigado",
+    "answer": "Thank you",
+    "alternatives": ["thank you", "thanks"]
+  },
+  {
+    "id": "pt-ex-004",
+    "lesson_id": "pt-a1-greetings-1",
+    "level": "A1",
+    "type": "match_pairs",
+    "pairs": [
+      { "left": "Olá", "right": "Hello" },
+      { "left": "Tchau", "right": "Bye" },
+      { "left": "Obrigado", "right": "Thank you" },
+      { "left": "Bom dia", "right": "Good morning" }
+    ]
+  },
+  {
+    "id": "pt-ex-005",
+    "lesson_id": "pt-a1-greetings-1",
+    "level": "A1",
+    "type": "word_order",
+    "prompt": "Build the phrase:",
+    "words": ["obrigado", "Muito"],
+    "correct_order": [1, 0]
+  },
+  {
+    "id": "pt-ex-006",
+    "lesson_id": "pt-a1-introductions",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "'Como você se chama?' means:",
+    "options": ["What is your name?", "Where are you from?", "How are you?"],
+    "correct": 0
+  },
+  {
+    "id": "pt-ex-007",
+    "lesson_id": "pt-a1-introductions",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "Meu nome ___ Pedro.",
+    "answer": "é",
+    "options": ["é", "são", "ser"]
+  }
+]

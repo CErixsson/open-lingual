@@ -1,1 +1,97 @@
-[]
+[
+  {
+    "id": "it-ex-001",
+    "lesson_id": "it-a1-greetings-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "Come si dice 'Good morning' in italiano?",
+    "options": ["Buongiorno", "Buonasera", "Arrivederci"],
+    "correct": 0
+  },
+  {
+    "id": "it-ex-002",
+    "lesson_id": "it-a1-greetings-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "___, come stai?",
+    "answer": "Ciao",
+    "options": ["Ciao", "Grazie", "Prego"]
+  },
+  {
+    "id": "it-ex-003",
+    "lesson_id": "it-a1-greetings-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Grazie mille",
+    "answer": "Thank you very much",
+    "alternatives": ["thank you very much", "thanks a lot", "many thanks"]
+  },
+  {
+    "id": "it-ex-004",
+    "lesson_id": "it-a1-greetings-1",
+    "level": "A1",
+    "type": "word_order",
+    "prompt": "Build the greeting:",
+    "words": ["mille", "Grazie", "!"],
+    "correct_order": [1, 0, 2]
+  },
+  {
+    "id": "it-ex-005",
+    "lesson_id": "it-a1-greetings-1",
+    "level": "A1",
+    "type": "match_pairs",
+    "pairs": [
+      { "left": "Ciao", "right": "Hello / Bye" },
+      { "left": "Buongiorno", "right": "Good morning" },
+      { "left": "Grazie", "right": "Thank you" },
+      { "left": "Arrivederci", "right": "Goodbye (formal)" }
+    ]
+  },
+  {
+    "id": "it-ex-006",
+    "lesson_id": "it-a1-introductions-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "'Come ti chiami?' means:",
+    "options": ["What is your name?", "Where are you from?", "How are you?"],
+    "correct": 0
+  },
+  {
+    "id": "it-ex-007",
+    "lesson_id": "it-a1-introductions-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "Mi ___ Giulia.",
+    "answer": "chiamo",
+    "options": ["chiamo", "chiami", "chiama"]
+  },
+  {
+    "id": "it-ex-008",
+    "lesson_id": "it-a1-introductions-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Sono italiano.",
+    "answer": "I am Italian",
+    "alternatives": ["i am italian", "I'm Italian", "i'm italian"]
+  },
+  {
+    "id": "it-ex-009",
+    "lesson_id": "it-a1-introductions-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "How do you say 'Nice to meet you' in Italian?",
+    "options": ["Piacere di conoscerti", "Come stai?", "Buonasera"],
+    "correct": 0
+  },
+  {
+    "id": "it-ex-010",
+    "lesson_id": "it-a1-introductions-1",
+    "level": "A1",
+    "type": "word_order",
+    "prompt": "Build the phrase:",
+    "words": ["di", "Piacere", "conoscerti"],
+    "correct_order": [1, 0, 2]
+  }
+]

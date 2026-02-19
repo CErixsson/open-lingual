@@ -1,1 +1,60 @@
-[]
+[
+  {
+    "id": "ru-ex-001",
+    "lesson_id": "ru-a1-greetings",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "What does Привет mean?",
+    "options": ["Hi (informal)", "Goodbye", "Thank you"],
+    "correct": 0
+  },
+  {
+    "id": "ru-ex-002",
+    "lesson_id": "ru-a1-greetings",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "Добрый ___, как дела?",
+    "answer": "день",
+    "options": ["день", "утро", "вечер"]
+  },
+  {
+    "id": "ru-ex-003",
+    "lesson_id": "ru-a1-greetings",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Спасибо",
+    "answer": "Thank you",
+    "alternatives": ["thank you", "thanks"]
+  },
+  {
+    "id": "ru-ex-004",
+    "lesson_id": "ru-a1-greetings",
+    "level": "A1",
+    "type": "match_pairs",
+    "pairs": [
+      { "left": "Привет", "right": "Hi (informal)" },
+      { "left": "Здравствуйте", "right": "Hello (formal)" },
+      { "left": "Спасибо", "right": "Thank you" },
+      { "left": "До свидания", "right": "Goodbye" }
+    ]
+  },
+  {
+    "id": "ru-ex-005",
+    "lesson_id": "ru-a1-introductions",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "'Как вас зовут?' means:",
+    "options": ["What is your name?", "Where are you from?", "How old are you?"],
+    "correct": 0
+  },
+  {
+    "id": "ru-ex-006",
+    "lesson_id": "ru-a1-introductions",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "Меня ___ Иван.",
+    "answer": "зовут",
+    "options": ["зовут", "зову", "зовёт"]
+  }
+]

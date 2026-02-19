@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "id": "ar-ex-001",
+    "lesson_id": "ar-a1-greetings-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "What does مرحبا mean?",
+    "options": ["Hello", "Goodbye", "Thank you"],
+    "correct": 0
+  },
+  {
+    "id": "ar-ex-002",
+    "lesson_id": "ar-a1-greetings-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "___ الخير! (Good morning)",
+    "answer": "صباح",
+    "options": ["صباح", "مساء", "مرحبا"]
+  },
+  {
+    "id": "ar-ex-003",
+    "lesson_id": "ar-a1-greetings-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "شكراً جزيلاً",
+    "answer": "Thank you very much",
+    "alternatives": ["thank you very much", "thanks a lot"]
+  },
+  {
+    "id": "ar-ex-004",
+    "lesson_id": "ar-a1-greetings-1",
+    "level": "A1",
+    "type": "match_pairs",
+    "pairs": [
+      { "left": "مرحبا", "right": "Hello" },
+      { "left": "مع السلامة", "right": "Goodbye" },
+      { "left": "شكراً", "right": "Thank you" },
+      { "left": "صباح الخير", "right": "Good morning" }
+    ]
+  },
+  {
+    "id": "ar-ex-005",
+    "lesson_id": "ar-a1-introductions",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "How do you say 'My name is' in Arabic?",
+    "options": ["اسمي", "أنا من", "كيف حالك"],
+    "correct": 0
+  }
+]

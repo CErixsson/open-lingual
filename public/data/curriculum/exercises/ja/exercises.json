@@ -1,1 +1,69 @@
-[]
+[
+  {
+    "id": "ja-ex-001",
+    "lesson_id": "ja-a1-greetings-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "What does こんにちは mean?",
+    "options": ["Hello", "Goodbye", "Thank you"],
+    "correct": 0
+  },
+  {
+    "id": "ja-ex-002",
+    "lesson_id": "ja-a1-greetings-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "___ございます！ (Thank you very much)",
+    "answer": "ありがとう",
+    "options": ["ありがとう", "こんにちは", "さようなら"]
+  },
+  {
+    "id": "ja-ex-003",
+    "lesson_id": "ja-a1-greetings-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "さようなら",
+    "answer": "Goodbye",
+    "alternatives": ["goodbye", "bye", "farewell"]
+  },
+  {
+    "id": "ja-ex-004",
+    "lesson_id": "ja-a1-greetings-1",
+    "level": "A1",
+    "type": "match_pairs",
+    "pairs": [
+      { "left": "こんにちは", "right": "Hello" },
+      { "left": "さようなら", "right": "Goodbye" },
+      { "left": "ありがとう", "right": "Thank you" },
+      { "left": "おはようございます", "right": "Good morning" }
+    ]
+  },
+  {
+    "id": "ja-ex-005",
+    "lesson_id": "ja-a1-greetings-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "Morning greeting in Japanese:",
+    "options": ["おはようございます", "こんにちは", "こんばんは"],
+    "correct": 0
+  },
+  {
+    "id": "ja-ex-006",
+    "lesson_id": "ja-a1-introductions",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "'はじめまして' means:",
+    "options": ["Nice to meet you", "Goodbye", "Thank you"],
+    "correct": 0
+  },
+  {
+    "id": "ja-ex-007",
+    "lesson_id": "ja-a1-introductions",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "わたしの なまえは ___ です。 (My name is Yuki)",
+    "answer": "ゆき",
+    "options": ["ゆき", "たなか", "さくら"]
+  }
+]
