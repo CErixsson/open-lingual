@@ -185,7 +185,8 @@ All ${lang.name} text must be authentic. Return ONLY the JSON array.`;
     // Self-chain: trigger next batch automatically
     if (hasMore && autoChain) {
       const selfUrl = `${Deno.env.get('SUPABASE_URL')}/functions/v1/seed-descriptor-lessons`;
-      globalThis.EdgeRuntime?.waitUntil?.(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (globalThis as any).EdgeRuntime?.waitUntil?.(
         fetch(selfUrl, {
           method: 'POST',
           headers: {

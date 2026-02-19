@@ -1,1 +1,97 @@
-[]
+[
+  {
+    "id": "en-ex-001",
+    "lesson_id": "en-a1-greetings-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "Which is a formal greeting in English?",
+    "options": ["Good morning", "Hey!", "Wassup?"],
+    "correct": 0
+  },
+  {
+    "id": "en-ex-002",
+    "lesson_id": "en-a1-greetings-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "___ afternoon! How are you?",
+    "answer": "Good",
+    "options": ["Good", "Nice", "Fine"]
+  },
+  {
+    "id": "en-ex-003",
+    "lesson_id": "en-a1-greetings-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Buenos días",
+    "answer": "Good morning",
+    "alternatives": ["good morning"]
+  },
+  {
+    "id": "en-ex-004",
+    "lesson_id": "en-a1-greetings-1",
+    "level": "A1",
+    "type": "word_order",
+    "prompt": "Build the sentence:",
+    "words": ["name", "is", "My", "Alex"],
+    "correct_order": [2, 0, 1, 3]
+  },
+  {
+    "id": "en-ex-005",
+    "lesson_id": "en-a1-greetings-1",
+    "level": "A1",
+    "type": "match_pairs",
+    "pairs": [
+      { "left": "Hello", "right": "Greeting" },
+      { "left": "Goodbye", "right": "Farewell" },
+      { "left": "Thank you", "right": "Gratitude" },
+      { "left": "Please", "right": "Polite request" }
+    ]
+  },
+  {
+    "id": "en-ex-006",
+    "lesson_id": "en-a1-introductions-1",
+    "level": "A1",
+    "type": "multiple_choice",
+    "prompt": "How do you ask someone's name?",
+    "options": ["What's your name?", "Where are you?", "How old are you?"],
+    "correct": 0
+  },
+  {
+    "id": "en-ex-007",
+    "lesson_id": "en-a1-introductions-1",
+    "level": "A1",
+    "type": "fill_blank",
+    "sentence": "Nice to ___ you!",
+    "answer": "meet",
+    "options": ["meet", "see", "find"]
+  },
+  {
+    "id": "en-ex-008",
+    "lesson_id": "en-a1-introductions-1",
+    "level": "A1",
+    "type": "translate",
+    "prompt": "Translate to English:",
+    "source": "Me llamo María",
+    "answer": "My name is Maria",
+    "alternatives": ["my name is maria", "I am Maria", "i am maria"]
+  },
+  {
+    "id": "en-ex-009",
+    "lesson_id": "en-a2-travel",
+    "level": "A2",
+    "type": "multiple_choice",
+    "prompt": "At the airport you ask: '___ is the gate for flight BA204?'",
+    "options": ["Where", "When", "Who"],
+    "correct": 0
+  },
+  {
+    "id": "en-ex-010",
+    "lesson_id": "en-a2-shopping",
+    "level": "A2",
+    "type": "fill_blank",
+    "sentence": "How ___ does this cost?",
+    "answer": "much",
+    "options": ["much", "many", "more"]
+  }
+]
