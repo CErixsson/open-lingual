@@ -41,6 +41,8 @@
   { "code": "eu", "name": "Euskara", "flag_emoji": "🇪🇺" },
   { "code": "cy", "name": "Cymraeg", "flag_emoji": "🏴" },
   { "code": "is", "name": "Íslenska", "flag_emoji": "🇮🇸" },
-  { "code": "mn", "name": "Монгол", "flag_emoji": "🇲🇳" }
+  { "code": "mn", "name": "Монгол", "flag_emoji": "🇲🇳" },
+  { "code": "sgn", "name": "International Sign Language", "flag_emoji": "🤟" },
+  { "code": "brl", "name": "Punktskrift (Braille)", "flag_emoji": "⠿" }
 ]
 
