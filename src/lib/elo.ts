@@ -85,11 +85,10 @@ export function getCefrColor(level: string): string {
   return CEFR_COLORS[level] || CEFR_COLORS['A1'];
 }
 
+/** 4 core language skills with icons */
 export const SKILL_ICONS: Record<string, string> = {
   listening: 'Headphones',
   reading: 'BookOpen',
   speaking: 'Mic',
   writing: 'PenTool',
-  grammar: 'FileText',
-  vocabulary: 'Library',
 };

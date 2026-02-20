@@ -11,7 +11,7 @@ import { Trophy, Medal, Loader2 } from 'lucide-react';
 export default function LeaderboardPage() {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
-  const [selectedLanguageId, setSelectedLanguageId] = useState<string | null>(null);
+  const [selectedLanguageId, setSelectedLanguageId] = useState<string | null>(null); // uses language code now
 
   const { data: languages } = useLanguages();
   const { data: entries, isLoading } = useLeaderboard(selectedLanguageId);
@@ -22,7 +22,7 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     if (languages?.length && !selectedLanguageId) {
-      setSelectedLanguageId(languages[0].id);
+      setSelectedLanguageId(languages[0].code);
     }
   }, [languages, selectedLanguageId]);
 

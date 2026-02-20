@@ -7,10 +7,10 @@ import {
 } from '@/components/ui/select';
 
 interface Language {
-  id: string;
   code: string;
   name: string;
   flag_emoji: string | null;
+  id?: string; // optional for backward compat
 }
 
 interface LanguageSelectorProps {
@@ -23,11 +23,11 @@ export default function LanguageSelector({ languages, selectedId, onSelect }: La
   return (
     <Select value={selectedId || undefined} onValueChange={onSelect}>
       <SelectTrigger className="w-[200px] bg-card border-border/50">
-        <SelectValue placeholder="Välj språk…" />
+        <SelectValue placeholder="Select language…" />
       </SelectTrigger>
       <SelectContent>
         {languages.map(lang => (
-          <SelectItem key={lang.id} value={lang.id}>
+          <SelectItem key={lang.id || lang.code} value={lang.id || lang.code}>
             <span className="flex items-center gap-2">
               <span>{lang.flag_emoji}</span>
               <span>{lang.name}</span>

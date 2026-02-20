@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import { useLanguages } from '@/hooks/useLanguages';
+import { useLanguages, type CurriculumLanguage } from '@/hooks/useLanguages';
 import { useActiveLanguage } from '@/hooks/useActiveLanguage';
 import { useCreateLanguageProfile, useDeleteLanguageProfile } from '@/hooks/useLanguageProfile';
 import { getCefrLabels } from '@/hooks/useCourses';
@@ -64,7 +64,7 @@ export default function CoursesPage() {
     setSelectedLevel(null);
   }, [activeLanguageCode]);
 
-  const { getLessonCompletion, isLessonComplete } = useCurriculumProgress();
+  const { getLessonCompletion, isLessonComplete } = useCurriculumProgress(activeLanguageCode);
 
   // Load ALL curriculum lessons for active language
   const { data: curriculumLessons, isLoading: lessonsLoading } = useCurriculumLessons(activeLanguageCode);
@@ -103,13 +103,13 @@ export default function CoursesPage() {
   const hasLessons = validLessons.length > 0;
 
   // Languages not yet enrolled
-  const enrolledLangIds = new Set(profiles.map((p: any) => p.language_id));
-  const unenrolledLanguages = (allLanguages || []).filter(l => !enrolledLangIds.has(l.id));
+  const enrolledLangCodes = new Set(profiles.map((p: any) => p.languages?.code));
+  const unenrolledLanguages = (allLanguages || []).filter(l => !enrolledLangCodes.has(l.code));
 
-  const handleEnroll = async (languageId: string) => {
-    setEnrollingId(languageId);
+  const handleEnroll = async (lang: CurriculumLanguage) => {
+    setEnrollingId(lang.code);
     try {
-      const profile = await createProfile.mutateAsync(languageId);
+      const profile = await createProfile.mutateAsync(lang);
       setActiveProfileId(profile.id);
       setAddLangOpen(false);
       toast.success('Language added! Start learning now.');
@@ -394,14 +394,14 @@ export default function CoursesPage() {
               <div className="grid grid-cols-2 gap-2 max-h-72 overflow-y-auto pr-1">
                 {unenrolledLanguages.map(lang => (
                   <button
-                    key={lang.id}
-                    onClick={() => handleEnroll(lang.id)}
-                    disabled={enrollingId === lang.id}
+                    key={lang.code}
+                    onClick={() => handleEnroll(lang)}
+                    disabled={enrollingId === lang.code}
                     className="flex items-center gap-3 rounded-xl border border-border/50 bg-card px-3 py-2.5 hover:border-primary/40 hover:bg-primary/5 transition-all text-left disabled:opacity-50"
                   >
                     <span className="text-2xl">{lang.flag_emoji}</span>
                     <span className="text-sm font-medium">{lang.name}</span>
-                    {enrollingId === lang.id && <Loader2 className="w-3.5 h-3.5 animate-spin ml-auto text-primary" />}
+                    {enrollingId === lang.code && <Loader2 className="w-3.5 h-3.5 animate-spin ml-auto text-primary" />}
                   </button>
                 ))}
               </div>

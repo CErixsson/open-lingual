@@ -85,6 +85,42 @@ export type Database = {
         }
         Relationships: []
       }
+      curriculum_progress: {
+        Row: {
+          completed_at: string | null
+          completion_percent: number
+          created_at: string
+          id: string
+          language_code: string
+          lesson_id: string
+          updated_at: string
+          user_id: string
+          xp: number
+        }
+        Insert: {
+          completed_at?: string | null
+          completion_percent?: number
+          created_at?: string
+          id?: string
+          language_code: string
+          lesson_id: string
+          updated_at?: string
+          user_id: string
+          xp?: number
+        }
+        Update: {
+          completed_at?: string | null
+          completion_percent?: number
+          created_at?: string
+          id?: string
+          language_code?: string
+          lesson_id?: string
+          updated_at?: string
+          user_id?: string
+          xp?: number
+        }
+        Relationships: []
+      }
       descriptor_exercises: {
         Row: {
           content_json: Json
