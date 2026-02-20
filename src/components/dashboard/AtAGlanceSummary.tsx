@@ -32,12 +32,12 @@ export default function AtAGlanceSummary({
 
   const deltaLabel =
     stats?.lastSessionDelta === null || stats?.lastSessionDelta === undefined
-      ? 'Ingen data'
+      ? 'No data'
       : stats.lastSessionDelta > 0
       ? `+${stats.lastSessionDelta}`
       : stats.lastSessionDelta < 0
       ? `${stats.lastSessionDelta}`
-      : '→ Stabil';
+      : '→ Stable';
 
   const deltaColor =
     stats?.lastSessionDelta === null || stats?.lastSessionDelta === undefined
@@ -72,7 +72,7 @@ export default function AtAGlanceSummary({
         </div>
         <div className="flex items-baseline gap-1">
           <span className="text-2xl font-bold tabular-nums text-secondary">{streak}</span>
-          <span className="text-xs text-muted-foreground">dagar</span>
+          <span className="text-xs text-muted-foreground">days</span>
         </div>
       </div>
 
@@ -80,14 +80,14 @@ export default function AtAGlanceSummary({
       <div className="rounded-xl border border-border/50 bg-card p-4 shadow-soft">
         <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-2">
           <Clock className="w-3.5 h-3.5" />
-          <span>Tid idag</span>
+          <span>Time today</span>
         </div>
         <div className="flex flex-col">
           <span className="text-2xl font-bold tabular-nums text-foreground">
             {isLoading ? '—' : formatTime(stats?.timePracticedToday || 0)}
           </span>
           <span className="text-xs text-muted-foreground tabular-nums">
-            {isLoading ? '' : `${formatTime(stats?.timePracticedWeek || 0)} denna vecka`}
+            {isLoading ? '' : `${formatTime(stats?.timePracticedWeek || 0)} this week`}
           </span>
         </div>
       </div>
@@ -96,7 +96,7 @@ export default function AtAGlanceSummary({
       <div className="rounded-xl border border-border/50 bg-card p-4 shadow-soft">
         <div className="flex items-center gap-1.5 text-muted-foreground text-xs mb-2">
           {deltaIcon || <TrendingUp className="w-3.5 h-3.5" />}
-          <span>Senaste pass</span>
+          <span>Last session</span>
         </div>
         <div className="flex flex-col">
           <span className={`text-2xl font-bold tabular-nums ${deltaColor}`}>

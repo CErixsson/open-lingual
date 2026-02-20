@@ -21,7 +21,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
-  const [selectedLangId, setSelectedLangId] = useState<string | null>(null);
+  const [selectedLangCode, setSelectedLangCode] = useState<string | null>(null);
   const [savingLang, setSavingLang] = useState(false);
 
   const navigate = useNavigate();
@@ -87,10 +87,12 @@ const Auth = () => {
   };
 
   const handleSaveLanguage = async () => {
-    if (!selectedLangId) return;
+    if (!selectedLangCode) return;
+    const lang = languages?.find(l => l.code === selectedLangCode);
+    if (!lang) return;
     setSavingLang(true);
     try {
-      await createProfile.mutateAsync(selectedLangId);
+      await createProfile.mutateAsync(lang);
       toast.success("Great choice! Let's start learning 🎉");
       navigate("/dashboard");
     } catch {
@@ -116,11 +118,11 @@ const Auth = () => {
           <div className="bg-card rounded-2xl shadow-card border border-border/50 p-6">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
               {languages?.map(lang => {
-                const isSelected = selectedLangId === lang.id;
+                const isSelected = selectedLangCode === lang.code;
                 return (
                   <button
-                    key={lang.id}
-                    onClick={() => setSelectedLangId(lang.id)}
+                    key={lang.code}
+                    onClick={() => setSelectedLangCode(lang.code)}
                     className={`flex flex-col items-center gap-2 rounded-xl border-2 p-4 transition-all ${
                       isSelected
                         ? 'border-primary bg-primary/5 shadow-soft'
@@ -136,7 +138,7 @@ const Auth = () => {
 
             <Button
               className="w-full h-12"
-              disabled={!selectedLangId || savingLang}
+              disabled={!selectedLangCode || savingLang}
               onClick={handleSaveLanguage}
             >
               {savingLang ? (

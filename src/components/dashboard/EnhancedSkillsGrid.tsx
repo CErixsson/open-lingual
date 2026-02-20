@@ -33,7 +33,7 @@ export default function EnhancedSkillsGrid({ trends, bands, onSkillClick }: Enha
   if (!trends.length) {
     return (
       <div className="text-center py-8 text-muted-foreground">
-        Inga färdighetsdata ännu. Starta en övning!
+        No skill data yet. Complete some exercises to get started!
       </div>
     );
   }

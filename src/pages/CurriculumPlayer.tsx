@@ -19,7 +19,7 @@ export default function CurriculumPlayer() {
   const { data: lesson, isLoading } = useCurriculumLesson(lang ?? null, level ?? null, lessonId ?? null);
   const { data: allLessons } = useCurriculumLessons(lang ?? null, level);
   const { data: allExercises } = useCurriculumExercises(lang ?? null);
-  const { setLessonProgress, getLessonCompletion } = useCurriculumProgress();
+  const { setLessonProgress, getLessonCompletion } = useCurriculumProgress(lang ?? null);
 
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answered, setAnswered] = useState(false);
@@ -81,11 +81,11 @@ export default function CurriculumPlayer() {
   const goNext = useCallback(() => {
     if (currentIdx + 1 < total) {
       const pct = Math.round(((currentIdx + 1) / total) * 100);
-      if (lessonId) setLessonProgress(lessonId, pct, 0);
+      if (lessonId) setLessonProgress(lessonId, pct, 0, lang);
       setCurrentIdx(i => i + 1);
       resetExercise();
     } else {
-      if (lessonId && lesson) setLessonProgress(lessonId, 100, lesson.xp);
+      if (lessonId && lesson) setLessonProgress(lessonId, 100, lesson.xp, lang);
       setFinished(true);
     }
   }, [currentIdx, total, resetExercise, lessonId, lesson, setLessonProgress]);

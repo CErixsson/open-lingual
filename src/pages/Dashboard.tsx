@@ -42,7 +42,7 @@ export default function Dashboard() {
     isLoading: profilesLoading,
   } = useActiveLanguage();
 
-  const selectedLanguageId = activeLanguage?.id ?? null;
+  const selectedLanguageId = (activeProfile as any)?.language_id ?? null;
 
   const { data: bands } = useCefrBands(selectedLanguageId || undefined);
 

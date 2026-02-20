@@ -51,7 +51,7 @@ export default function LearnDashboard() {
   const { data: attempts } = useRecentAttempts(user?.id ?? null, 10);
   const { data: skillTrends } = useSkillTrends(activeProfile?.id ?? null);
   const { data: descriptorsByLevel } = useDescriptorProgressByLevel(user?.id ?? null, activeProfile?.language_id);
-  const { getLessonCompletion, isLessonComplete, completedCount: curriculumCompleted } = useCurriculumProgress();
+  const { getLessonCompletion, isLessonComplete, completedCount: curriculumCompleted } = useCurriculumProgress(activeLanguageCode);
 
   // Load all curriculum lessons for active language (all levels)
   const { data: curriculumLessons, isLoading: lessonsLoading } = useCurriculumLessons(activeLanguageCode);

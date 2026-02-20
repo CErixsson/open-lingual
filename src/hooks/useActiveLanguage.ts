@@ -1,31 +1,36 @@
 /**
  * Hook to manage the user's active learning language.
- * Persists the selected language in localStorage and syncs with user_language_profiles.
+ * Persists the selected language code in localStorage.
+ * Works with both DB profiles (for Elo/skills) and JSON languages (for curriculum).
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useUserLanguageProfiles } from './useLanguageProfile';
+import { useLanguages, type CurriculumLanguage } from './useLanguages';
 import { useAuth } from './useAuth';
 
-const STORAGE_KEY = 'linguaflow_active_lang_id';
+const STORAGE_KEY = 'linguaflow_active_lang_code';
 
 export function useActiveLanguage() {
   const { user } = useAuth();
-  const { data: profiles, isLoading } = useUserLanguageProfiles();
+  const { data: profiles, isLoading: profilesLoading } = useUserLanguageProfiles();
+  const { data: allLanguages } = useLanguages();
 
-  const [activeProfileId, setActiveProfileIdState] = useState<string | null>(() => {
+  const [activeLangCode, setActiveLangCodeState] = useState<string | null>(() => {
     return localStorage.getItem(STORAGE_KEY);
   });
 
-  // When profiles load, default to stored preference or first profile
+  // When profiles load, default to stored preference or first profile's language
   useEffect(() => {
     if (!profiles || profiles.length === 0) return;
     const stored = localStorage.getItem(STORAGE_KEY);
-    const valid = profiles.find(p => p.id === stored);
+    // Verify stored code matches a profile
+    const valid = profiles.find((p: any) => p.languages?.code === stored);
     if (!valid) {
-      // Default to first profile
-      const first = profiles[0];
-      setActiveProfileIdState(first.id);
-      localStorage.setItem(STORAGE_KEY, first.id);
+      const first = (profiles[0] as any)?.languages?.code;
+      if (first) {
+        setActiveLangCodeState(first);
+        localStorage.setItem(STORAGE_KEY, first);
+      }
     }
   }, [profiles]);
 
@@ -33,26 +38,51 @@ export function useActiveLanguage() {
   useEffect(() => {
     if (!user) {
       localStorage.removeItem(STORAGE_KEY);
-      setActiveProfileIdState(null);
+      setActiveLangCodeState(null);
     }
   }, [user]);
 
-  const setActiveProfileId = (id: string) => {
-    setActiveProfileIdState(id);
-    localStorage.setItem(STORAGE_KEY, id);
+  const setActiveLangCode = (code: string) => {
+    setActiveLangCodeState(code);
+    localStorage.setItem(STORAGE_KEY, code);
   };
 
-  const activeProfile = profiles?.find(p => p.id === activeProfileId) ?? profiles?.[0] ?? null;
-  const activeLanguage = (activeProfile as any)?.languages ?? null;
+  // Find the matching DB profile for the active language code
+  const activeProfile = useMemo(() => {
+    if (!profiles) return null;
+    return profiles.find((p: any) => p.languages?.code === activeLangCode)
+      ?? profiles[0]
+      ?? null;
+  }, [profiles, activeLangCode]);
+
+  const activeLanguage: CurriculumLanguage | null = useMemo(() => {
+    const code = (activeProfile as any)?.languages?.code ?? activeLangCode;
+    if (!code) return null;
+    // Try DB profile language first
+    const dbLang = (activeProfile as any)?.languages;
+    if (dbLang) return { code: dbLang.code, name: dbLang.name, flag_emoji: dbLang.flag_emoji };
+    // Fallback to JSON languages
+    return allLanguages?.find(l => l.code === code) ?? null;
+  }, [activeProfile, activeLangCode, allLanguages]);
+
+  // For backward compat, also expose setActiveProfileId
+  const setActiveProfileId = (profileId: string) => {
+    const profile = profiles?.find((p: any) => p.id === profileId);
+    if (profile) {
+      const code = (profile as any)?.languages?.code;
+      if (code) setActiveLangCode(code);
+    }
+  };
 
   return {
     profiles: profiles ?? [],
     activeProfile,
     activeLanguage,
-    activeLanguageCode: activeLanguage?.code ?? null,
+    activeLanguageCode: activeLanguage?.code ?? activeLangCode,
     activeLanguageName: activeLanguage?.name ?? null,
     activeLanguageFlag: activeLanguage?.flag_emoji ?? null,
     setActiveProfileId,
-    isLoading,
+    setActiveLangCode,
+    isLoading: profilesLoading,
   };
 }
