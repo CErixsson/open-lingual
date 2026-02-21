@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useActiveLanguage } from '@/hooks/useActiveLanguage';
 import { useCefrBands } from '@/hooks/useLanguages';
 import { useDashboardStats, useSkillTrends } from '@/hooks/useDashboardStats';
+import { useCurriculumSkills } from '@/hooks/useCurriculumLessons';
 import { useProgressHistory, usePeriodComparison } from '@/hooks/useProgressHistory';
 import { useCoachingInsights } from '@/hooks/useCoachingInsights';
 import { useDailyFocus } from '@/hooks/useDailyFocus';
@@ -48,6 +49,7 @@ export default function Dashboard() {
 
   const { data: stats, isLoading: statsLoading } = useDashboardStats(activeProfile?.id || undefined);
   const { data: skillTrends, isLoading: trendsLoading } = useSkillTrends(activeProfile?.id || undefined);
+  const { data: curriculumSkills } = useCurriculumSkills();
   const { data: history, isLoading: historyLoading } = useProgressHistory(activeProfile?.id || undefined, 30);
   const { data: comparison, isLoading: comparisonLoading } = usePeriodComparison(activeProfile?.id || undefined, 7);
   const { data: insights, isLoading: insightsLoading } = useCoachingInsights(
@@ -145,7 +147,7 @@ export default function Dashboard() {
                   <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
                 </div>
               ) : skillTrends && skillTrends.length > 0 ? (
-                <EnhancedSkillsGrid trends={skillTrends} bands={cefrBands} />
+                <EnhancedSkillsGrid trends={skillTrends} bands={cefrBands} curriculumSkills={curriculumSkills} />
               ) : (
                 <div className="text-center py-8 text-muted-foreground rounded-xl border border-border/50 bg-card">
                   No skill data yet. Complete some exercises to see your ratings.

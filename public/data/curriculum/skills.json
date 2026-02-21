@@ -1,0 +1,52 @@
+{
+  "skills": [
+    {
+      "id": "listening",
+      "key": "listening",
+      "display_name": "Listening",
+      "icon_name": "Headphones",
+      "category": "receptive",
+      "description": "Understanding spoken language, including different accents, speeds, and nuances."
+    },
+    {
+      "id": "reading",
+      "key": "reading",
+      "display_name": "Reading",
+      "icon_name": "BookOpen",
+      "category": "receptive",
+      "description": "Analyzing written text to absorb vocabulary, complex grammar, and structure."
+    },
+    {
+      "id": "speaking",
+      "key": "speaking",
+      "display_name": "Speaking",
+      "icon_name": "Mic",
+      "category": "productive",
+      "description": "Producing speech for active communication."
+    },
+    {
+      "id": "writing",
+      "key": "writing",
+      "display_name": "Writing",
+      "icon_name": "PenTool",
+      "category": "productive",
+      "description": "Structuring language to communicate clearly in written form."
+    },
+    {
+      "id": "grammar",
+      "key": "grammar",
+      "display_name": "Grammar",
+      "icon_name": "FileText",
+      "category": "building_block",
+      "description": "Rules, structures, and drills including tenses and syntax."
+    },
+    {
+      "id": "vocabulary",
+      "key": "vocabulary",
+      "display_name": "Vocabulary",
+      "icon_name": "Library",
+      "category": "building_block",
+      "description": "Acquisition, retention, and usage of themed word banks and synonyms."
+    }
+  ]
+}
