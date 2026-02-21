@@ -3,15 +3,19 @@
     "id": "ar-ex-001",
     "lesson_id": "ar-a1-greetings-1",
     "level": "A1",
+    "skill": "speaking",
+    "descriptor_ids": [1151],
     "type": "multiple_choice",
-    "prompt": "What does مرحبا mean?",
-    "options": ["Hello", "Goodbye", "Thank you"],
+    "prompt": "How do you say 'Hello' in Arabic?",
+    "options": ["مرحبا", "مع السلامة", "شكرا"],
     "correct": 0
   },
   {
     "id": "ar-ex-002",
     "lesson_id": "ar-a1-greetings-1",
     "level": "A1",
+    "skill": "grammar",
+    "descriptor_ids": [1151],
     "type": "fill_blank",
     "sentence": "___ الخير! (Good morning)",
     "answer": "صباح",
@@ -21,6 +25,8 @@
     "id": "ar-ex-003",
     "lesson_id": "ar-a1-greetings-1",
     "level": "A1",
+    "skill": "writing",
+    "descriptor_ids": [1151],
     "type": "translate",
     "prompt": "Translate to English:",
     "source": "شكراً جزيلاً",
@@ -31,6 +37,8 @@
     "id": "ar-ex-004",
     "lesson_id": "ar-a1-greetings-1",
     "level": "A1",
+    "skill": "vocabulary",
+    "descriptor_ids": [1151],
     "type": "match_pairs",
     "pairs": [
       { "left": "مرحبا", "right": "Hello" },
@@ -43,9 +51,11 @@
     "id": "ar-ex-005",
     "lesson_id": "ar-a1-introductions",
     "level": "A1",
+    "skill": "speaking",
+    "descriptor_ids": [1151, 1152],
     "type": "multiple_choice",
-    "prompt": "How do you say 'My name is' in Arabic?",
-    "options": ["اسمي", "أنا من", "كيف حالك"],
+    "prompt": "'اسمي' means:",
+    "options": ["My name is", "I am from", "I like"],
     "correct": 0
   }
 ]

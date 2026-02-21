@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import type { CurriculumSkill } from '@/lib/elo';
 
 export interface CurriculumExercise {
   type: 'vocabulary_intro' | 'multiple_choice' | 'translate' | 'match_pairs' | 'fill_blank' | 'word_order';
@@ -65,12 +66,10 @@ export function useCurriculumLessons(lang: string | null, level?: string) {
       const levels = level ? [level] : ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
       const allLessons: CurriculumLesson[] = [];
 
-      // Fetch all level indexes in parallel
       const indexResults = await Promise.all(
         levels.map(lvl => fetchCurriculumIndex(lang!, lvl).then(files => ({ lvl, files })))
       );
 
-      // Fetch all lessons in parallel
       const lessonPromises = indexResults.flatMap(({ lvl, files }) =>
         files.map(f => fetchCurriculumLesson(lang!, lvl, f))
       );
@@ -109,6 +108,8 @@ export interface CurriculumExerciseEntry extends CurriculumExercise {
   id: string;
   lesson_id: string;
   level: string;
+  skill?: string;
+  descriptor_ids?: number[];
 }
 
 export function useCurriculumExercises(lang: string | null) {
@@ -129,3 +130,18 @@ export function useCurriculumExercises(lang: string | null) {
   });
 }
 
+export function useCurriculumSkills() {
+  return useQuery({
+    queryKey: ['curriculum-skills'],
+    queryFn: async (): Promise<CurriculumSkill[]> => {
+      try {
+        const res = await fetch('/data/curriculum/skills.json');
+        if (!res.ok) return [];
+        const data = await res.json();
+        return data.skills || [];
+      } catch {
+        return [];
+      }
+    },
+  });
+}
